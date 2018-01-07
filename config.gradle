@@ -1,0 +1,49 @@
+ext {
+    android = [
+            compileSdkVersion: 26,
+            buildToolsVersion: "26.0.2",
+            applicationId    : "com.wj.baseutils",
+            minSdkVersion    : 15,
+            targetSdkVersion : 26,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    def dependVersion = [
+            support    : "26.1.0",
+            butterknife: "8.8.1",
+            glide      : "4.5.0",
+    ]
+
+    dependencies = [
+            //base
+            "support-v4"            : "com.android.support:support-v4:${dependVersion.support}",
+            "appcompat-v7"          : "com.android.support:appcompat-v7:${dependVersion.support}",
+            "annotations"           : "com.android.support:support-annotations:${dependVersion.support}",
+            "constraint-layout"     : "com.android.support.constraint:constraint-layout:1.0.2",
+            //test
+            "junit"                 : "junit:junit:4.12",
+            "runner"                : "com.android.support.test:runner:1.0.1",
+            "espresso-core"         : "com.android.support.test.espresso:espresso-core:3.0.1",
+            //eventbus
+            "eventbus"              : "org.greenrobot:eventbus:3.1.1",
+            //butterknife
+            "butterknife"           : "com.jakewharton:butterknife:${dependVersion.butterknife}",
+            "butterknife-compiler"  : "com.jakewharton:butterknife-compiler:${dependVersion.butterknife}",
+            //Glide
+            "glide"                 : "com.github.bumptech.glide:glide:${dependVersion.glide}",
+            "glide-compiler"        : "com.github.bumptech.glide:compiler:${dependVersion.glide}",
+            //log
+            "logger"                : "com.orhanobut:logger:2.1.1",
+
+            //Rxjava
+            "rxjava"                : "io.reactivex.rxjava2:rxjava:2.1.6",
+            "rxandroid"             : "io.reactivex.rxjava2:rxandroid:2.0.1",
+
+            //Retrofit
+            "retrofit"              : "com.squareup.retrofit2:retrofit:2.3.0",
+            "retrofit-gson"         : "com.squareup.retrofit2:converter-gson:2.3.0",
+            "retrofit-adapter"      : "com.squareup.retrofit2:adapter-rxjava2:2.3.0",
+            "okhttp-log-interceptor": "com.squareup.okhttp3:logging-interceptor:3.8.0"
+    ]
+}
