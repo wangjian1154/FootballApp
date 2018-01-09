@@ -9,6 +9,8 @@ import android.content.Context;
 
 public class Initialization {
 
+    public static final boolean DEBUG = true;
+
     public Initialization(Context context) {
         this.context = context;
     }

@@ -3,7 +3,6 @@ package com.wj.base.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.wj.base.Config;
 import com.wj.base.Initialization;
 
 /**
@@ -15,7 +14,7 @@ public class ToastUtils {
     // Toast
     private static Toast toast;
 
-    public static final boolean debug = Config.DEBUG;
+    public static final boolean debug = Initialization.DEBUG;
 
     private static Context appContext = Initialization.getContext();
 

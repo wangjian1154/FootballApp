@@ -1,4 +1,4 @@
-package com.wj.baseutils;
+package com.wj.baseutils.app;
 
 import android.app.Application;
 import android.content.Context;
