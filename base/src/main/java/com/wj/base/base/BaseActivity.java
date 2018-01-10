@@ -1,10 +1,11 @@
 package com.wj.base.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected boolean isDestroy = false;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
@@ -44,4 +45,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayoutId();
+
+    @Subscribe
+    public void onEventMainThread(Message msg) {
+        if (msg != null) {
+            switch (msg.what) {
+
+            }
+        }
+    }
 }

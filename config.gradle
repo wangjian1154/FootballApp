@@ -12,14 +12,15 @@ ext {
     def dependVersion = [
             support    : "26.1.0",
             butterknife: "8.8.1",
-            glide      : "4.5.0",
+            glide      : "4.4.0"
     ]
 
     dependencies = [
             //base
             "support-v4"            : "com.android.support:support-v4:${dependVersion.support}",
             "appcompat-v7"          : "com.android.support:appcompat-v7:${dependVersion.support}",
-            "annotations"           : "com.android.support:support-annotations:${dependVersion.support}",
+            "support-annotations"   : "com.android.support:support-annotations:${dependVersion.support}",
+            "support-compat"        : "com.android.support:support-compat:${dependVersion.support}",
             "constraint-layout"     : "com.android.support.constraint:constraint-layout:1.0.2",
             //test
             "junit"                 : "junit:junit:4.12",

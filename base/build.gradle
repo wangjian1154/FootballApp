@@ -36,7 +36,8 @@ dependencies {
     api(rootProject.ext.dependencies["appcompat-v7"]) {
         exclude module: 'support-v4'
     }
-    api rootProject.ext.dependencies["annotations"]
+    api rootProject.ext.dependencies["support-annotations"]
+    api rootProject.ext.dependencies["support-compat"]
 
     //eventbus
     api rootProject.ext.dependencies["eventbus"]
@@ -49,7 +50,7 @@ dependencies {
 
     //glide
     api(rootProject.ext.dependencies["glide"]) {
-        exclude module: 'support-v4'
+        exclude module: 'support-fragment'
     }
     annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
         exclude module: 'jsr305'
