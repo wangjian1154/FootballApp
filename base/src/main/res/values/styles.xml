@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--自定义标题-->
+    <declare-styleable name="TitleBar">
+        <attr name="tb_title" format="string" />
+        <attr name="tb_navigator_icon" format="integer" />
+        <attr name="tb_action_icon" format="integer" />
+        <attr name="tb_navigator_label" format="string" />
+        <attr name="tb_action_label" format="string" />
+        <attr name="tb_action_text_color" format="color" />
+        <attr name="tb_hide_navigator_icon" format="boolean" />
+    </declare-styleable>
+
 </resources>

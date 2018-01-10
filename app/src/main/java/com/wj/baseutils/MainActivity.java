@@ -1,15 +1,28 @@
 package com.wj.baseutils;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.wj.base.base.BaseActivity;
+import com.wj.base.views.TitleBar;
 
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initViewAndEvent(Bundle savedInstanceState) {
+        TitleBar titleBar=findViewById(R.id.title_bar);
+        titleBar.setBackOnClickListenner(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 }
