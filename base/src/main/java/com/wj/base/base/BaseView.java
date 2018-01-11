@@ -8,6 +8,7 @@ public interface BaseView {
 
     void showErrorMsg(String msg);
 
+    //=======  State  =======
     void stateError();
 
     void stateEmpty();

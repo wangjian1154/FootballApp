@@ -38,7 +38,10 @@ dependencies {
     }
     api rootProject.ext.dependencies["support-annotations"]
     api rootProject.ext.dependencies["support-compat"]
-
+    api(rootProject.ext.dependencies["support-design"]) {
+        exclude module: 'recyclerview-v7'
+    }
+    api rootProject.ext.dependencies["recyclerview"]
     //eventbus
     api rootProject.ext.dependencies["eventbus"]
 
@@ -68,4 +71,7 @@ dependencies {
     api rootProject.ext.dependencies["retrofit-gson"]
     api rootProject.ext.dependencies["retrofit-adapter"]
     api rootProject.ext.dependencies["okhttp-log-interceptor"]
+
+    //SmartRefreshLayout
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
 }

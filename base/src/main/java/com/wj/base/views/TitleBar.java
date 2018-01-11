@@ -3,6 +3,8 @@ package com.wj.base.views;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ public class TitleBar extends FrameLayout {
     private OnClickListener actionOnClickListener;
 
     private int actionTextColor = 0xFF000000;
+    private Drawable backDrawable;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -38,7 +41,7 @@ public class TitleBar extends FrameLayout {
         super(context, attrs);
 
         View view = LayoutInflater.from(context).inflate(R.layout.layout_title_view, this);
-
+        
         tv_title = view.findViewById(R.id.tv_title);
         imb_left = view.findViewById(R.id.tv_back);
         imb_right = view.findViewById(R.id.tv_right);
@@ -64,6 +67,8 @@ public class TitleBar extends FrameLayout {
         if (drawable != null) {
             imb_right.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
         }
+
+        backDrawable = context.getResources().getDrawable(R.drawable.ic_back);
 
         imb_left.setOnClickListener(new OnClickListener() {
             @Override
@@ -107,7 +112,9 @@ public class TitleBar extends FrameLayout {
     }
 
     public void setBackOnClickListenner(OnClickListener navigatorOnClickListener) {
-        imb_left.setBackgroundResource(R.drawable.ic_back);
+        if (backDrawable!=null){
+            imb_left.setCompoundDrawablesWithIntrinsicBounds(backDrawable, null, null, null);
+        }
         this.navigatorOnClickListener = navigatorOnClickListener;
     }
 

@@ -1,57 +1,44 @@
 package com.wj.base.base;
 
-import android.os.Bundle;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by wj on 2018/1/6.
+ * MVP基类
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
 
-    private Unbinder bind;
-    protected boolean isCreate = false;
-    protected boolean isDestroy = false;
+    protected T mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
-        bind = ButterKnife.bind(this);
-        if (!EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().register(this);
-        isCreate = true;
-
-        initViewAndEvent(savedInstanceState);
+    protected void onViewCreated() {
+        if (mPresenter != null)
+            mPresenter.attachView(this);
     }
 
-    protected abstract void initViewAndEvent(Bundle savedInstanceState);
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
 
     @Override
     protected void onDestroy() {
+        if (mPresenter != null)
+            mPresenter.detachView();
         super.onDestroy();
-        if (bind != null)
-            bind.unbind();
-        if (EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().unregister(this);
-        isDestroy = true;
-    }
-
-    protected abstract int getLayoutId();
-
-    @Subscribe
-    public void onEventMainThread(Message msg) {
-        if (msg != null) {
-            switch (msg.what) {
-
-            }
-        }
     }
 }
