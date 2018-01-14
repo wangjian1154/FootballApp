@@ -3,6 +3,8 @@ package com.wj.baseutils.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.wj.base.Initialization;
 
 /**

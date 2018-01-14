@@ -6,5 +6,5 @@ package com.wj.base.net;
 
 public class ApiConstants {
 
-    public static final String API_SERVER = "";
+    public static final String API_SERVER = "http://api.qiuduoduo.cn";
 }

@@ -8,4 +8,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="page_bg">#EFEFEF</color>
+    <color name="main_bottom_line">#C0C0C0</color>
+    <color name="font_gay">#C0C0C0</color>
 </resources>

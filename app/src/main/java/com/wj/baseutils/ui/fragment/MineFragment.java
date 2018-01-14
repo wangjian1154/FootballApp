@@ -1,8 +1,11 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseFragment;
+import com.wj.base.base.BasePresenter;
 import com.wj.baseutils.R;
 
 /**
@@ -13,11 +16,16 @@ import com.wj.baseutils.R;
 public class MineFragment extends BaseFragment{
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
-
+        Log.i("info", "MineFragment");
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_mine;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 }

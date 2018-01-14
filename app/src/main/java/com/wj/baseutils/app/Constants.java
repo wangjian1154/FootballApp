@@ -6,4 +6,8 @@ package com.wj.baseutils.app;
 
 public class Constants {
 
+    public interface Key {
+        String BUNDLE = "BUNDLE";
+    }
+
 }

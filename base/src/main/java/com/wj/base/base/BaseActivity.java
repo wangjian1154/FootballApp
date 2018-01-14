@@ -1,44 +1,40 @@
 package com.wj.base.base;
 
 /**
- * Created by wj on 2018/1/6.
  * MVP基类
+ *
+ * @param <V> 子activity的view接口
+ * @param <T> 子activity关联的presenter： T extends BasePresenter<V>
  */
-
-public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SimpleActivity {
 
     protected T mPresenter;
 
     @Override
     protected void onViewCreated() {
-        if (mPresenter != null)
-            mPresenter.attachView(this);
+        super.onViewCreated();
+        //初始化Presenter
+        mPresenter = createPresenter();
+        //presenter与View绑定
+        if (null != mPresenter) {
+            mPresenter.attachView((V) this);
+        }
     }
 
-    @Override
-    public void showErrorMsg(String msg) {
-
-    }
-
-    @Override
-    public void stateError() {
-
-    }
-
-    @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
+    /**
+     * 创建presenter
+     *
+     * @return
+     */
+    protected abstract T createPresenter();
 
     @Override
     protected void onDestroy() {
-        if (mPresenter != null)
-            mPresenter.detachView();
+        //presenter与activity解绑定
+        if (null != mPresenter) {
+            mPresenter.detacheView();
+            mPresenter = null;
+        }
         super.onDestroy();
     }
 }

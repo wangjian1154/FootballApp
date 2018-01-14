@@ -5,21 +5,35 @@ package com.wj.base.base;
  * MVP基类
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
+public abstract class BaseFragment<V, T extends BasePresenter<V>> extends SimpleFragment {
 
     protected T mPresenter;
 
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
-        if (mPresenter != null)
-            mPresenter.attachView(this);
+        //初始化Presenter
+        mPresenter = createPresenter();
+        //presenter与View绑定
+        if (null != mPresenter) {
+            mPresenter.attachView((V) this);
+        }
     }
+
+    /**
+     * 创建presenter
+     *
+     * @return
+     */
+    protected abstract T createPresenter();
 
     @Override
     public void onDestroyView() {
-        if (mPresenter != null)
-            mPresenter.detachView();
+        //presenter与activity解绑定
+        if (null != mPresenter) {
+            mPresenter.detacheView();
+            mPresenter = null;
+        }
         super.onDestroyView();
     }
 }
