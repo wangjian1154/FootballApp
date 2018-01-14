@@ -6,6 +6,7 @@ import android.util.Log;
 import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.BasePresenter;
+import com.wj.base.base.SimpleFragment;
 import com.wj.baseutils.R;
 
 /**
@@ -13,7 +14,7 @@ import com.wj.baseutils.R;
  * 我的
  */
 
-public class MineFragment extends BaseFragment{
+public class MineFragment extends SimpleFragment {
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
         Log.i("info", "MineFragment");
@@ -24,8 +25,4 @@ public class MineFragment extends BaseFragment{
         return R.layout.fragment_mine;
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
 }

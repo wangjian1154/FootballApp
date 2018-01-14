@@ -1,17 +1,16 @@
 package com.wj.baseutils.ui.activity;
 
+import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 
-import com.wj.base.base.BaseActivity;
+import com.wj.base.base.SimpleActivity;
 import com.wj.baseutils.R;
-import com.wj.baseutils.presenter.SplashPresenter;
-import com.wj.baseutils.ui.contract.SplashContract;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class SplashActivity extends BaseActivity<SplashContract.View, SplashPresenter> {
+public class SplashActivity extends SimpleActivity {
 
 
     @BindView(R.id.rl_welcome)
@@ -19,7 +18,37 @@ public class SplashActivity extends BaseActivity<SplashContract.View, SplashPres
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
-        mPresenter.startAnim(rlWelcome );
+        rlWelcome.animate().scaleX(1.12f)
+                .scaleY(1.12f)
+                .setDuration(3000)
+                .setStartDelay(100)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        toMain();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+                        toMain();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                }).start();
+    }
+
+    private void toMain() {
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -27,10 +56,5 @@ public class SplashActivity extends BaseActivity<SplashContract.View, SplashPres
         return R.layout.activity_splash;
     }
 
-
-    @Override
-    protected SplashPresenter createPresenter() {
-        return new SplashPresenter(this);
-    }
 
 }

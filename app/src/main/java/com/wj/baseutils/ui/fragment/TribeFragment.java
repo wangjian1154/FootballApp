@@ -6,6 +6,7 @@ import android.util.Log;
 import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.BasePresenter;
+import com.wj.base.base.SimpleFragment;
 import com.wj.baseutils.R;
 
 /**
@@ -13,7 +14,7 @@ import com.wj.baseutils.R;
  * 部落
  */
 
-public class TribeFragment extends BaseFragment {
+public class TribeFragment extends SimpleFragment {
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
         Log.i("info", "TribeFragment");
@@ -24,8 +25,4 @@ public class TribeFragment extends BaseFragment {
         return R.layout.fragment_tribe;
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
 }

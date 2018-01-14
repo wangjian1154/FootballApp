@@ -2,13 +2,11 @@ package com.wj.base.base;
 
 /**
  * MVP基类
- *
- * @param <V> 子activity的view接口
- * @param <T> 子activity关联的presenter： T extends BasePresenter<V>
  */
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SimpleActivity {
+public abstract class BaseActivity<T extends BasePresenter, M extends BaseModel> extends SimpleActivity {
 
     protected T mPresenter;
+    protected M mModel;
 
     @Override
     protected void onViewCreated() {
@@ -17,7 +15,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends Simple
         mPresenter = createPresenter();
         //presenter与View绑定
         if (null != mPresenter) {
-            mPresenter.attachView((V) this);
+            mPresenter.attachView(mModel, this);
         }
     }
 
@@ -32,7 +30,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends Simple
     protected void onDestroy() {
         //presenter与activity解绑定
         if (null != mPresenter) {
-            mPresenter.detacheView();
+            mPresenter.detachView();
             mPresenter = null;
         }
         super.onDestroy();

@@ -1,4 +1,4 @@
-package com.wj.base.net;
+package com.wj.baseutils.net;
 
 import com.google.gson.GsonBuilder;
 import com.wj.base.Initialization;

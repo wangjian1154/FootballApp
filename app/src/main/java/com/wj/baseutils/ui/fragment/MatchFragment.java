@@ -6,6 +6,7 @@ import android.util.Log;
 import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.BasePresenter;
+import com.wj.base.base.SimpleFragment;
 import com.wj.baseutils.R;
 
 /**
@@ -13,7 +14,7 @@ import com.wj.baseutils.R;
  * 赛事
  */
 
-public class MatchFragment extends BaseFragment {
+public class MatchFragment extends SimpleFragment {
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -25,8 +26,4 @@ public class MatchFragment extends BaseFragment {
         return R.layout.fragment_match;
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
 }

@@ -6,47 +6,30 @@ import java.lang.ref.WeakReference;
  * Created by wj on 2018/1/6.
  */
 
-public abstract class BasePresenter<T> {
+public abstract class BasePresenter<M, V> {
 
-    /**
-     * View的引用，使用弱引用，当弱引用所引用的对象被销毁，软引用也会被释放
-     */
-    protected WeakReference<T> mViewRef;
+    protected M mModel;
 
+    protected WeakReference<V> mViewRef;
 
-    /**
-     * Presenter与View关联
-     *
-     * @param view
-     */
-    public void attachView(T view) {
-        mViewRef = new WeakReference<T>(view);
+    protected void attachView(M model, V view) {
+        mModel = model;
+        mViewRef = new WeakReference<>(view);
     }
 
-    /**
-     * Presenter与View解除关联
-     */
-    public void detacheView() {
-        if (mViewRef != null) {
+    protected V getView() {
+        return isViewAttached() ? mViewRef.get() : null;
+    }
+
+    protected boolean isViewAttached() {
+        return null != mViewRef && null != mViewRef.get();
+    }
+
+    protected void detachView() {
+        if (null != mViewRef) {
             mViewRef.clear();
             mViewRef = null;
         }
-    }
-
-    protected T getView() {
-        if (mViewRef != null) {
-            return mViewRef.get();
-        }
-        return null;
-    }
-
-    /**
-     * Presenter与View是否已关联
-     *
-     * @return
-     */
-    public boolean isViewAttached() {
-        return mViewRef != null && mViewRef.get() != null;
     }
 
 }
