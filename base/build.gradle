@@ -76,4 +76,6 @@ dependencies {
     api rootProject.ext.dependencies["SmartRefreshLayout"]
     //banner
     api rootProject.ext.dependencies["banner"]
+    //brvah
+    api rootProject.ext.dependencies["brvah"]
 }

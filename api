@@ -3,6 +3,13 @@ http://api.qiuduoduo.cn/posts/columns/all
 
 肆刻足球
 头条 http://api.qiuduoduo.cn/ttposts?b=&fillContent=true&lazy=true&ps=20
+    itemType
+        1:Item横向普通图文
+        2:Item纵向大图文
+        3:Banner
+    columnistsMap 专栏集合
+    topicsMap 专题
+    outsidesMap 出墙
 转会 http://api.qiuduoduo.cn/transfer/posts?b=&t=0
 中超 http://api.qiuduoduo.cn/posts?t=zc&b=
 英超 http://api.qiuduoduo.cn/posts?t=yc&b=
