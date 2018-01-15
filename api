@@ -1,5 +1,21 @@
-肆刻足球
-http://api.qiuduoduo.cn/ttposts?b=&fillContent=true&lazy=true&ps=20
-
 顶部所有标签
 http://api.qiuduoduo.cn/posts/columns/all
+
+肆刻足球
+头条 http://api.qiuduoduo.cn/ttposts?b=&fillContent=true&lazy=true&ps=20
+转会 http://api.qiuduoduo.cn/transfer/posts?b=&t=0
+中超 http://api.qiuduoduo.cn/posts?t=zc&b=
+英超 http://api.qiuduoduo.cn/posts?t=yc&b=
+好彩 http://api.qiuduoduo.cn/posts?t=hc&b=
+西甲 http://api.qiuduoduo.cn/posts?t=xj&b=
+超级颜论 http://api.qiuduoduo.cn/posts?t=cjyl&b=
+意甲 http://api.qiuduoduo.cn/posts?t=yj&b=
+德甲 http://api.qiuduoduo.cn/posts?t=dj&b=
+视频 http://api.qiuduoduo.cn/posts?t=sp&b=
+五洲 http://api.qiuduoduo.cn/posts?t=wz&b=
+专题 http://api.qiuduoduo.cn/posts?t=zt&b=
+欧冠 http://api.qiuduoduo.cn/posts?t=og&b=
+国际 http://api.qiuduoduo.cn/posts?t=gj&b=
+法甲 http://api.qiuduoduo.cn/posts?t=fj&b=
+专栏 http://api.qiuduoduo.cn/posts?t=zl&b=
+青少年 http://api.qiuduoduo.cn/posts?t=qs&b=

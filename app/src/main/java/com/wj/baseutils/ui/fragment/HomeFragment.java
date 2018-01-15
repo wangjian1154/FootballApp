@@ -40,7 +40,6 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     protected void initViewAndEvent(Bundle savedInstanceState) {
 
         initView();
-
         mPresenter.loadData(true);
     }
 
@@ -48,9 +47,14 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         tagList = new ArrayList<>();
         fragments = new ArrayList<>();
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabPaddingLeftAndRight(
-                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_10)),
-                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_10)));
+        tabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                tabLayout.setTabPaddingLeftAndRight(
+                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)),
+                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)));
+            }
+        });
         tabAdapter = new HomeTagPagerAdapter(getChildFragmentManager(), fragments, tagList);
         viewPager.setAdapter(tabAdapter);
     }

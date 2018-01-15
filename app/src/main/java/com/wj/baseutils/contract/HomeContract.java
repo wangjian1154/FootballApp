@@ -4,6 +4,7 @@ import com.wj.base.base.BaseListener;
 import com.wj.base.base.BaseModel;
 import com.wj.base.base.BasePresenter;
 import com.wj.base.base.BaseView;
+import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.bean.HomeTagBean;
 
 /**
@@ -13,6 +14,7 @@ import com.wj.baseutils.bean.HomeTagBean;
 public interface HomeContract {
 
     interface HomeModel extends BaseModel {
+
         void loadTag(BaseListener<HomeTagBean> listener);
     }
 

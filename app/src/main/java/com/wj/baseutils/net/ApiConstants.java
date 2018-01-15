@@ -11,4 +11,7 @@ public class ApiConstants {
 
     //首页顶部Tag
     public static final String API_HOME_TAG = "/posts/columns/all";
+
+    //首页头条数据
+    public static final String API_HOME_TOP_DATA="/ttposts";
 }

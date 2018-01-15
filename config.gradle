@@ -22,7 +22,7 @@ ext {
             "support-annotations"   : "com.android.support:support-annotations:${dependVersion.support}",
             "support-compat"        : "com.android.support:support-compat:${dependVersion.support}",
             "support-design"        : "com.android.support:design:${dependVersion.support}",
-            "recyclerview"        : "com.android.support:recyclerview-v7:${dependVersion.support}",
+            "recyclerview"          : "com.android.support:recyclerview-v7:${dependVersion.support}",
             "constraint-layout"     : "com.android.support.constraint:constraint-layout:1.0.2",
             //test
             "junit"                 : "junit:junit:4.12",
@@ -50,6 +50,8 @@ ext {
             "okhttp-log-interceptor": "com.squareup.okhttp3:logging-interceptor:3.8.0",
 
             //刷新控件
-            "SmartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7"
+            "SmartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7",
+            //Banner
+            "banner"                : "com.youth.banner:banner:1.4.10"
     ]
 }

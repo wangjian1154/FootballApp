@@ -2,8 +2,7 @@ package com.wj.baseutils.model;
 
 import com.wj.base.base.BaseListener;
 import com.wj.baseutils.bean.HomeDataBean;
-import com.wj.baseutils.bean.HomeTagBean;
-import com.wj.baseutils.contract.HomeContract;
+import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.net.ApiRetrofit;
 import com.wj.baseutils.net.ApiService;
 
@@ -14,24 +13,24 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by wj on 2018/1/14.
+ * Created by wj on 2018/1/15.
  */
 
-public class HomeModelImpl implements HomeContract.HomeModel {
+public class HomeSupportModelImpl implements HomeSupportContract.HomeSupportModel {
 
     @Override
-    public void loadTag(final BaseListener<HomeTagBean> listener) {
+    public void loadHomeData(final BaseListener<HomeDataBean> listener) {
         ApiService apiService = ApiRetrofit.getInstance().getApiService();
-        Observable<HomeTagBean> tagData = apiService.getTagData();
-        Observer<HomeTagBean> observer = new Observer<HomeTagBean>() {
+        Observable<HomeDataBean> homeData = apiService.getHomeData("",true,true,20);
+        Observer<HomeDataBean> observer = new Observer<HomeDataBean>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(HomeTagBean homeTagBean) {
-                listener.onSuccess(homeTagBean);
+            public void onNext(HomeDataBean homeDataBean) {
+                listener.onSuccess(homeDataBean);
             }
 
             @Override
@@ -44,10 +43,8 @@ public class HomeModelImpl implements HomeContract.HomeModel {
 
             }
         };
-        tagData.subscribeOn(Schedulers.newThread())
+        homeData.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
-
     }
 }
