@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.utils.BannerImageLoader;
 import com.wj.base.utils.StringUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
@@ -27,40 +28,26 @@ import butterknife.BindView;
 
 /**
  * Created by wj on 2018/1/14.
+ *
  */
 
 public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl> implements HomeSupportContract.HomeSupportView {
 
     @BindView(R.id.lay_banner)
     Banner layBanner;
-    @BindView(R.id.smart_refresh)
-    SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
 
     private List<String> bannerImg;
     private List<String> bannerTitle;
     private List<HomeDataBean.DataBean.PostsBeanX> posts;
-    private TopNewsAdapter adapter;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
 
         initView();
 
-        initEvent();
-
         mPresenter.loadData(true);
     }
 
-    private void initEvent() {
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.loadData(true);
-            }
-        });
-    }
 
     private void initView() {
         bannerImg = new ArrayList<>();
@@ -70,13 +57,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         layBanner.setDelayTime(5 * 1000);
         layBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         layBanner.setIndicatorGravity(BannerConfig.LEFT);
-
-        adapter = new TopNewsAdapter(posts, bannerImg, bannerTitle, layBanner);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        layBanner.setImages(bannerImg);
-        layBanner.setBannerTitles(bannerTitle);
+        layBanner.setIndicatorGravity(BannerConfig.LEFT);
     }
 
     @Override
@@ -96,16 +77,25 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
 
     @Override
     public void setTopNewsData(boolean isRefresh, HomeDataBean homeDataBean) {
-        Logger.i("wangjian","setTopNewsData");
         if (isRefresh) {
             posts.clear();
-            layBanner.start();
         }
-        if (homeDataBean != null && homeDataBean.data != null
-                && homeDataBean.data.posts != null && homeDataBean.data.posts.size() > 0) {
-            posts.addAll(homeDataBean.data.posts);
-            adapter.notifyDataSetChanged();
-            Logger.i("wangjian",""+posts.size());
+        try {
+            if (homeDataBean != null && homeDataBean.data != null
+                    && homeDataBean.data.posts != null && homeDataBean.data.posts.size() > 0) {
+                posts.addAll(homeDataBean.data.posts);
+                for (int i = 0; i < posts.size(); i++) {
+                    if (posts.get(i).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER) {
+                        bannerImg.add(posts.get(i).imageUrls.get(0));
+                        bannerTitle.add(posts.get(i).title);
+                    }
+                }
+                layBanner.setImages(bannerImg);
+                layBanner.setBannerTitles(bannerTitle);
+                layBanner.start();
+            }
+        } catch (Exception e) {
+            ToastUtils.showDebugShort(e.getMessage());
         }
     }
 

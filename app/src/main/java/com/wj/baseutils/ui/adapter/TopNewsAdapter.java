@@ -29,7 +29,7 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
         super(data);
         this.bannerImg = bannerImg;
         this.bannerTitle = bannerTitle;
-        this.layBanner=layBanner;
+//        this.layBanner=layBanner;
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL, R.layout.item_list_top_news_normal);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BIG_IMG, R.layout.item_list_top_news_big_pic);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER, R.layout.layout_banner);
@@ -37,8 +37,7 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
 
     @Override
     protected void convert(BaseViewHolder helper, HomeDataBean.DataBean.PostsBeanX item) {
-
-        switch (item.getItemType()) {
+        switch (helper.getItemViewType()) {
             case HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL:
                 ImageView iv_normal_pic = helper.getView(R.id.iv_normal_pic);
                 TextView tv_normal_title = helper.getView(R.id.tv_normal_title);
@@ -56,11 +55,13 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
                 break;
 
             case HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER:
+//                helper.getView(R.id.lay_banner).setVisibility(View.GONE);
                 if (item.imageUrls != null && item.imageUrls.size() > 0) {
                     bannerImg.add(item.imageUrls.get(0));
                 }
                 break;
         }
+
 
     }
 
