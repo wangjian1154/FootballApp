@@ -19,6 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        Logger.addLogAdapter(new AndroidLogAdapter());
         new Initialization(this);
 
     }

@@ -17,7 +17,7 @@ public interface HomeSupportContract {
     }
 
     interface HomeSupportView extends BaseView {
-        void setTopNewsData(HomeDataBean homeDataBean);//头条
+        void setTopNewsData(boolean isRefresh,HomeDataBean homeDataBean);//头条
     }
 
     abstract class HomeSupportPresenter extends BasePresenter<HomeSupportModel, HomeSupportView> {

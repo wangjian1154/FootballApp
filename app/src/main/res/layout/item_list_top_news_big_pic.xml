@@ -18,6 +18,7 @@
         android:textSize="@dimen/font_size_16" />
 
     <ImageView
+        android:id="@+id/iv_big_pic"
         android:layout_below="@+id/tv_big_pic_title"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/widget_size_10"
