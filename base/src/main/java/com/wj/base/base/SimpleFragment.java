@@ -24,6 +24,7 @@ public abstract class SimpleFragment extends Fragment {
     private Unbinder bind;
     protected boolean isCreate = false;
     protected boolean isDestroy = false;
+    protected boolean isFirstVisible = true;
 
     @Nullable
     @Override
@@ -33,18 +34,74 @@ public abstract class SimpleFragment extends Fragment {
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
         isCreate = true;
+        boolean isVis = isHidden() || getUserVisibleHint();
 
         onViewCreated();
-        
+
         initViewAndEvent(savedInstanceState);
-        
+
+        if (isVis && isFirstVisible) {
+            lazyLoad();
+            isFirstVisible = false;
+        }
+
         return itemView;
     }
 
     protected void onViewCreated() {
     }
 
+    /**
+     * 初始化界面
+     *
+     * @param savedInstanceState
+     */
     protected abstract void initViewAndEvent(Bundle savedInstanceState);
+
+    /**
+     * 数据懒加载
+     */
+    protected void lazyLoad() {
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            onVisible();
+        } else {
+            onInVisible();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            onVisible();
+        } else {
+            onInVisible();
+        }
+    }
+
+    /**
+     * 当界面不可见时的操作
+     */
+    protected void onInVisible() {
+
+    }
+
+    /**
+     * 当界面可见时的操作
+     */
+    protected void onVisible() {
+        if (isFirstVisible && isResumed()) {
+            lazyLoad();
+            isFirstVisible = false;
+        }
+    }
+
 
     @Override
     public void onDestroyView() {

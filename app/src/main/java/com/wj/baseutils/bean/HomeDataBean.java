@@ -234,6 +234,7 @@ public class HomeDataBean {
             public static final int ITEM_NORMAL = 1;
             public static final int ITEM_BIG_IMG = 2;
             public static final int ITEM_BANNER = 3;
+            public static final int ITEM_THREE_IMG = 4;
 
 
             public PostsBeanX(int itemType) {

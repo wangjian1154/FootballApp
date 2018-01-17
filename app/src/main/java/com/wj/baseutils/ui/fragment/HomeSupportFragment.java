@@ -3,6 +3,7 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -44,10 +45,13 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     protected void initViewAndEvent(Bundle savedInstanceState) {
 
         initView();
-
-        mPresenter.loadData(true);
     }
 
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        mPresenter.loadData(true);
+    }
 
     private void initView() {
         bannerImg = new ArrayList<>();

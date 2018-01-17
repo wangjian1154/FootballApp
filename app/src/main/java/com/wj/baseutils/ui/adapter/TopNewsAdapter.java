@@ -33,6 +33,7 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL, R.layout.item_list_top_news_normal);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BIG_IMG, R.layout.item_list_top_news_big_pic);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER, R.layout.layout_banner);
+        addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG, R.layout.layout_banner);
     }
 
     @Override
@@ -59,6 +60,9 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
                 if (item.imageUrls != null && item.imageUrls.size() > 0) {
                     bannerImg.add(item.imageUrls.get(0));
                 }
+                break;
+            case HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG:
+
                 break;
         }
 

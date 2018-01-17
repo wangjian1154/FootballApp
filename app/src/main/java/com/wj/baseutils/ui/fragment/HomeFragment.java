@@ -82,7 +82,10 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
             for (int i = 0; i < tagBean.data.size(); i++) {
                 if (tagBean.data.get(i) != null) {
                     tagList.add(tagBean.data.get(i).name);
-                    fragments.add(new HomeSupportFragment());
+                    HomeSupportFragment fragment = new HomeSupportFragment();
+                    Bundle bundle = new Bundle();
+                    fragment.setArguments(bundle);
+                    fragments.add(fragment);
                 }
             }
         }
