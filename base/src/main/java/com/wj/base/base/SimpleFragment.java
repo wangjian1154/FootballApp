@@ -34,18 +34,19 @@ public abstract class SimpleFragment extends Fragment {
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
         isCreate = true;
-        boolean isVis = isHidden() || getUserVisibleHint();
+        return itemView;
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         onViewCreated();
-
         initViewAndEvent(savedInstanceState);
-
+        boolean isVis = isHidden() || getUserVisibleHint();
         if (isVis && isFirstVisible) {
             lazyLoad();
             isFirstVisible = false;
         }
-
-        return itemView;
     }
 
     protected void onViewCreated() {

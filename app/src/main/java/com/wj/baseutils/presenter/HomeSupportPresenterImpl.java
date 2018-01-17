@@ -10,14 +10,14 @@ import com.wj.baseutils.contract.HomeSupportContract;
 
 public class HomeSupportPresenterImpl extends HomeSupportContract.HomeSupportPresenter {
     @Override
-    public void loadData(final boolean isRefresh) {
+    public void loadData(final boolean isRefresh,String type) {
         final HomeSupportContract.HomeSupportView mView = getView();
         if (mView == null) return;
 
-        mModel.loadHomeData(new BaseListener<HomeDataBean>() {
+        mModel.loadHomeData(type, new BaseListener<HomeDataBean>() {
             @Override
             public void onSuccess(HomeDataBean result) {
-                mView.setTopNewsData(isRefresh,result);
+                mView.setTopNewsData(isRefresh, result);
             }
 
             @Override

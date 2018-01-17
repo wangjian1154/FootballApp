@@ -10,7 +10,6 @@ import com.wj.base.utils.ImageLoadUtils;
 import com.wj.base.utils.StringUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.HomeDataBean;
-import com.youth.banner.Banner;
 
 import java.util.List;
 
@@ -20,16 +19,8 @@ import java.util.List;
 
 public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataBean.PostsBeanX, BaseViewHolder> {
 
-    private List<String> bannerImg;
-    private List<String> bannerTitle;
-    private Banner layBanner;
-
-    public TopNewsAdapter(List<HomeDataBean.DataBean.PostsBeanX> data, List<String> bannerImg,
-                          List<String> bannerTitle, Banner layBanner) {
+    public TopNewsAdapter(List<HomeDataBean.DataBean.PostsBeanX> data) {
         super(data);
-        this.bannerImg = bannerImg;
-        this.bannerTitle = bannerTitle;
-//        this.layBanner=layBanner;
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL, R.layout.item_list_top_news_normal);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BIG_IMG, R.layout.item_list_top_news_big_pic);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER, R.layout.layout_banner);
@@ -56,13 +47,8 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
                 break;
 
             case HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER:
-//                helper.getView(R.id.lay_banner).setVisibility(View.GONE);
-                if (item.imageUrls != null && item.imageUrls.size() > 0) {
-                    bannerImg.add(item.imageUrls.get(0));
-                }
                 break;
             case HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG:
-
                 break;
         }
 

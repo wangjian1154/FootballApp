@@ -9,6 +9,7 @@ import com.wj.base.base.BaseFragment;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.views.ColorTrackTabLayout;
 import com.wj.baseutils.R;
+import com.wj.baseutils.app.Constants;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;
@@ -40,6 +41,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     protected void initViewAndEvent(Bundle savedInstanceState) {
 
         initView();
+
         mPresenter.loadData(true);
     }
 
@@ -84,12 +86,14 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                     tagList.add(tagBean.data.get(i).name);
                     HomeSupportFragment fragment = new HomeSupportFragment();
                     Bundle bundle = new Bundle();
+                    bundle.putString(Constants.Key.KEY, tagBean.data.get(i).key);
                     fragment.setArguments(bundle);
                     fragments.add(fragment);
                 }
             }
         }
         tabAdapter.notifyDataSetChanged();
+        viewPager.setOffscreenPageLimit(tagList.size());
     }
 
 }

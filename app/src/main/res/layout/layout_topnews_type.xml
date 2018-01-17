@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/widget_size_5"
+    android:id="@+id/ll_top_news_type"
+    android:visibility="gone"
     android:paddingTop="@dimen/widget_size_5">
 
     <LinearLayout

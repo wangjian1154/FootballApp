@@ -1,6 +1,7 @@
 package com.wj.baseutils.model;
 
 import com.wj.base.base.BaseListener;
+import com.wj.baseutils.app.Constants;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.net.ApiRetrofit;
@@ -19,9 +20,24 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeSupportModelImpl implements HomeSupportContract.HomeSupportModel {
 
     @Override
-    public void loadHomeData(final BaseListener<HomeDataBean> listener) {
+    public void loadHomeData(String type, final BaseListener<HomeDataBean> listener) {
         ApiService apiService = ApiRetrofit.getInstance().getApiService();
-        Observable<HomeDataBean> homeData = apiService.getHomeData("",true,true,20);
+
+        Observable<HomeDataBean> homeList;
+        switch (type) {
+            case Constants.TYPE.TOP_NEWS:
+                //获取头条数据
+                homeList = apiService.getTopNewsData("", true, true, 20);
+                break;
+            case Constants.TYPE.TOP_TRANSFER:
+                //获取转会数据
+                homeList = apiService.getTransferList("", "0");
+                break;
+            default:
+                homeList = apiService.getHomeList(type, "");
+                break;
+        }
+
         Observer<HomeDataBean> observer = new Observer<HomeDataBean>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -43,7 +59,7 @@ public class HomeSupportModelImpl implements HomeSupportContract.HomeSupportMode
 
             }
         };
-        homeData.subscribeOn(Schedulers.newThread())
+        homeList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }

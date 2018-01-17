@@ -13,14 +13,14 @@ import com.wj.baseutils.bean.HomeDataBean;
 public interface HomeSupportContract {
 
     interface HomeSupportModel extends BaseModel {
-        void loadHomeData(BaseListener<HomeDataBean> listener);
+        void loadHomeData(String type, BaseListener<HomeDataBean> listener);
     }
 
     interface HomeSupportView extends BaseView {
-        void setTopNewsData(boolean isRefresh,HomeDataBean homeDataBean);//头条
+        void setTopNewsData(boolean isRefresh, HomeDataBean homeDataBean);//头条
     }
 
     abstract class HomeSupportPresenter extends BasePresenter<HomeSupportModel, HomeSupportView> {
-        public abstract void loadData(boolean isRefresh);
+        public abstract void loadData(boolean isRefresh, String type);
     }
 }

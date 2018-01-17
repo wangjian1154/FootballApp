@@ -13,5 +13,11 @@ public class ApiConstants {
     public static final String API_HOME_TAG = "/posts/columns/all";
 
     //首页头条数据
-    public static final String API_HOME_TOP_DATA="/ttposts";
+    public static final String API_HOME_TOP_DATA = "/ttposts";
+
+    //首页转会
+    public static final String API_HOME_TRANSFER = "/transfer/posts";
+
+    //剩余几种
+    public static final String API_HOME_OTHER = "/posts";
 }

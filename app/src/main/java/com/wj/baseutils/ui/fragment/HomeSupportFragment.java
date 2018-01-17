@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -14,6 +16,7 @@ import com.wj.base.utils.BannerImageLoader;
 import com.wj.base.utils.StringUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
+import com.wj.baseutils.app.Constants;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.model.HomeSupportModelImpl;
@@ -29,39 +32,56 @@ import butterknife.BindView;
 
 /**
  * Created by wj on 2018/1/14.
- *
  */
 
 public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl> implements HomeSupportContract.HomeSupportView {
 
     @BindView(R.id.lay_banner)
     Banner layBanner;
+    @BindView(R.id.ll_top_news_type)
+    LinearLayout llTopNewsType;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     private List<String> bannerImg;
     private List<String> bannerTitle;
     private List<HomeDataBean.DataBean.PostsBeanX> posts;
+    private String key;
+    private TopNewsAdapter adapter;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
-
         initView();
     }
 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        mPresenter.loadData(true);
+        mPresenter.loadData(true, key);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void initView() {
+        Bundle bundle = getArguments();
+        key = bundle.getString(Constants.Key.KEY);
+
         bannerImg = new ArrayList<>();
         bannerTitle = new ArrayList<>();
         posts = new ArrayList<>();
+
         layBanner.setImageLoader(new BannerImageLoader());
         layBanner.setDelayTime(5 * 1000);
         layBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         layBanner.setIndicatorGravity(BannerConfig.LEFT);
-        layBanner.setIndicatorGravity(BannerConfig.LEFT);
+
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(manager);
+        adapter = new TopNewsAdapter(posts);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -81,26 +101,40 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
 
     @Override
     public void setTopNewsData(boolean isRefresh, HomeDataBean homeDataBean) {
-        if (isRefresh) {
-            posts.clear();
-        }
         try {
-            if (homeDataBean != null && homeDataBean.data != null
-                    && homeDataBean.data.posts != null && homeDataBean.data.posts.size() > 0) {
+            if (isRefresh) {
+                posts.clear();
+            }
+            if (homeDataBean != null
+                    && homeDataBean.data != null
+                    && homeDataBean.data.posts != null
+                    && homeDataBean.data.posts.size() > 0) {
                 posts.addAll(homeDataBean.data.posts);
-                for (int i = 0; i < posts.size(); i++) {
-                    if (posts.get(i).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER) {
-                        bannerImg.add(posts.get(i).imageUrls.get(0));
-                        bannerTitle.add(posts.get(i).title);
-                    }
+                adapter.notifyDataSetChanged();
+                //加载头条数据
+                if (posts.size() > 0 && posts.get(0).getItemType()
+                        == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER
+                        && Constants.TYPE.TOP_NEWS.equals(key)) {
+                    loadBanner();
                 }
-                layBanner.setImages(bannerImg);
-                layBanner.setBannerTitles(bannerTitle);
-                layBanner.start();
             }
         } catch (Exception e) {
             ToastUtils.showDebugShort(e.getMessage());
         }
+    }
+
+    private void loadBanner() {
+        layBanner.setVisibility(View.VISIBLE);
+        llTopNewsType.setVisibility(View.VISIBLE);
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER) {
+                bannerImg.add(posts.get(i).imageUrls.get(0));
+                bannerTitle.add(posts.get(i).title);
+            }
+        }
+        layBanner.setImages(bannerImg);
+        layBanner.setBannerTitles(bannerTitle);
+        layBanner.start();
     }
 
     @Override
