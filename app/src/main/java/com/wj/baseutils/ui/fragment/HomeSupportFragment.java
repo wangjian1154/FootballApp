@@ -35,7 +35,8 @@ import butterknife.BindView;
  * Created by wj on 2018/1/14.
  */
 
-public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl> implements HomeSupportContract.HomeSupportView {
+public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl>
+        implements HomeSupportContract.HomeSupportView {
 
     @BindView(R.id.lay_banner)
     Banner layBanner;

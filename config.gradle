@@ -56,7 +56,7 @@ ext {
             "brvah"                 : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34",
             "flexibledivider"       : "com.yqritc:recyclerview-flexibledivider:1.4.0",
             //jiaozivideoplayer
-            "jiaozivideoplayer" :"cn.jzvd:jiaozivideoplayer:6.2.4"
-
+            "jiaozivideoplayer"     : "cn.jzvd:jiaozivideoplayer:6.2.4",
+            "flowlayout"            : "com.hyman:flowlayout-lib:1.1.2"
     ]
 }

@@ -1,12 +1,13 @@
 package com.wj.baseutils.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by wj on 2018/1/14.
  */
 
-public class HomeTagBean {
+public class HomeTagBean implements Serializable{
 
 
     /**
@@ -19,7 +20,7 @@ public class HomeTagBean {
     public long serverTime;
     public List<DataBean> data;
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * name : 头条
          * key : tt
