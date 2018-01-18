@@ -19,6 +19,7 @@ import com.wj.baseutils.ui.fragment.TribeFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jzvd.JZVideoPlayer;
 
 public class MainActivity extends BaseActivity {
 
@@ -199,5 +200,19 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }

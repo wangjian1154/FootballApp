@@ -280,6 +280,18 @@ public class HomeDataBean {
             public List<TopicsBeanX> topics;
             public List<?> columnists;
             public List<String> imageUrls;
+            public VideoBean video;
+
+            public static class VideoBean {
+                public int id;
+                public String title;
+                public String url;
+                public String image;
+                public String editorId;
+                public String createdAt;
+                public String updatedAt;
+                public String duration;
+            }
 
             public static class PostAuthorBean {
 

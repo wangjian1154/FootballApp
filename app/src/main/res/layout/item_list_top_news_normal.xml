@@ -36,6 +36,7 @@
         android:id="@+id/iv_normal_pic"
         android:layout_width="@dimen/widget_size_100"
         android:layout_height="@dimen/widget_size_50"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_default" />
 
 

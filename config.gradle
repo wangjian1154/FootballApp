@@ -3,7 +3,7 @@ ext {
             compileSdkVersion: 26,
             buildToolsVersion: "26.0.2",
             applicationId    : "com.wj.baseutils",
-            minSdkVersion    : 15,
+            minSdkVersion    : 16,
             targetSdkVersion : 26,
             versionCode      : 1,
             versionName      : "1.0.0"
@@ -54,6 +54,9 @@ ext {
             //Banner
             "banner"                : "com.youth.banner:banner:1.4.10",
             "brvah"                 : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34",
-            "flexibledivider"       : "com.yqritc:recyclerview-flexibledivider:1.4.0"
+            "flexibledivider"       : "com.yqritc:recyclerview-flexibledivider:1.4.0",
+            //jiaozivideoplayer
+            "jiaozivideoplayer" :"cn.jzvd:jiaozivideoplayer:6.2.4"
+
     ]
 }

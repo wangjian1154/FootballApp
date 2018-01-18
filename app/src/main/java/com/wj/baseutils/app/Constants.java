@@ -14,6 +14,7 @@ public class Constants {
     public interface TYPE {
         String TOP_NEWS = "tt";//头条
         String TOP_TRANSFER = "zh";//转会
+        String TOP_VIDEO = "sp";//视频
     }
 
 }

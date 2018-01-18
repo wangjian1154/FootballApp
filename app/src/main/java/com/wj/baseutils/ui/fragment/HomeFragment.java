@@ -1,11 +1,11 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.wj.base.base.BaseFragment;
+import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.views.ColorTrackTabLayout;
 import com.wj.baseutils.R;
@@ -82,11 +82,17 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         fragments.clear();
         if (tagBean != null && tagBean.data != null) {
             for (int i = 0; i < tagBean.data.size(); i++) {
-                if (tagBean.data.get(i) != null) {
+                HomeTagBean.DataBean bean = tagBean.data.get(i);
+                if (bean != null) {
                     tagList.add(tagBean.data.get(i).name);
-                    HomeSupportFragment fragment = new HomeSupportFragment();
+                    SimpleFragment fragment;
+                    if (Constants.TYPE.TOP_VIDEO.equals(bean.key)) {
+                        fragment = new VideoFragment();
+                    } else {
+                        fragment = new HomeSupportFragment();
+                    }
                     Bundle bundle = new Bundle();
-                    bundle.putString(Constants.Key.KEY, tagBean.data.get(i).key);
+                    bundle.putString(Constants.Key.KEY, bean.key);
                     fragment.setArguments(bundle);
                     fragments.add(fragment);
                 }

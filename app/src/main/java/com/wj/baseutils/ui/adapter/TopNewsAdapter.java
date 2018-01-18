@@ -47,8 +47,12 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
                 break;
 
             case HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER:
+
+
                 break;
             case HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG:
+
+
                 break;
         }
 
