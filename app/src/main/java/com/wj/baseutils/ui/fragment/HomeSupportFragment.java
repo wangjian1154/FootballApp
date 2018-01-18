@@ -24,6 +24,7 @@ import com.wj.baseutils.presenter.HomeSupportPresenterImpl;
 import com.wj.baseutils.ui.adapter.TopNewsAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,10 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration
+                .Builder(getActivity())
+                .colorResId(R.color.decoration_color)
+                .build());
         adapter = new TopNewsAdapter(posts);
         recyclerView.setAdapter(adapter);
     }
@@ -124,17 +129,19 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     }
 
     private void loadBanner() {
-        layBanner.setVisibility(View.VISIBLE);
-        llTopNewsType.setVisibility(View.VISIBLE);
-        for (int i = 0; i < posts.size(); i++) {
-            if (posts.get(i).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER) {
-                bannerImg.add(posts.get(i).imageUrls.get(0));
-                bannerTitle.add(posts.get(i).title);
+        if (Constants.TYPE.TOP_NEWS.equals(key)) {
+            layBanner.setVisibility(View.VISIBLE);
+            llTopNewsType.setVisibility(View.VISIBLE);
+            for (int i = 0; i < posts.size(); i++) {
+                if (posts.get(i).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER) {
+                    bannerImg.add(posts.get(i).imageUrls.get(0));
+                    bannerTitle.add(posts.get(i).title);
+                }
             }
+            layBanner.setImages(bannerImg);
+            layBanner.setBannerTitles(bannerTitle);
+            layBanner.start();
         }
-        layBanner.setImages(bannerImg);
-        layBanner.setBannerTitles(bannerTitle);
-        layBanner.start();
     }
 
     @Override

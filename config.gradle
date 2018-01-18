@@ -53,6 +53,7 @@ ext {
             "SmartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7",
             //Banner
             "banner"                : "com.youth.banner:banner:1.4.10",
-            "brvah"                 : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34"
+            "brvah"                 : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34",
+            "flexibledivider"       : "com.yqritc:recyclerview-flexibledivider:1.4.0"
     ]
 }
