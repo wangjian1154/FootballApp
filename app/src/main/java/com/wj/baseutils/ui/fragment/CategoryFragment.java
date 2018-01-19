@@ -1,6 +1,8 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.wj.base.base.BaseFragment;
@@ -9,6 +11,7 @@ import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.CategoryContract;
 import com.wj.baseutils.model.CategoryModelImpl;
 import com.wj.baseutils.presenter.CategoryPresenterImpl;
+import com.wj.baseutils.ui.adapter.CategoryAdapter;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -26,8 +29,8 @@ import butterknife.BindView;
 public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, CategoryModelImpl>
         implements CategoryContract.CategoryView {
 
-    @BindView(R.id.flowlayout)
-    TagFlowLayout tagFlowLayout;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     private List<HomeTagBean.DataBean> tagList;
     public static final String KEY = "key";
@@ -49,13 +52,10 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
         tagList = new ArrayList<>();
         tagList.clear();
         tagList.addAll(bean.data);
-        tagFlowLayout.setAdapter(new TagAdapter(tagList) {
-            @Override
-            public View getView(FlowLayout parent, int position, Object o) {
 
-                return null;
-            }
-        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        CategoryAdapter adapter = new CategoryAdapter(tagList);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
