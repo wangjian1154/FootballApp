@@ -8,6 +8,9 @@ import android.widget.RelativeLayout;
 import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseActivity;
 import com.wj.base.base.BasePresenter;
+import com.wj.base.base.SimpleFragment;
+import com.wj.base.utils.HandleBackUtil;
+import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.app.Constants;
 import com.wj.baseutils.ui.adapter.BaseTabFragmentAdapter;
@@ -34,6 +37,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.rl_tab_mine)
     RelativeLayout rlTabMine;
 
+    private long exitTime = 0;
     private HomeFragment homeFragment;
     private TribeFragment tribeFragment;
     private MatchFragment matchFragment;
@@ -42,6 +46,8 @@ public class MainActivity extends BaseActivity {
     private BaseTabFragmentAdapter mTabFragmentAdapter;
     private int[] tabViewId2Index = {R.id.rl_tab_home, R.id.rl_tab_tribe,
             R.id.rl_tab_match, R.id.rl_tab_data, R.id.rl_tab_mine};
+    private SimpleFragment mBackHandedFragment;
+    private boolean hadIntercept;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -207,7 +213,17 @@ public class MainActivity extends BaseActivity {
         if (JZVideoPlayer.backPress()) {
             return;
         }
-        super.onBackPressed();
+
+        if (!HandleBackUtil.handleBackPress(this)) {
+            if (System.currentTimeMillis() - exitTime < 2000) {
+                super.onBackPressed();
+            } else {
+                ToastUtils.showShort(getString(R.string.string_exit));
+                exitTime = System.currentTimeMillis();
+            }
+        } else {
+
+        }
     }
 
     @Override
@@ -215,4 +231,5 @@ public class MainActivity extends BaseActivity {
         super.onPause();
         JZVideoPlayer.releaseAllVideos();
     }
+
 }

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wj.base.utils.HandleBackUtil;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -19,7 +21,7 @@ import butterknife.Unbinder;
  * 无MVP基类
  */
 
-public abstract class SimpleFragment extends Fragment {
+public abstract class SimpleFragment extends Fragment implements HandleBackUtil.HandleBackInterface  {
 
     private Unbinder bind;
     protected boolean isCreate = false;
@@ -117,6 +119,11 @@ public abstract class SimpleFragment extends Fragment {
 
     protected abstract int getLayoutId();
 
+    @Override
+    public boolean onBackPressed() {
+        return HandleBackUtil.handleBackPress(this);
+    }
+
     @Subscribe
     public void onEventMainThread(Message msg) {
         if (msg != null) {
@@ -125,4 +132,5 @@ public abstract class SimpleFragment extends Fragment {
             }
         }
     }
+
 }

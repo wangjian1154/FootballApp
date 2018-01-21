@@ -3,6 +3,7 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
 import com.wj.base.base.BaseFragment;
@@ -39,6 +40,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     private List<Fragment> fragments;
     private HomeTagPagerAdapter tabAdapter;
     private HomeTagBean tagBean;
+    private CategoryFragment categoryFragment;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -110,12 +112,29 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     public void changeTag() {
         if (tagBean != null) {
             FragmentManager fm = getChildFragmentManager();
-            CategoryFragment categoryFragment = new CategoryFragment();
+            categoryFragment = new CategoryFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable(CategoryFragment.KEY, tagBean);
             categoryFragment.setArguments(bundle);
-            fm.beginTransaction().replace(R.id.fl_tag, categoryFragment).commit();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.fl_tag, categoryFragment).commit();
         }
     }
 
+    /**
+     * 隐藏TagFragment
+     */
+    public boolean hideTagFragment() {
+        if (categoryFragment != null && !categoryFragment.isHidden()) {
+            getChildFragmentManager().beginTransaction().remove(categoryFragment).commit();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        hideTagFragment();
+        return true;
+    }
 }
