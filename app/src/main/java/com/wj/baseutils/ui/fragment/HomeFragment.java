@@ -2,6 +2,7 @@ package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 
 import com.wj.base.base.BaseFragment;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by wj on 2018/1/11.
@@ -36,6 +38,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     private List<String> tagList;
     private List<Fragment> fragments;
     private HomeTagPagerAdapter tabAdapter;
+    private HomeTagBean tagBean;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
 
     @Override
     public void setTagData(HomeTagBean tagBean) {
+        this.tagBean = tagBean;
         tagList.clear();
         fragments.clear();
         if (tagBean != null && tagBean.data != null) {
@@ -100,6 +104,18 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         }
         tabAdapter.notifyDataSetChanged();
         viewPager.setOffscreenPageLimit(tagList.size());
+    }
+
+    @OnClick(R.id.ll_change_tag)
+    public void changeTag() {
+        if (tagBean != null) {
+            FragmentManager fm = getChildFragmentManager();
+            CategoryFragment categoryFragment = new CategoryFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(CategoryFragment.KEY, tagBean);
+            categoryFragment.setArguments(bundle);
+            fm.beginTransaction().replace(R.id.fl_tag, categoryFragment).commit();
+        }
     }
 
 }

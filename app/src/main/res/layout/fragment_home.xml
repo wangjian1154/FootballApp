@@ -48,11 +48,12 @@
             app:tabTextColor="@color/font_gay" />
 
         <LinearLayout
+            android:id="@+id/ll_change_tag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/widget_size_10"
-            android:layout_marginRight="@dimen/widget_size_10"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="@dimen/widget_size_10"
+            android:paddingRight="@dimen/widget_size_10">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -68,11 +69,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_tab" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fl_tag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_search">
 
-    </LinearLayout>
+    </FrameLayout>
 
 </RelativeLayout>
