@@ -213,16 +213,17 @@ public class MainActivity extends BaseActivity {
         if (JZVideoPlayer.backPress()) {
             return;
         }
-
         if (!HandleBackUtil.handleBackPress(this)) {
-            if (System.currentTimeMillis() - exitTime < 2000) {
-                super.onBackPressed();
-            } else {
-                ToastUtils.showShort(getString(R.string.string_exit));
-                exitTime = System.currentTimeMillis();
-            }
-        } else {
+            dealQuit();
+        }
+    }
 
+    private void dealQuit() {
+        if (System.currentTimeMillis() - exitTime < 2000) {
+            super.onBackPressed();
+        } else {
+            ToastUtils.showShort(getString(R.string.string_exit));
+            exitTime = System.currentTimeMillis();
         }
     }
 

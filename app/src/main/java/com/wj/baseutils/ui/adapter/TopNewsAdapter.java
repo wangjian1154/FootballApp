@@ -23,20 +23,15 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
         super(data);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL, R.layout.item_list_top_news_normal);
         addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BIG_IMG, R.layout.item_list_top_news_big_pic);
-        addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER, R.layout.layout_banner);
-        addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG, R.layout.layout_banner);
+        addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER, R.layout.item_list_top_news_normal);
+        addItemType(HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG, R.layout.item_list_top_news_normal);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, HomeDataBean.DataBean.PostsBeanX item) {
         switch (helper.getItemViewType()) {
             case HomeDataBean.DataBean.PostsBeanX.ITEM_NORMAL:
-                ImageView iv_normal_pic = helper.getView(R.id.iv_normal_pic);
-                TextView tv_normal_title = helper.getView(R.id.tv_normal_title);
-                TextView tv_normal_hotnum = helper.getView(R.id.tv_normal_hotnum);
-                loadImageData(item, iv_normal_pic);
-                tv_normal_title.setText(StringUtils.setStr(item.title));
-                tv_normal_hotnum.setText(StringUtils.setStr(item.heatValue + ""));
+                setNormalData(helper, item);
                 break;
 
             case HomeDataBean.DataBean.PostsBeanX.ITEM_BIG_IMG:
@@ -47,16 +42,23 @@ public class TopNewsAdapter extends BaseMultiItemQuickAdapter<HomeDataBean.DataB
                 break;
 
             case HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER:
-
-
+                setNormalData(helper, item);
                 break;
             case HomeDataBean.DataBean.PostsBeanX.ITEM_THREE_IMG:
-
-
+                setNormalData(helper, item);
                 break;
         }
 
 
+    }
+
+    private void setNormalData(BaseViewHolder helper, HomeDataBean.DataBean.PostsBeanX item) {
+        ImageView iv_normal_pic = helper.getView(R.id.iv_normal_pic);
+        TextView tv_normal_title = helper.getView(R.id.tv_normal_title);
+        TextView tv_normal_hotnum = helper.getView(R.id.tv_normal_hotnum);
+        loadImageData(item, iv_normal_pic);
+        tv_normal_title.setText(StringUtils.setStr(item.title));
+        tv_normal_hotnum.setText(StringUtils.setStr(item.heatValue + ""));
     }
 
     private void loadImageData(HomeDataBean.DataBean.PostsBeanX item, ImageView imageView) {

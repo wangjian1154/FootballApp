@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wj.base.base.BaseFragment;
 import com.wj.baseutils.R;
 import com.wj.baseutils.app.Constants;
@@ -26,6 +30,8 @@ import butterknife.BindView;
 public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl>
         implements HomeSupportContract.HomeSupportView {
 
+    @BindView(R.id.smart_layout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private List<HomeDataBean.DataBean.PostsBeanX> posts;
@@ -45,7 +51,7 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        mPresenter.loadData(true, key);
+        mPresenter.loadData(true, key,"");
     }
 
     @Override
@@ -62,6 +68,26 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
                 .Builder(getActivity())
                 .colorResId(R.color.decoration_color)
                 .build());
+
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadData(true, key,"");
+            }
+        });
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                loadMore(false);
+            }
+        });
+    }
+
+    private void loadMore(boolean isRefresh) {
+        if (!isRefresh && posts != null && posts.size() > 0) {
+            mPresenter.loadData(isRefresh, key, posts.get(posts.size() - 1).originalPublishDate + "");
+        }
     }
 
     @Override
@@ -76,6 +102,9 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
             posts.addAll(homeDataBean.data.posts);
             adapter.notifyDataSetChanged();
         }
+
+        smartRefreshLayout.finishRefresh();
+        smartRefreshLayout.finishLoadmore();
     }
 
     @Override

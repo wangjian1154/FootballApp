@@ -13,7 +13,7 @@ import com.wj.baseutils.bean.HomeDataBean;
 public interface HomeSupportContract {
 
     interface HomeSupportModel extends BaseModel {
-        void loadHomeData(String type, BaseListener<HomeDataBean> listener);
+        void loadHomeData(String timeMillis,String type, BaseListener<HomeDataBean> listener);
     }
 
     interface HomeSupportView extends BaseView {
@@ -21,6 +21,6 @@ public interface HomeSupportContract {
     }
 
     abstract class HomeSupportPresenter extends BasePresenter<HomeSupportModel, HomeSupportView> {
-        public abstract void loadData(boolean isRefresh, String type);
+        public abstract void loadData(boolean isRefresh, String type,String loadData);
     }
 }

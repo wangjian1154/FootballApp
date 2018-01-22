@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.utils.BannerImageLoader;
@@ -38,13 +40,13 @@ import butterknife.BindView;
 public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSupportModelImpl>
         implements HomeSupportContract.HomeSupportView {
 
-    @BindView(R.id.lay_banner)
-    Banner layBanner;
-    @BindView(R.id.ll_top_news_type)
-    LinearLayout llTopNewsType;
+    @BindView(R.id.smart_layout)
+    SmartRefreshLayout smartRefreshLayout;
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
+    private Banner layBanner;
+    private LinearLayout llTopNewsType;
     private List<String> bannerImg;
     private List<String> bannerTitle;
     private List<HomeDataBean.DataBean.PostsBeanX> posts;
@@ -59,7 +61,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        mPresenter.loadData(true, key);
+        mPresenter.loadData(true, key, "");
     }
 
     @Override
@@ -75,11 +77,6 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         bannerTitle = new ArrayList<>();
         posts = new ArrayList<>();
 
-        layBanner.setImageLoader(new BannerImageLoader());
-        layBanner.setDelayTime(5 * 1000);
-        layBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-        layBanner.setIndicatorGravity(BannerConfig.LEFT);
-
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration
@@ -88,6 +85,39 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
                 .build());
         adapter = new TopNewsAdapter(posts);
         recyclerView.setAdapter(adapter);
+        initHeadView();
+
+        layBanner.setImageLoader(new BannerImageLoader());
+        layBanner.setDelayTime(5 * 1000);
+        layBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
+        layBanner.setIndicatorGravity(BannerConfig.LEFT);
+
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadData(true, key, "");
+            }
+        });
+
+        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                loadMore(false);
+            }
+        });
+    }
+
+    private void loadMore(boolean isRefresh) {
+        if (!isRefresh && posts != null && posts.size() > 0) {
+            mPresenter.loadData(isRefresh, key, posts.get(posts.size() - 1).originalPublishDate + "");
+        }
+    }
+
+    private void initHeadView() {
+        View headView = View.inflate(getContext(), R.layout.layout_topnews_head, null);
+        layBanner = headView.findViewById(R.id.lay_banner);
+        llTopNewsType = headView.findViewById(R.id.ll_top_news_type);
+        adapter.addHeaderView(headView);
     }
 
     @Override
@@ -118,8 +148,8 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
                 posts.addAll(homeDataBean.data.posts);
                 adapter.notifyDataSetChanged();
                 //加载头条数据
-                if (posts.size() > 0 && posts.get(0).getItemType()
-                        == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER
+                if (posts != null && posts.size() > 0
+                        && posts.get(0).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER
                         && Constants.TYPE.TOP_NEWS.equals(key)) {
                     loadBanner();
                 }
@@ -127,6 +157,8 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         } catch (Exception e) {
             ToastUtils.showDebugShort(e.getMessage());
         }
+        smartRefreshLayout.finishLoadmore();
+        smartRefreshLayout.finishRefresh();
     }
 
     private void loadBanner() {

@@ -20,21 +20,20 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeSupportModelImpl implements HomeSupportContract.HomeSupportModel {
 
     @Override
-    public void loadHomeData(String type, final BaseListener<HomeDataBean> listener) {
+    public void loadHomeData(String timeMillis,String type, final BaseListener<HomeDataBean> listener) {
         ApiService apiService = ApiRetrofit.getInstance().getApiService();
-
         Observable<HomeDataBean> homeList;
         switch (type) {
             case Constants.TYPE.TOP_NEWS:
                 //获取头条数据
-                homeList = apiService.getTopNewsData("", true, true, 20);
+                homeList = apiService.getTopNewsData(timeMillis, true, true, 20);
                 break;
             case Constants.TYPE.TOP_TRANSFER:
                 //获取转会数据
-                homeList = apiService.getTransferList("", "0");
+                homeList = apiService.getTransferList(timeMillis, "0");
                 break;
             default:
-                homeList = apiService.getHomeList(type, "");
+                homeList = apiService.getHomeList(type, timeMillis);
                 break;
         }
 

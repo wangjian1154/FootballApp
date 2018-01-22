@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:paddingLeft="@dimen/widget_size_10"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_size_40">
 
@@ -31,14 +31,20 @@
                 android:text="长按拖动顺序"
                 android:textSize="@dimen/font_size_12" />
         </LinearLayout>
-
-        <ImageView
+        <LinearLayout
+            android:id="@+id/ll_hide"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/widget_size_10"
-            android:src="@drawable/icon_show_home_team_down" />
+            android:paddingLeft="@dimen/widget_size_10"
+            android:paddingRight="@dimen/widget_size_10"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_show_home_team_down" />
+        </LinearLayout>
     </RelativeLayout>
 
     <FrameLayout

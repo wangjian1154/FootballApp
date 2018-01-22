@@ -117,6 +117,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
             bundle.putSerializable(CategoryFragment.KEY, tagBean);
             categoryFragment.setArguments(bundle);
             FragmentTransaction transaction = fm.beginTransaction();
+            transaction.setCustomAnimations(R.anim.top_slide_in, R.anim.top_slide_out);
             transaction.replace(R.id.fl_tag, categoryFragment).commit();
         }
     }
@@ -125,8 +126,10 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
      * 隐藏TagFragment
      */
     public boolean hideTagFragment() {
-        if (categoryFragment != null && !categoryFragment.isHidden()) {
-            getChildFragmentManager().beginTransaction().remove(categoryFragment).commit();
+        if (categoryFragment != null && !categoryFragment.isHidden() && categoryFragment.isVisible()) {
+            getChildFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.top_slide_in, R.anim.top_slide_out)
+                    .remove(categoryFragment).commit();
             return true;
         }
         return false;
@@ -134,7 +137,6 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
 
     @Override
     public boolean onBackPressed() {
-        hideTagFragment();
-        return true;
+        return hideTagFragment();
     }
 }
