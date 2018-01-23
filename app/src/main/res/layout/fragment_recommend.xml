@@ -4,9 +4,4 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.wj.base.views.tablayout.ColorTrackTabLayout
-        android:id="@+id/tab_layout_tribe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>

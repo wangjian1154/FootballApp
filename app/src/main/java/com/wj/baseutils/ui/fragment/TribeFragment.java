@@ -7,7 +7,10 @@ import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.BasePresenter;
 import com.wj.base.base.SimpleFragment;
+import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
+
+import butterknife.BindView;
 
 /**
  * Created by wj on 2018/1/11.
@@ -15,9 +18,14 @@ import com.wj.baseutils.R;
  */
 
 public class TribeFragment extends SimpleFragment {
+
+    @BindView(R.id.tab_layout_tribe)
+    ColorTrackTabLayout trackTabLayout;
+
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
-        Log.i("info", "TribeFragment");
+
+
     }
 
     @Override
