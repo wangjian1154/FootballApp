@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.ScreenUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
 import com.wj.baseutils.app.Constants;
@@ -64,6 +65,8 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         });
         tabAdapter = new HomeTagPagerAdapter(getChildFragmentManager(), fragments, tagList);
         viewPager.setAdapter(tabAdapter);
+        float density=getResources().getDisplayMetrics().density;
+        ToastUtils.showShort(density+"");
     }
 
     @Override
