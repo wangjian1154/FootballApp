@@ -4,20 +4,32 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wj on 2018/1/14.
  */
 
-public class HomeTagPagerAdapter extends FragmentStatePagerAdapter {
+public class TagPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
     private List<String> tagList;
 
-    public HomeTagPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> tagList) {
+    public TagPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> tagList) {
         super(fm);
         this.tagList = tagList;
+        this.fragments = fragments;
+    }
+
+
+    public TagPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] tags) {
+        super(fm);
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < tags.length; i++) {
+            list.add(tags[i]);
+        }
+        tagList = list;
         this.fragments = fragments;
     }
 

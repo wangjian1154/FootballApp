@@ -36,7 +36,7 @@
         android:layout_below="@+id/rl_search"
         android:background="@color/white">
 
-        <com.wj.base.views.ColorTrackTabLayout
+        <com.wj.base.views.tablayout.ColorTrackTabLayout
             android:id="@+id/tab_layout_home"
             android:layout_width="0dp"
             android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package com.wj.base.views;
+package com.wj.base.views.tablayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
