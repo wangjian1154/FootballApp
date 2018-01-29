@@ -6,11 +6,11 @@ import com.wj.base.base.SimpleFragment;
 import com.wj.baseutils.R;
 
 /**
- * Created by wj on 2018/1/23.
- * 最新
+ * Created by wj on 2018/1/26.
+ * 部落推荐
  */
 
-public class NewestFragment extends SimpleFragment{
+public class TribeRecommendFragment extends SimpleFragment {
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -19,6 +19,6 @@ public class NewestFragment extends SimpleFragment{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_newest;
+        return R.layout.fragment_tribe_recommend;
     }
 }

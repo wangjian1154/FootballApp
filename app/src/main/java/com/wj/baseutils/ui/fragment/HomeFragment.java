@@ -17,7 +17,7 @@ import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;
 import com.wj.baseutils.presenter.HomePresenterImpl;
-import com.wj.baseutils.ui.adapter.HomeTagPagerAdapter;
+import com.wj.baseutils.ui.adapter.TagPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
 
     private List<String> tagList;
     private List<Fragment> fragments;
-    private HomeTagPagerAdapter tabAdapter;
+    private TagPagerAdapter tabAdapter;
     private HomeTagBean tagBean;
     private CategoryFragment categoryFragment;
 
@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                         ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)));
             }
         });
-        tabAdapter = new HomeTagPagerAdapter(getChildFragmentManager(), fragments, tagList);
+        tabAdapter = new TagPagerAdapter(getChildFragmentManager(), fragments, tagList);
         viewPager.setAdapter(tabAdapter);
         float density=getResources().getDisplayMetrics().density;
         ToastUtils.showShort(density+"");

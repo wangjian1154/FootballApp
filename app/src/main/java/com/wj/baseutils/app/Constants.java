@@ -17,4 +17,10 @@ public class Constants {
         String TOP_VIDEO = "sp";//视频
     }
 
+    public interface TribeCategory {
+        String TITLE_RECOMMEND = "推荐";
+        String TITLE_NEW = "最新";
+        String TITLE_TRIBE = "部落";
+    }
+
 }

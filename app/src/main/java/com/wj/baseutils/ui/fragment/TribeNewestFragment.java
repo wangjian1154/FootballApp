@@ -7,10 +7,10 @@ import com.wj.baseutils.R;
 
 /**
  * Created by wj on 2018/1/23.
- * 推荐
+ * 部落最新
  */
 
-public class RecommendFragment extends SimpleFragment{
+public class TribeNewestFragment extends SimpleFragment{
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -19,8 +19,6 @@ public class RecommendFragment extends SimpleFragment{
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_recommend;
+        return R.layout.fragment_tribe_newest;
     }
-
-
 }
