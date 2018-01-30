@@ -17,7 +17,7 @@ import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;
 import com.wj.baseutils.presenter.HomePresenterImpl;
-import com.wj.baseutils.ui.adapter.TagPagerAdapter;
+import com.wj.baseutils.adapter.TagPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

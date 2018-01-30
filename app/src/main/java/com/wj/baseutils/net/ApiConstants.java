@@ -18,6 +18,9 @@ public class ApiConstants {
     //首页转会
     public static final String API_HOME_TRANSFER = "/transfer/posts";
 
-    //剩余几种
+    //首页剩余几种分类
     public static final String API_HOME_OTHER = "/posts";
+
+    //部落推荐-热议
+    public static final String API_TRIBE_RECOMMEND_HOT_DISCUSSION = "/sns/posts/tohome";
 }

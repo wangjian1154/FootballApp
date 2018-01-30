@@ -3,23 +3,18 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
-import com.orhanobut.logger.Logger;
-import com.wj.base.base.BaseFragment;
-import com.wj.base.base.BasePresenter;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
 import com.wj.baseutils.app.Constants;
-import com.wj.baseutils.ui.adapter.TagPagerAdapter;
+import com.wj.baseutils.adapter.TagPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.internal.schedulers.NewThreadWorker;
 
 /**
  * Created by wj on 2018/1/11.
@@ -32,7 +27,6 @@ public class TribeFragment extends SimpleFragment {
     ColorTrackTabLayout tabLayout;
     @BindView(R.id.vp_tribe)
     ViewPager viewPager;
-
 
     private String titles[] = {Constants.TribeCategory.TITLE_RECOMMEND,
             Constants.TribeCategory.TITLE_NEW, Constants.TribeCategory.TITLE_TRIBE};
@@ -62,6 +56,7 @@ public class TribeFragment extends SimpleFragment {
 
         tagPagerAdapter = new TagPagerAdapter(getChildFragmentManager(), fragments, titles);
         viewPager.setAdapter(tagPagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     @Override

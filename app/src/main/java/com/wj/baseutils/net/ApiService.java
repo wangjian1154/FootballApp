@@ -2,6 +2,7 @@ package com.wj.baseutils.net;
 
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.bean.HomeTagBean;
+import com.wj.baseutils.bean.HotDiscussionBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -31,6 +32,10 @@ public interface ApiService {
     //剩余几种 http://api.qiuduoduo.cn/posts?t=zc&b=
     @GET(ApiConstants.API_HOME_OTHER)
     Observable<HomeDataBean> getHomeList(@Query("t") String type, @Query("b") String b);
+
+    //部落推荐-热议
+    @GET(ApiConstants.API_TRIBE_RECOMMEND_HOT_DISCUSSION)
+    Observable<HotDiscussionBean> getHotDicussion();
 
 
 }

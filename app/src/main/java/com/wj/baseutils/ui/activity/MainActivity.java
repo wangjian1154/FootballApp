@@ -1,11 +1,9 @@
 package com.wj.baseutils.ui.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.orhanobut.logger.Logger;
 import com.wj.base.base.BaseActivity;
 import com.wj.base.base.BasePresenter;
 import com.wj.base.base.SimpleFragment;
@@ -13,7 +11,7 @@ import com.wj.base.utils.HandleBackUtil;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.app.Constants;
-import com.wj.baseutils.ui.adapter.BaseTabFragmentAdapter;
+import com.wj.baseutils.adapter.BaseTabFragmentAdapter;
 import com.wj.baseutils.ui.fragment.DataFragment;
 import com.wj.baseutils.ui.fragment.HomeFragment;
 import com.wj.baseutils.ui.fragment.MatchFragment;

@@ -1,4 +1,4 @@
-package com.wj.baseutils.ui.adapter;
+package com.wj.baseutils.adapter;
 
 import android.view.View;
 import android.widget.ImageView;

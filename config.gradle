@@ -23,6 +23,7 @@ ext {
             "support-compat"        : "com.android.support:support-compat:${dependVersion.support}",
             "support-design"        : "com.android.support:design:${dependVersion.support}",
             "recyclerview"          : "com.android.support:recyclerview-v7:${dependVersion.support}",
+            "cardview"          : "com.android.support:cardview-v7:${dependVersion.support}",
             "constraint-layout"     : "com.android.support.constraint:constraint-layout:1.0.2",
             //test
             "junit"                 : "junit:junit:4.12",

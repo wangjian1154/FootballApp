@@ -81,4 +81,5 @@ dependencies {
     api rootProject.ext.dependencies["flexibledivider"]
     api rootProject.ext.dependencies["jiaozivideoplayer"]
     api rootProject.ext.dependencies["flowlayout"]
+    api rootProject.ext.dependencies["cardview"]
 }

@@ -2,10 +2,8 @@ package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wj.base.base.BaseFragment;
@@ -14,13 +12,9 @@ import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.CategoryContract;
 import com.wj.baseutils.model.CategoryModelImpl;
 import com.wj.baseutils.presenter.CategoryPresenterImpl;
-import com.wj.baseutils.ui.adapter.CategoryAdapter;
+import com.wj.baseutils.adapter.CategoryAdapter;
 import com.wj.baseutils.widget.ItemDragHelperCallBack;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
-import com.zhy.view.flowlayout.TagView;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.wj.baseutils.ui.adapter;
+package com.wj.baseutils.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

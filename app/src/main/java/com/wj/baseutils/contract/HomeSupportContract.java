@@ -21,6 +21,6 @@ public interface HomeSupportContract {
     }
 
     abstract class HomeSupportPresenter extends BasePresenter<HomeSupportModel, HomeSupportView> {
-        public abstract void loadData(boolean isRefresh, String type,String loadData);
+        public abstract void loadData(boolean isRefresh, String type,String timeMillis);
     }
 }

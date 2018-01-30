@@ -15,7 +15,7 @@ import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.model.HomeSupportModelImpl;
 import com.wj.baseutils.presenter.HomeSupportPresenterImpl;
-import com.wj.baseutils.ui.adapter.VideoListAdapter;
+import com.wj.baseutils.adapter.VideoListAdapter;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
