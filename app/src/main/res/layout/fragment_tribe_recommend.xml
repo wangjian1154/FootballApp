@@ -6,32 +6,10 @@
     android:background="@color/page_bg"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewCircle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/widget_size_10"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/widget_size_2"
-        app:contentPadding="@dimen/widget_size_10">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_discussion_now"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/discussion_now" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_discussion_now" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/widget_size_20" />
 
 </LinearLayout>

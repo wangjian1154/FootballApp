@@ -1,6 +1,7 @@
 package com.wj.baseutils.presenter;
 
 import com.wj.base.base.BaseListener;
+import com.wj.baseutils.bean.CircleBean;
 import com.wj.baseutils.bean.HotDiscussionBean;
 import com.wj.baseutils.contract.TribeRecommendContract;
 
@@ -12,7 +13,7 @@ import com.wj.baseutils.contract.TribeRecommendContract;
 public class TribeRecommendPresenterImpl extends TribeRecommendContract.TribeRecommendPresenter {
 
     @Override
-    public void loadData(boolean isRefresh) {
+    public void loadData(String lastId,String pageSize,boolean isRefresh) {
         final TribeRecommendContract.TribeRecommendView mView = getView();
         if (mView == null) return;
 
@@ -28,6 +29,17 @@ public class TribeRecommendPresenterImpl extends TribeRecommendContract.TribeRec
             }
         });
 
+        mModel.loadCircle(lastId, pageSize, new BaseListener<CircleBean>() {
+            @Override
+            public void onSuccess(CircleBean result) {
+                mView.setCircle(result);
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
 
     }
 }

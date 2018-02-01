@@ -82,4 +82,6 @@ dependencies {
     api rootProject.ext.dependencies["jiaozivideoplayer"]
     api rootProject.ext.dependencies["flowlayout"]
     api rootProject.ext.dependencies["cardview"]
+    api rootProject.ext.dependencies["roundedimageview"]
+    api rootProject.ext.dependencies["circleimageview"]
 }
