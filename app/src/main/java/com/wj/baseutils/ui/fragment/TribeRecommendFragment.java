@@ -27,6 +27,9 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.recyclerViewCircle)
+    RecyclerView recyclerViewCircle;
+
     private List<HotDiscussionBean.DataBean.DiscussionBean> discussionList;
     private DiscussionBeanAdapter adapterDuscussion;
 
@@ -49,6 +52,9 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
         adapterDuscussion = new DiscussionBeanAdapter(discussionList);
         recyclerView.setLayoutManager(lm);
         recyclerView.setAdapter(adapterDuscussion);
+
+        LinearLayoutManager lmCircle=new LinearLayoutManager(getContext());
+        recyclerViewCircle.setLayoutManager(lmCircle);
     }
 
     @Override
