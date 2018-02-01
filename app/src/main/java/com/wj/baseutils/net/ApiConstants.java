@@ -23,4 +23,7 @@ public class ApiConstants {
 
     //部落推荐-热议
     public static final String API_TRIBE_RECOMMEND_HOT_DISCUSSION = "/sns/posts/tohome";
+
+    //部落推荐——朋友圈列表
+    public static final String API_TRIBE_RECOMMEND_CIRCLE = "/sns/post/recommend";
 }

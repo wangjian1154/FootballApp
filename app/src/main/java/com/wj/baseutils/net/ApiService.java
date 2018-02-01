@@ -1,5 +1,6 @@
 package com.wj.baseutils.net;
 
+import com.wj.baseutils.bean.CircleBean;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.bean.HotDiscussionBean;
@@ -37,5 +38,8 @@ public interface ApiService {
     @GET(ApiConstants.API_TRIBE_RECOMMEND_HOT_DISCUSSION)
     Observable<HotDiscussionBean> getHotDicussion();
 
-
+    //部落推荐——朋友圈列表
+    @GET(ApiConstants.API_TRIBE_RECOMMEND_CIRCLE)
+    Observable<CircleBean> getCircleList(@Query("lastId") String lastId,
+                                         @Query("pageSize") String pageSize);
 }

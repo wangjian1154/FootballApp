@@ -1,6 +1,7 @@
 package com.wj.baseutils.model;
 
 import com.wj.base.base.BaseListener;
+import com.wj.baseutils.bean.CircleBean;
 import com.wj.baseutils.bean.HotDiscussionBean;
 import com.wj.baseutils.contract.TribeRecommendContract;
 import com.wj.baseutils.net.ApiRetrofit;
@@ -46,6 +47,36 @@ public class TribeRecommendModelImpl implements TribeRecommendContract.TribeReco
             }
         };
         hotDicussion.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    @Override
+    public void loadCircle(String lastId, String pageSize, final BaseListener<CircleBean> listener) {
+        ApiService apiService = ApiRetrofit.getInstance().getApiService();
+        Observable<CircleBean> circleList = apiService.getCircleList(lastId, pageSize);
+        Observer<CircleBean> observer = new Observer<CircleBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(CircleBean circleBean) {
+                listener.onSuccess(circleBean);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        circleList.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
