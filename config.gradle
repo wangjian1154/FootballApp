@@ -60,6 +60,7 @@ ext {
             "jiaozivideoplayer"     : "cn.jzvd:jiaozivideoplayer:6.2.4",
             "flowlayout"            : "com.hyman:flowlayout-lib:1.1.2",
             "roundedimageview"      : "com.makeramen:roundedimageview:2.3.0",
-            "circleimageview"      : "de.hdodenhof:circleimageview:2.2.0"
+            "circleimageview"       : "de.hdodenhof:circleimageview:2.2.0",
+            "photoview"             : "com.github.chrisbanes:PhotoView:2.0.0"
     ]
 }

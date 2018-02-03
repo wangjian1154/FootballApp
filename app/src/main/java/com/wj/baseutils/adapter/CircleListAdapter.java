@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.wj.base.utils.ImageBrowserActivity;
 import com.wj.base.utils.ImageLoadUtils;
 import com.wj.base.utils.StringUtils;
 import com.wj.baseutils.R;
@@ -59,12 +60,22 @@ public class CircleListAdapter extends BaseQuickAdapter<CircleBean.DataBean, Bas
      * @param imageUrls
      * @param imageViews
      */
-    private void setContentImageView(List<String> imageUrls, ImageView[] imageViews) {
+    private void setContentImageView(final List<String> imageUrls, final ImageView[] imageViews) {
         for (int i = 0; i < imageViews.length; i++) {
             imageViews[i].setVisibility(View.GONE);
+            final int selectPos = i;
+            imageViews[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowserActivity.show(mContext,imageUrls, selectPos);
+                }
+            });
         }
         if (imageUrls != null && imageUrls.size() > 0) {
             int imgSize = imageUrls.size() >= 3 ? 3 : imageUrls.size();
+            for (int i = 0; i < imageViews.length; i++) {
+                imageViews[i].setVisibility(View.INVISIBLE);
+            }
             for (int i = 0; i < imgSize; i++) {
                 imageViews[i].setVisibility(View.VISIBLE);
                 ImageLoadUtils.display(mContext, imageUrls.get(i), imageViews[i]);

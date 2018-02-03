@@ -13,26 +13,27 @@ import com.wj.baseutils.contract.TribeRecommendContract;
 public class TribeRecommendPresenterImpl extends TribeRecommendContract.TribeRecommendPresenter {
 
     @Override
-    public void loadData(String lastId,String pageSize,boolean isRefresh) {
+    public void loadData(String lastId, String pageSize, final boolean isRefresh) {
         final TribeRecommendContract.TribeRecommendView mView = getView();
         if (mView == null) return;
+        if (isRefresh) {
+            mModel.loadDiscussuion(new BaseListener<HotDiscussionBean>() {
+                @Override
+                public void onSuccess(HotDiscussionBean result) {
+                    mView.setDiscussion(result);
+                }
 
-        mModel.loadDiscussuion(new BaseListener<HotDiscussionBean>() {
-            @Override
-            public void onSuccess(HotDiscussionBean result) {
-                mView.setDiscussion(result);
-            }
+                @Override
+                public void onError(String msg) {
 
-            @Override
-            public void onError(String msg) {
-
-            }
-        });
+                }
+            });
+        }
 
         mModel.loadCircle(lastId, pageSize, new BaseListener<CircleBean>() {
             @Override
             public void onSuccess(CircleBean result) {
-                mView.setCircle(result);
+                mView.setCircle(isRefresh,result);
             }
 
             @Override

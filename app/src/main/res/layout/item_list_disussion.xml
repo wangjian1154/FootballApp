@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/iv_pic"
-        android:layout_width="@dimen/widget_size_50"
-        android:layout_height="@dimen/widget_size_50"
+        android:layout_width="@dimen/widget_size_70"
+        android:layout_height="@dimen/widget_size_70"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_default" />
 

@@ -25,7 +25,7 @@ public interface TribeRecommendContract {
 
         void setDiscussion(HotDiscussionBean discussionBean);
 
-        void setCircle(CircleBean circleBean);
+        void setCircle(boolean isRefresh,CircleBean circleBean);
     }
 
     abstract class TribeRecommendPresenter extends BasePresenter<TribeRecommendModel, TribeRecommendView> {
