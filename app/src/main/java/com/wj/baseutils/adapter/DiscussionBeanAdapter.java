@@ -35,7 +35,7 @@ public class DiscussionBeanAdapter extends BaseQuickAdapter<HotDiscussionBean.Da
         } else {
             imageView.setImageResource(R.drawable.ic_default);
         }
-        tvTitle.setText(StringUtils.setStr(item.title2));
+        tvTitle.setText(StringUtils.setStr(item.title));
         String heatValue = String.format(mContext.getResources().getString(R.string.tribe_hot_value),
                 StringUtils.setStr(item.heatValue + ""));
         tvHotValue.setText(heatValue);

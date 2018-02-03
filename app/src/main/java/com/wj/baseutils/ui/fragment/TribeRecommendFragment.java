@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wj.base.base.BaseFragment;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.CircleListAdapter;
@@ -35,6 +39,8 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
     private RecyclerView recyclerView;
     @BindView(R.id.recyclerViewCircle)
     RecyclerView recyclerViewCircle;
+    @BindView(R.id.smart_layout)
+    SmartRefreshLayout refreshLayout;
 
     private List<HotDiscussionBean.DataBean.DiscussionBean> discussionList;
     private List<CircleBean.DataBean> circleList;
@@ -45,7 +51,29 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
+
         initView();
+
+        initEvent();
+    }
+
+    private void initEvent() {
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.loadData("", pageSize + "", true);
+            }
+        });
+
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (circleList != null && circleList.size() > 0) {
+                    int lastId = circleList.get(circleList.size() - 1).id;
+                    mPresenter.loadData(lastId + "", pageSize + "", false);
+                }
+            }
+        });
     }
 
     @Override
@@ -75,7 +103,7 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
 
     private void initHeadView() {
         headView = View.inflate(getActivity(), R.layout.layout_tribe_recommend_head, null);
-        recyclerView=headView.findViewById(R.id.recyclerView);
+        recyclerView = headView.findViewById(R.id.recyclerView);
     }
 
     @Override
@@ -94,16 +122,25 @@ public class TribeRecommendFragment extends BaseFragment<TribeRecommendPresenter
                 adapterDuscussion.notifyDataSetChanged();
             }
         }
+        refreshComplete();
     }
 
     @Override
-    public void setCircle(CircleBean circleBean) {
+    public void setCircle(boolean isRefresh, CircleBean circleBean) {
+        if (isRefresh) {
+            circleList.clear();
+        }
         if (circleBean != null && circleBean.data != null
                 && circleBean.data.size() > 0) {
-            circleList.clear();
             circleList.addAll(circleBean.data);
             circleAdapter.notifyDataSetChanged();
         }
+        refreshComplete();
+    }
+
+    private void refreshComplete() {
+        refreshLayout.finishLoadmore();
+        refreshLayout.finishRefresh();
     }
 
     @Override
