@@ -1,5 +1,6 @@
 package com.wj.base.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wj.base.R;
 import com.wj.base.base.SimpleActivity;
 import com.wj.base.views.FixedViewPager;
@@ -74,17 +76,32 @@ public class ImageBrowserActivity extends SimpleActivity {
             }
         });
 
-        ivDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String imgUrl = imgList.get(selectPos);
-                String fileName = System.currentTimeMillis() + ".JPG";
-                ImageLoadUtils.saveImage(ImageBrowserActivity.this,
-                        imgUrl,
-                        ImageUtils.getNormalPictureSaveDir(),
-                        fileName);
+        ivDownload.setOnClickListener(view -> {
+            if (!NoFastClickUtils.isDoubleClick()) {
+                RxPermissions rxPermissions = new RxPermissions(ImageBrowserActivity.this);
+                if (rxPermissions.isGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    saveImg2Local();
+                } else {
+                    rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            .subscribe(granted -> {
+                                if (granted) {//授予
+                                    saveImg2Local();
+                                } else {
+
+                                }
+                            });
+                }
             }
         });
+    }
+
+    private void saveImg2Local() {
+        String imgUrl = imgList.get(selectPos);
+        String fileName = System.currentTimeMillis() + ".PNG";
+        ImageLoadUtils.saveImage(ImageBrowserActivity.this,
+                imgUrl,
+                ImageUtils.getNormalPictureSaveDir(),
+                fileName);
     }
 
     @Override

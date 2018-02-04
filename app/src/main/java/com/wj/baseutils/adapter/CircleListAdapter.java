@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.wj.base.utils.ImageBrowserActivity;
 import com.wj.base.utils.ImageLoadUtils;
 import com.wj.base.utils.StringUtils;
+import com.wj.base.utils.TimeUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.CircleBean;
 
@@ -46,10 +47,21 @@ public class CircleListAdapter extends BaseQuickAdapter<CircleBean.DataBean, Bas
 
         ImageLoadUtils.display(mContext, StringUtils.setStr(item.avatar), ivAvatar);
         setContentImageView(imageUrls, imageViews);
-        tvTitle.setText(StringUtils.setStr(item.title));
+        if (StringUtils.isEmpty(item.title)) {
+            tvTitle.setVisibility(View.GONE);
+        } else {
+            tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText(item.title);
+        }
+
+        if (StringUtils.isEmpty(item.content)) {
+            tvContent.setVisibility(View.GONE);
+        } else {
+            tvContent.setVisibility(View.VISIBLE);
+            tvContent.setText(Html.fromHtml(item.content));
+        }
         tvName.setText(StringUtils.setStr(item.author));
-        tvUpdateTime.setText(StringUtils.setStr(item.time + ""));
-        tvContent.setText(Html.fromHtml(StringUtils.setStr(item.content)));
+        tvUpdateTime.setText(TimeUtils.updateStr(item.recommendWeight));
         tvType.setText(StringUtils.setStr(item.groupName));
         tvCommentNum.setText(StringUtils.setStr(item.commentCount + ""));
     }
@@ -67,7 +79,7 @@ public class CircleListAdapter extends BaseQuickAdapter<CircleBean.DataBean, Bas
             imageViews[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ImageBrowserActivity.show(mContext,imageUrls, selectPos);
+                    ImageBrowserActivity.show(mContext, imageUrls, selectPos);
                 }
             });
         }
