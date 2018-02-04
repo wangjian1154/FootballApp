@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -8,7 +8,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-
+        jackOptions.enabled = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -20,6 +20,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -86,4 +90,5 @@ dependencies {
     api rootProject.ext.dependencies["roundedimageview"]
     api rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["photoview"]
+    api rootProject.ext.dependencies["rxpermissions2"]
 }
