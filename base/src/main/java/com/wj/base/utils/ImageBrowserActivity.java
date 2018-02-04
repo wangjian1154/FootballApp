@@ -64,6 +64,7 @@ public class ImageBrowserActivity extends SimpleActivity {
 
             @Override
             public void onPageSelected(int position) {
+                selectPos = position;
                 tvNum.setText((position + 1) + "/" + imgList.size());
             }
 
@@ -76,7 +77,12 @@ public class ImageBrowserActivity extends SimpleActivity {
         ivDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ImageUtils.save()
+                String imgUrl = imgList.get(selectPos);
+                String fileName = System.currentTimeMillis() + ".JPG";
+                ImageLoadUtils.saveImage(ImageBrowserActivity.this,
+                        imgUrl,
+                        ImageUtils.getNormalPictureSaveDir(),
+                        fileName);
             }
         });
     }

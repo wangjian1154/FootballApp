@@ -1,7 +1,13 @@
 package com.wj.base.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.net.Uri;
+import android.os.Environment;
+
+import com.wj.base.Initialization;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -12,123 +18,54 @@ import java.io.OutputStream;
 /**
  * Created by wj on 2018/2/3.
  * Reference from Blankj
- * https://github.com/Blankj/AndroidUtilCode
  */
 public class ImageUtils {
 
+    //App默认图片保存位置文件夹的名称
+    public static final String NORMAL_PIC_SAVE_DIR_NAME = "Pictures";
+
     /**
-     * 根据文件名判断文件是否为图片
+     * 保存图片到指定文件夹
      *
-     * @param file
+     * @param bitmap   图片文件
+     * @param dirPath  文件夹路径
+     * @param fileName 文件名称
      * @return
      */
-    public static boolean isImage(File file) {
-        return file != null && file.getPath() != null && isImage(file.getPath());
-    }
-
-    /**
-     * 根据文件名判断文件是否为图片
-     * @param filePath
-     * @return
-     */
-    public static boolean isImage(String filePath) {
-        String path = filePath.toUpperCase();
-        return path.endsWith(".PNG") || path.endsWith(".JPG")
-                || path.endsWith(".JPEG") || path.endsWith(".BMP")
-                || path.endsWith(".GIF");
-    }
-
-    /**
-     * 保存图片
-     *
-     * @param src      源图片
-     * @param filePath 需要保存到的那个文件的路径
-     * @param format   格式
-     * @return
-     */
-    public static boolean save(Bitmap src, String filePath,
-                               CompressFormat format) {
-        return save(src, filePath, format, false);
-    }
-
-    /**
-     * 保存图片
-     *
-     * @param src    源图片
-     * @param file   要保存的文件
-     * @param format 格式
-     * @return
-     */
-    public static boolean save(Bitmap src, File file, CompressFormat format) {
-        return save(src, file, format, false);
-    }
-
-    /**
-     * 保存图片
-     *
-     * @param src      源图片
-     * @param filePath 要保存到的文件路径
-     * @param format   格式
-     * @param recycle  是否回收
-     */
-    public static boolean save(final Bitmap src,
-                               final String filePath,
-                               final CompressFormat format,
-                               final boolean recycle) {
-        return save(src, FileUtils.getFileByPath(filePath), format, recycle);
-    }
-
-    /**
-     * @param src     源图片
-     * @param file    要保存的文件
-     * @param format  格式
-     * @param recycle 是否回收
-     * @return
-     */
-    private static boolean save(Bitmap src, File file,
-                                CompressFormat format,
-                                boolean recycle) {
-        if (isEmptyBitmap(src) || createFileByDeleteOldFile(file)) return false;
-        OutputStream os = null;
+    public static boolean saveImg(Bitmap bitmap, String dirPath, String fileName) {
         boolean ret = false;
+        if (bitmap == null || bitmap.getWidth() == 0 || bitmap.getHeight() == 0) return ret;
+        File file = new File(dirPath, fileName);
+        if (file.exists()) {
+            ToastUtils.showShort("已经保存该张图片了");
+            return ret;
+        }
+        OutputStream os = null;
         try {
             os = new BufferedOutputStream(new FileOutputStream(file));
-            ret = src.compress(format, 100, os);
-            if (recycle && !src.isRecycled()) src.recycle();
+            ret = bitmap.compress(CompressFormat.PNG, 100, os);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             CloseUtils.closeIO(os);
+            Initialization.getContext().sendBroadcast(
+                    new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                            Uri.parse("file://" + dirPath)));
         }
-
         return ret;
     }
 
     /**
-     * 判断Bitmap对象是否为空
+     * 获取App图片默认的存储地址
      *
-     * @param src
      * @return
      */
-    public static boolean isEmptyBitmap(Bitmap src) {
-        return src == null || src.getWidth() == 0 || src.getHeight() == 0;
-    }
-
-    private static boolean createFileByDeleteOldFile(File file) {
-        if (file == null) return false;
-        if (file.exists() && !file.delete()) return false;
-        if (!createOrExistsDir(file.getParentFile())) return false;
-        try {
-            return file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+    public static String getNormalPictureSaveDir() {
+        File normalDir = new File(Environment.getExternalStorageDirectory(), NORMAL_PIC_SAVE_DIR_NAME);
+        if (!normalDir.exists()) {
+            normalDir.mkdir();
         }
-    }
-
-    private static boolean createOrExistsDir(final File file) {
-        // 如果存在，是目录则返回 true，是文件则返回 false，不存在则返回是否创建成功
-        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
+        return normalDir.getAbsolutePath();
     }
 
 
