@@ -8,7 +8,6 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        jackOptions.enabled = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -91,4 +90,8 @@ dependencies {
     api rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["photoview"]
     api rootProject.ext.dependencies["rxpermissions2"]
+    implementation (rootProject.ext.dependencies["material-dialogs"]){
+        exclude module: 'recyclerview-v7'
+        exclude module: 'appcompat-v7'
+    }
 }
