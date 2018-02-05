@@ -11,15 +11,15 @@ import com.wj.base.base.BaseView;
 public interface TribeChildContract {
 
     interface TribeChildModel extends BaseModel {
-
+        void loadCategory();
     }
 
     interface TribeChildView extends BaseView {
-
+        void setCategory();
     }
 
     abstract class TribePresenter extends BasePresenter<TribeChildModel, TribeChildView> {
-
+        public abstract void loadData();
     }
 
 }

@@ -26,4 +26,7 @@ public class ApiConstants {
 
     //部落推荐——朋友圈列表
     public static final String API_TRIBE_RECOMMEND_CIRCLE = "/sns/post/recommend";
+
+    //部落分类
+    public static final String API_TRIBE_CATEGORY = "/sns/categories/all?hasGroups=true";
 }
