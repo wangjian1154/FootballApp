@@ -37,6 +37,7 @@ public class ImageBrowserActivity extends SimpleActivity {
 
     private List<String> imgList;
     private int selectPos;
+    private RxPermissions rxPermissions;
 
     public static void show(Context context, List<String> imgList, int selectPos) {
         Intent intent = new Intent(context, ImageBrowserActivity.class);
@@ -50,6 +51,7 @@ public class ImageBrowserActivity extends SimpleActivity {
         viewPager = findViewById(R.id.vp_browser);
         tvNum = findViewById(R.id.tv_num);
         ivDownload = findViewById(R.id.iv_download);
+        rxPermissions = new RxPermissions(ImageBrowserActivity.this);
 
         Intent intent = getIntent();
         imgList = (List<String>) intent.getSerializableExtra(PARAMS_IMG_LIST);
@@ -78,19 +80,15 @@ public class ImageBrowserActivity extends SimpleActivity {
 
         ivDownload.setOnClickListener(view -> {
             if (!NoFastClickUtils.isDoubleClick()) {
-                RxPermissions rxPermissions = new RxPermissions(ImageBrowserActivity.this);
-                if (rxPermissions.isGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    saveImg2Local();
-                } else {
-                    rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            .subscribe(granted -> {
-                                if (granted) {//授予
-                                    saveImg2Local();
-                                } else {
+                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .subscribe(granted -> {
+                            if (granted) {//全部授予
+                                saveImg2Local();
+                            } else {
+                                ToastUtils.showShort("您没有授权该权限，请在设置中打开授权");
+                            }
+                        });
 
-                                }
-                            });
-                }
             }
         });
     }
@@ -138,12 +136,7 @@ public class ImageBrowserActivity extends SimpleActivity {
             PhotoView photoView = itemView.findViewById(R.id.photoView);
             ImageLoadUtils.display(mContext, data.get(position), photoView);
 
-            photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
-                @Override
-                public void onPhotoTap(ImageView view, float x, float y) {
-                    ((Activity) mContext).finish();
-                }
-            });
+            photoView.setOnPhotoTapListener((view, x, y) -> ((Activity) mContext).finish());
 
             container.addView(itemView);
             return itemView;
