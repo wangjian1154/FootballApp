@@ -1,13 +1,22 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.wj.base.base.BaseFragment;
 import com.wj.baseutils.R;
+import com.wj.baseutils.adapter.TribeCategoryListAdapter;
+import com.wj.baseutils.adapter.TribeCategoryTypeAdapter;
+import com.wj.baseutils.bean.TribeCategoryBean;
 import com.wj.baseutils.contract.TribeChildContract;
 import com.wj.baseutils.model.TribeChildModelImpl;
 import com.wj.baseutils.presenter.TribeChildPresenterImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -23,6 +32,10 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     RecyclerView recyclerViewCategory;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    private List<TribeCategoryBean.DataBean.CategoriesBean> typeList;
+    List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean> list;
+    private TribeCategoryTypeAdapter typeAdapter;
+    private TribeCategoryListAdapter adapter;
 
     @Override
     protected TribeChildPresenterImpl createPresenter() {
@@ -36,7 +49,22 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
+        initView();
+        mPresenter.loadData();
+    }
 
+    private void initView() {
+        typeList = new ArrayList<>();
+        list = new ArrayList<>();
+        LinearLayoutManager lmCategory = new LinearLayoutManager(getContext());
+        recyclerViewCategory.setLayoutManager(lmCategory);
+        typeAdapter = new TribeCategoryTypeAdapter(typeList);
+        recyclerViewCategory.setAdapter(typeAdapter);
+
+        LinearLayoutManager lmList = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(lmList);
+        adapter = new TribeCategoryListAdapter(list);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -45,7 +73,23 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     }
 
     @Override
-    public void setCategory() {
+    public void setCategory(TribeCategoryBean result) {
+        typeList.clear();
+        list.clear();
+        if (result != null && result.data != null
+                && result.data.categories != null &&
+                result.data.categories.size() > 0) {
 
+            typeList.addAll(result.data.categories);
+            typeAdapter.notifyDataSetChanged();
+
+            Map<String, List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean>> categoryGroupsMap =
+                    result.data.categoryGroupsMap;
+            for (String key : categoryGroupsMap.keySet()) {
+                List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean> objBeans = categoryGroupsMap.get(key);
+                list.addAll(objBeans);
+            }
+
+        }
     }
 }

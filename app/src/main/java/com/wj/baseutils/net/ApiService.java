@@ -4,13 +4,11 @@ import com.wj.baseutils.bean.CircleBean;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.bean.HotDiscussionBean;
-import com.wj.baseutils.bean.TribeCategory;
+import com.wj.baseutils.bean.TribeCategoryBean;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by wj on 2018/1/7.
@@ -45,5 +43,5 @@ public interface ApiService {
     Observable<CircleBean> getCircleList(@Query("lastId") String lastId,
                                          @Query("pageSize") String pageSize);
     @GET(ApiConstants.API_TRIBE_CATEGORY)
-    Observer<TribeCategory> getCategory();
+    Observable<TribeCategoryBean> getTribeCategory();
 }
