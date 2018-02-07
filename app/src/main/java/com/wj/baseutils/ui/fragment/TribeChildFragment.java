@@ -1,10 +1,14 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wj.base.base.BaseFragment;
+import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.TribeCategoryListAdapter;
 import com.wj.baseutils.adapter.TribeCategoryTypeAdapter;
@@ -16,7 +20,6 @@ import com.wj.baseutils.presenter.TribeChildPresenterImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.BindView;
 
@@ -33,9 +36,11 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private List<TribeCategoryBean.DataBean.CategoriesBean> typeList;
-    List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean> list;
+    private List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean> list;
+    private List<String> keyList;
     private TribeCategoryTypeAdapter typeAdapter;
-    private TribeCategoryListAdapter adapter;
+    private TribeCategoryListAdapter mAdapter;
+    private Map<String, List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean>> categoryGroupsMap;
 
     @Override
     protected TribeChildPresenterImpl createPresenter() {
@@ -51,20 +56,37 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     protected void initViewAndEvent(Bundle savedInstanceState) {
         initView();
         mPresenter.loadData();
+
+        initEvent();
+    }
+
+    private void initEvent() {
+        typeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                list.clear();
+                typeAdapter.setSelection(position);
+                if (categoryGroupsMap != null) {
+                    list.addAll(categoryGroupsMap.get(keyList.get(position)));
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void initView() {
         typeList = new ArrayList<>();
         list = new ArrayList<>();
+        keyList = new ArrayList<>();
         LinearLayoutManager lmCategory = new LinearLayoutManager(getContext());
         recyclerViewCategory.setLayoutManager(lmCategory);
         typeAdapter = new TribeCategoryTypeAdapter(typeList);
         recyclerViewCategory.setAdapter(typeAdapter);
 
-        LinearLayoutManager lmList = new LinearLayoutManager(getContext());
+        GridLayoutManager lmList = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(lmList);
-        adapter = new TribeCategoryListAdapter(list);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new TribeCategoryListAdapter(list);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -76,20 +98,23 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     public void setCategory(TribeCategoryBean result) {
         typeList.clear();
         list.clear();
+        keyList.clear();
         if (result != null && result.data != null
                 && result.data.categories != null &&
                 result.data.categories.size() > 0) {
 
             typeList.addAll(result.data.categories);
             typeAdapter.notifyDataSetChanged();
-
-            Map<String, List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean>> categoryGroupsMap =
-                    result.data.categoryGroupsMap;
+            categoryGroupsMap = result.data.categoryGroupsMap;
             for (String key : categoryGroupsMap.keySet()) {
-                List<TribeCategoryBean.DataBean.CategoryGroupsMapBean.ObjBean> objBeans = categoryGroupsMap.get(key);
-                list.addAll(objBeans);
+                keyList.add(key);
             }
-
+            if (categoryGroupsMap != null) {
+                list.addAll(categoryGroupsMap.get(keyList.get(0)));
+                typeAdapter.setSelection(0);
+                mAdapter.notifyDataSetChanged();
+                typeAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

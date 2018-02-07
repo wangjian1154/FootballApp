@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="推荐"
             android:textColor="@color/font_gay"
-            android:textSize="@dimen/font_size_16" />
+            android:textSize="@dimen/font_size_14" />
     </LinearLayout>
 
 </RelativeLayout>
