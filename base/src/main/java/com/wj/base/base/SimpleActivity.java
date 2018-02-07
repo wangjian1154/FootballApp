@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.wj.base.views.LoadingProgress;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -35,12 +37,24 @@ public abstract class SimpleActivity extends AppCompatActivity {
         initViewAndEvent(savedInstanceState);
     }
 
-    protected void onViewCreated(){
+    protected void onViewCreated() {
 
     }
 
     protected abstract void initViewAndEvent(Bundle savedInstanceState);
 
+    /**
+     * 是否显示加载对话框
+     *
+     * @param active
+     */
+    public void setProgressIndicator(boolean active) {
+        if (active) {
+            LoadingProgress.getInstance(this).show();
+        } else {
+            LoadingProgress.getInstance(this).dismiss();
+        }
+    }
 
     @Override
     protected void onDestroy() {

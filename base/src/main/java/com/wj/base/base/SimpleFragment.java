@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wj.base.utils.HandleBackUtil;
+import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -60,6 +61,19 @@ public abstract class SimpleFragment extends Fragment implements HandleBackUtil.
      * @param savedInstanceState
      */
     protected abstract void initViewAndEvent(Bundle savedInstanceState);
+
+    /**
+     * 是否显示加载对话框
+     *
+     * @param active
+     */
+    public void setProgressIndicator(boolean active) {
+        if (active) {
+            LoadingProgress.getInstance(getActivity()).show();
+        } else {
+            LoadingProgress.getInstance(getActivity()).dismiss();
+        }
+    }
 
     /**
      * 数据懒加载

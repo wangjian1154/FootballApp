@@ -55,9 +55,13 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
         initView();
-        mPresenter.loadData();
-
         initEvent();
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        mPresenter.loadData();
     }
 
     private void initEvent() {
