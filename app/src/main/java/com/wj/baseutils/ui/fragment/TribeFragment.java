@@ -8,7 +8,7 @@ import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
-import com.wj.baseutils.app.Constants;
+import com.wj.base.data.Constants;
 import com.wj.baseutils.adapter.TagPagerAdapter;
 
 import java.util.ArrayList;

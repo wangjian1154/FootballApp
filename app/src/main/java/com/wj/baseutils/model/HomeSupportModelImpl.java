@@ -1,7 +1,7 @@
 package com.wj.baseutils.model;
 
 import com.wj.base.base.BaseListener;
-import com.wj.baseutils.app.Constants;
+import com.wj.base.data.Constants;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.net.ApiRetrofit;

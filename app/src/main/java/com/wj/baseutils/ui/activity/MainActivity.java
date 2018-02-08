@@ -10,7 +10,7 @@ import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.HandleBackUtil;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
-import com.wj.baseutils.app.Constants;
+import com.wj.base.data.Constants;
 import com.wj.baseutils.adapter.BaseTabFragmentAdapter;
 import com.wj.baseutils.ui.fragment.DataFragment;
 import com.wj.baseutils.ui.fragment.HomeFragment;

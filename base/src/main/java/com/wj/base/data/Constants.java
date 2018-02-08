@@ -1,4 +1,4 @@
-package com.wj.baseutils.app;
+package com.wj.base.data;
 
 /**
  * Created by wj on 2018/1/11.
@@ -21,6 +21,10 @@ public class Constants {
         String TITLE_RECOMMEND = "推荐";
         String TITLE_NEW = "最新";
         String TITLE_TRIBE = "部落";
+    }
+
+    public interface Key_EventBus_Msg {
+        int NET_CONNECT_SUCCESS = 0;
     }
 
 }

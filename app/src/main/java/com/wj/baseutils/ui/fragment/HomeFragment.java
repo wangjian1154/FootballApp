@@ -12,7 +12,7 @@ import com.wj.base.utils.ScreenUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
-import com.wj.baseutils.app.Constants;
+import com.wj.base.data.Constants;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;

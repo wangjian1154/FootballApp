@@ -14,7 +14,7 @@ import com.wj.base.base.BaseFragment;
 import com.wj.base.utils.BannerImageLoader;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
-import com.wj.baseutils.app.Constants;
+import com.wj.base.data.Constants;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.model.HomeSupportModelImpl;
