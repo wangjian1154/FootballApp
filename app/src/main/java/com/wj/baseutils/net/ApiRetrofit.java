@@ -83,6 +83,11 @@ public class ApiRetrofit {
             if (!NetworkUtils.isNetworkAvailable(Initialization.getContext())) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE).build();
+            }else{
+                request = request.newBuilder()
+                        //网络可用 强制从网络获取数据
+                        .cacheControl(CacheControl.FORCE_NETWORK)
+                        .build();
             }
 
             Response response = chain.proceed(request);
