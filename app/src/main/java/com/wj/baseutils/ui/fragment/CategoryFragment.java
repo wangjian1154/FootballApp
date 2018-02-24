@@ -17,6 +17,7 @@ import com.wj.baseutils.widget.ItemDragHelperCallBack;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,7 +28,7 @@ import butterknife.OnClick;
  */
 
 public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, CategoryModelImpl>
-        implements CategoryContract.CategoryView, ItemDragHelperCallBack.OnChannelDragListener {
+        implements CategoryContract.CategoryView {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -35,7 +36,6 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
     private List<HomeTagBean.DataBean> tagList;
     public static final String KEY = "key";
     private CategoryAdapter adapter;
-    private ItemTouchHelper mHelper;
 
     @Override
     protected CategoryPresenterImpl createPresenter() {
@@ -57,15 +57,22 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
         adapter = new CategoryAdapter(tagList);
-        ItemDragHelperCallBack callBack = new ItemDragHelperCallBack(this);
-        mHelper = new ItemTouchHelper(callBack);
-        mHelper.attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext())
                 .color(getResources().getColor(R.color.white))
                 .size((int) getResources().getDimension(R.dimen.widget_size_15))
                 .build());
         recyclerView.setAdapter(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemDragHelperCallBack(
+                new ItemDragHelperCallBack.OnChannelDragListener() {
+                    @Override
+                    public void onItemMove(int starPos, int endPos) {
+                        Collections.swap(tagList, starPos, endPos);
+                        adapter.notifyItemMoved(starPos,endPos);
+                    }
+                }));
+
+        helper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -83,24 +90,4 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
         getFragmentManager().beginTransaction().remove(this).commit();
     }
 
-    @Override
-    public void onStarDrag(BaseViewHolder baseViewHolder) {
-        //开始拖动
-        mHelper.startDrag(baseViewHolder);
-    }
-
-    @Override
-    public void onItemMove(int starPos, int endPos) {
-
-    }
-
-    @Override
-    public void onMoveToMyChannel(int starPos, int endPos) {
-
-    }
-
-    @Override
-    public void onMoveToOtherChannel(int starPos, int endPos) {
-
-    }
 }

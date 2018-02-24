@@ -1,6 +1,9 @@
 package com.wj.baseutils.adapter;
 
+import android.app.Service;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -25,5 +28,14 @@ public class CategoryAdapter extends BaseQuickAdapter<HomeTagBean.DataBean, Base
     protected void convert(BaseViewHolder helper, HomeTagBean.DataBean item) {
         TextView tvTag = helper.getView(R.id.tv_tag);
         tvTag.setText(StringUtils.setStr(item.name));
+
+        helper.getView(R.id.ll_item).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Vibrator vib = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
+                vib.vibrate(150);
+                return false;
+            }
+        });
     }
 }
