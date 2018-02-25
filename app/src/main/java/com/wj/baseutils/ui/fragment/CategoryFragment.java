@@ -1,6 +1,9 @@
 package com.wj.baseutils.ui.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -27,6 +30,7 @@ import butterknife.OnClick;
  * Created by wj on 2018/1/18.
  */
 
+@SuppressLint("ValidFragment")
 public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, CategoryModelImpl>
         implements CategoryContract.CategoryView {
 
@@ -35,7 +39,17 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
 
     private List<HomeTagBean.DataBean> tagList;
     public static final String KEY = "key";
+    public static final String KEY_FRAGMENT = "key_fragment";
+    public static final String KEY_SELECT_CATEGORY = "select_category";
     private CategoryAdapter adapter;
+    private HomeFragment.OnCategoryChangeCallback onCategoryChangeCallback;
+    private String selectCategory;
+    private int selectPosition;
+
+    @SuppressLint("ValidFragment")
+    public CategoryFragment(HomeFragment.OnCategoryChangeCallback onCategoryChangeCallback) {
+        this.onCategoryChangeCallback = onCategoryChangeCallback;
+    }
 
     @Override
     protected CategoryPresenterImpl createPresenter() {
@@ -51,6 +65,7 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
     protected void initViewAndEvent(Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         HomeTagBean bean = (HomeTagBean) bundle.getSerializable(KEY);
+        selectCategory = bundle.getString(KEY_SELECT_CATEGORY);
         tagList = new ArrayList<>();
         tagList.clear();
         tagList.addAll(bean.data);
@@ -58,17 +73,23 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
         adapter = new CategoryAdapter(tagList);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getContext())
-                .color(getResources().getColor(R.color.white))
-                .size((int) getResources().getDimension(R.dimen.widget_size_15))
-                .build());
         recyclerView.setAdapter(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(new ItemDragHelperCallBack(
                 new ItemDragHelperCallBack.OnChannelDragListener() {
                     @Override
                     public void onItemMove(int starPos, int endPos) {
                         Collections.swap(tagList, starPos, endPos);
-                        adapter.notifyItemMoved(starPos,endPos);
+                        Collections.swap(HomeFragment.fragments, starPos, endPos);
+                        adapter.notifyItemMoved(starPos, endPos);
+                        if (onCategoryChangeCallback != null) {
+                            for (int i = 0; i < tagList.size(); i++) {
+                                if (tagList.get(i).name.equals(selectCategory)) {
+                                    selectPosition = i;
+                                    break;
+                                }
+                            }
+                            onCategoryChangeCallback.onCategoryChange(tagList, selectPosition);
+                        }
                     }
                 }));
 

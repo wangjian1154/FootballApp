@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -57,6 +58,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
+        Logger.i("HomeSupportFragment");
         mPresenter.loadData(true, key, "");
     }
 

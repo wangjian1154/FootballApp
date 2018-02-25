@@ -24,7 +24,7 @@ public class Constants {
     }
 
     public interface Key_EventBus_Msg {
-        int NET_CONNECT_SUCCESS = 0;
+        int NET_CONNECT_SUCCESS = 0;//网络重连
     }
 
 }
