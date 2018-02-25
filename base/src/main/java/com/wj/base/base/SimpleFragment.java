@@ -53,6 +53,7 @@ public abstract class SimpleFragment extends Fragment implements HandleBackUtil.
     }
 
     protected void onViewCreated() {
+
     }
 
     /**

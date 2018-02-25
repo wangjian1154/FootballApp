@@ -25,6 +25,7 @@ public class Constants {
 
     public interface Key_EventBus_Msg {
         int NET_CONNECT_SUCCESS = 0;//网络重连
+        int CATEGORY_CHANGE = 1;//标签变化
     }
 
 }

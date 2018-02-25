@@ -1,6 +1,8 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +20,8 @@ import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;
 import com.wj.baseutils.presenter.HomePresenterImpl;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +138,8 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                     viewPager.setCurrentItem(selectPosition);
                     tabAdapter.notifyDataSetChanged();
                     viewPager.setOffscreenPageLimit(tagList.size());
+                    EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
+                            Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
                 }
             });
             Bundle bundle = new Bundle();

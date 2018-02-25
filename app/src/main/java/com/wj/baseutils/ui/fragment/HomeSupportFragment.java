@@ -1,6 +1,7 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -58,7 +59,6 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        Logger.i("HomeSupportFragment");
         mPresenter.loadData(true, key, "");
     }
 
@@ -185,5 +185,16 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     public void onStop() {
         super.onStop();
         layBanner.stopAutoPlay();
+    }
+
+    @Override
+    public void onEventMainThread(Message msg) {
+        super.onEventMainThread(msg);
+        switch (msg.what) {
+            case Constants.Key_EventBus_Msg.CATEGORY_CHANGE:
+                if (mPresenter != null)
+                    mPresenter.loadData(true, key, "");
+                break;
+        }
     }
 }
