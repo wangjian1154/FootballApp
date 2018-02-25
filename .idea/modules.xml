@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppBaseUtils.iml" filepath="$PROJECT_DIR$/AppBaseUtils.iml" />
       <module fileurl="file://F:\GitHubCode\FootballApp\AppBaseUtils.iml" filepath="F:\GitHubCode\FootballApp\AppBaseUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FootballApp.iml" filepath="$PROJECT_DIR$/FootballApp.iml" />
       <module fileurl="file://F:\Demo\AppBaseUtils\FootballApp.iml" filepath="F:\Demo\AppBaseUtils\FootballApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
