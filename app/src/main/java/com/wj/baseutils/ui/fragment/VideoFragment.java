@@ -1,9 +1,11 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -112,4 +114,14 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
         return R.layout.fragment_video;
     }
 
+    @Override
+    public void onEventMainThread(Message msg) {
+        super.onEventMainThread(msg);
+        switch (msg.what) {
+            case Constants.Key_EventBus_Msg.CATEGORY_CHANGE:
+                if (mPresenter != null)
+                    mPresenter.loadData(true, key, "");
+                break;
+        }
+    }
 }

@@ -1,6 +1,10 @@
 package com.wj.baseutils.ui.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,16 +12,18 @@ import android.support.v4.view.ViewPager;
 
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.SimpleFragment;
+import com.wj.base.data.Constants;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
-import com.wj.base.data.Constants;
+import com.wj.baseutils.adapter.TagPagerAdapter;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.HomeContract;
 import com.wj.baseutils.model.HomeModelImpl;
 import com.wj.baseutils.presenter.HomePresenterImpl;
-import com.wj.baseutils.adapter.TagPagerAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +43,12 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     @BindView(R.id.vp_home)
     ViewPager viewPager;
 
-    private List<String> tagList;
-    private List<Fragment> fragments;
+    private List<HomeTagBean.DataBean> tagList;
+    public static List<Fragment> fragments;
     private TagPagerAdapter tabAdapter;
     private HomeTagBean tagBean;
     private CategoryFragment categoryFragment;
+    private List<String> tagStrList;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -63,10 +70,19 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                         ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)));
             }
         });
-        tabAdapter = new TagPagerAdapter(getChildFragmentManager(), fragments, tagList);
+        tagStrList = new ArrayList<>();
+        tabAdapter = new TagPagerAdapter(getChildFragmentManager(), fragments, setTagStrList(tagList));
         viewPager.setAdapter(tabAdapter);
-        float density=getResources().getDisplayMetrics().density;
-        ToastUtils.showShort(density+"");
+        float density = getResources().getDisplayMetrics().density;
+        ToastUtils.showShort(density + "");
+    }
+
+    private List<String> setTagStrList(List<HomeTagBean.DataBean> tagList) {
+        tagStrList.clear();
+        for (int i = 0; i < tagList.size(); i++) {
+            tagStrList.add(tagList.get(i).name);
+        }
+        return tagStrList;
     }
 
     @Override
@@ -90,10 +106,11 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         tagList.clear();
         fragments.clear();
         if (tagBean != null && tagBean.data != null) {
+            tagList.addAll(tagBean.data);
+            setTagStrList(tagList);
             for (int i = 0; i < tagBean.data.size(); i++) {
                 HomeTagBean.DataBean bean = tagBean.data.get(i);
                 if (bean != null) {
-                    tagList.add(tagBean.data.get(i).name);
                     SimpleFragment fragment;
                     if (Constants.TYPE.TOP_VIDEO.equals(bean.key)) {
                         fragment = new VideoFragment();
@@ -115,9 +132,22 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     public void changeTag() {
         if (tagBean != null) {
             FragmentManager fm = getChildFragmentManager();
-            categoryFragment = new CategoryFragment();
+            categoryFragment = new CategoryFragment(new OnCategoryChangeCallback() {
+                @Override
+                public void onCategoryChange( List<HomeTagBean.DataBean> tagList, int selectPosition) {
+                    tagBean.data = tagList;
+                    tagStrList.addAll(setTagStrList(tagList));
+                    viewPager.setCurrentItem(selectPosition);
+                    tabAdapter.notifyDataSetChanged();
+                    viewPager.setOffscreenPageLimit(tagList.size());
+                    EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
+                            Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
+                }
+            });
             Bundle bundle = new Bundle();
             bundle.putSerializable(CategoryFragment.KEY, tagBean);
+            bundle.putString(CategoryFragment.KEY_SELECT_CATEGORY, tabAdapter.getPageTitle(
+                    viewPager.getCurrentItem()).toString());
             categoryFragment.setArguments(bundle);
             FragmentTransaction transaction = fm.beginTransaction();
             transaction.setCustomAnimations(R.anim.top_slide_in, R.anim.top_slide_out);
@@ -141,5 +171,15 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     @Override
     public boolean onBackPressed() {
         return hideTagFragment();
+    }
+
+    public interface OnCategoryChangeCallback {
+        /**
+         * 分类移动后的回调
+         *
+         * @param tagList        分类集合
+         * @param selectPosition 初始选中的标题的pos
+         */
+        public void onCategoryChange(List<HomeTagBean.DataBean> tagList, int selectPosition);
     }
 }

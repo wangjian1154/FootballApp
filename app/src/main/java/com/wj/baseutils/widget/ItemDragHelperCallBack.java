@@ -27,8 +27,6 @@ public class ItemDragHelperCallBack extends ItemTouchHelper.Callback{
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         /**
          * 处理拖拽事件和滑动事件，以及拖拽和滑动的方向
-         * 如果是列表类型的，拖拽只有ItemTouchHelper.UP、ItemTouchHelper.DOWN两个方向
-         * 如果是网格类型的，拖拽则有UP、DOWN、LEFT、RIGHT四个方向
          */
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         int dragFlags;
@@ -57,31 +55,13 @@ public class ItemDragHelperCallBack extends ItemTouchHelper.Callback{
     }
 
     @Override
-    public boolean isLongPressDragEnabled() {
-        //不需要长按拖动，因为我们的标题和 频道推荐 是不需要拖动的，所以手动控制
-        return false;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        //不需要侧滑
-        return false;
-    }
-
-    @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
     }
 
-    public interface OnChannelDragListener extends OnChannelListener {
-        void onStarDrag(BaseViewHolder baseViewHolder);
-
-    }
-
-    public interface OnChannelListener {
+    public interface OnChannelDragListener {
         void onItemMove(int starPos, int endPos);
-        void onMoveToMyChannel(int starPos, int endPos);
-        void onMoveToOtherChannel(int starPos, int endPos);
+
     }
 
 }

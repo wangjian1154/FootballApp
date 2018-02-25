@@ -55,7 +55,9 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/widget_size_10"/>
+            android:paddingLeft="@dimen/widget_size_10"
+            android:paddingRight="@dimen/widget_size_10"
+            android:paddingBottom="@dimen/widget_size_10"/>
 
         <ImageView
             android:layout_width="match_parent"
