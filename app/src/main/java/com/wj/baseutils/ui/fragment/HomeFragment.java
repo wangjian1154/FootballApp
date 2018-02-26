@@ -1,10 +1,8 @@
 package com.wj.baseutils.ui.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -154,7 +152,6 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                     viewPager.setOffscreenPageLimit(tagList.size());
                     EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
                             Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
-                    SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY, tagList);
                 }
             });
             Bundle bundle = new Bundle();
@@ -163,27 +160,9 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                     viewPager.getCurrentItem()).toString());
             categoryFragment.setArguments(bundle);
             FragmentTransaction transaction = fm.beginTransaction();
-            transaction.setCustomAnimations(R.anim.top_slide_in, R.anim.top_slide_out);
+            transaction.setCustomAnimations(R.anim.category_enter, R.anim.category_exit);
             transaction.replace(R.id.fl_tag, categoryFragment).commit();
         }
-    }
-
-    /**
-     * 隐藏TagFragment
-     */
-    public boolean hideTagFragment() {
-        if (categoryFragment != null && !categoryFragment.isHidden() && categoryFragment.isVisible()) {
-            getChildFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.top_slide_in, R.anim.top_slide_out)
-                    .remove(categoryFragment).commit();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        return hideTagFragment();
     }
 
     public interface OnCategoryChangeCallback {

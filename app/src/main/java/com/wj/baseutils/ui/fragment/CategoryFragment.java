@@ -1,15 +1,17 @@
 package com.wj.baseutils.ui.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.animation.Animation;
 
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.wj.base.base.BaseFragment;
+import com.wj.base.data.Constants;
+import com.wj.base.utils.SPUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.contract.CategoryContract;
@@ -17,7 +19,8 @@ import com.wj.baseutils.model.CategoryModelImpl;
 import com.wj.baseutils.presenter.CategoryPresenterImpl;
 import com.wj.baseutils.adapter.CategoryAdapter;
 import com.wj.baseutils.widget.ItemDragHelperCallBack;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,8 +91,9 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
                                     break;
                                 }
                             }
-                            onCategoryChangeCallback.onCategoryChange(tagList, selectPosition);
+
                         }
+                        SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY, tagList);
                     }
                 }));
 
@@ -106,9 +110,30 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
 
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return exitFragment();
+    }
+
+    public boolean exitFragment() {
+        if (this != null && !this.isHidden() && this.isVisible()) {
+            onCategoryChangeCallback.onCategoryChange(tagList, selectPosition);
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.category_enter, R.anim.category_exit, R.anim.category_enter, R.anim.category_exit)//设置退出动画
+                    .remove(this).commit();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
     @OnClick(R.id.ll_hide)
     public void hideFragment() {
-        getFragmentManager().beginTransaction().remove(this).commit();
+        exitFragment();
     }
 
 }
