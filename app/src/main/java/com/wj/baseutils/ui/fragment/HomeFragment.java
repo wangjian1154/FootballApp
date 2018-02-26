@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.data.Constants;
+import com.wj.base.utils.SPUtils;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
@@ -49,6 +50,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     private HomeTagBean tagBean;
     private CategoryFragment categoryFragment;
     private List<String> tagStrList;
+    private List<HomeTagBean.DataBean> spTag;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -59,6 +61,12 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     }
 
     private void initView() {
+        try {
+            spTag = (List<HomeTagBean.DataBean>) SPUtils.
+                    getInstance().getObject(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tagList = new ArrayList<>();
         fragments = new ArrayList<>();
         tabLayout.setupWithViewPager(viewPager);
@@ -106,7 +114,11 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         tagList.clear();
         fragments.clear();
         if (tagBean != null && tagBean.data != null) {
-            tagList.addAll(tagBean.data);
+            if (spTag != null) {
+                tagList.addAll(spTag);
+            } else {
+                tagList.addAll(tagBean.data);
+            }
             setTagStrList(tagList);
             for (int i = 0; i < tagBean.data.size(); i++) {
                 HomeTagBean.DataBean bean = tagBean.data.get(i);
@@ -134,7 +146,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
             FragmentManager fm = getChildFragmentManager();
             categoryFragment = new CategoryFragment(new OnCategoryChangeCallback() {
                 @Override
-                public void onCategoryChange( List<HomeTagBean.DataBean> tagList, int selectPosition) {
+                public void onCategoryChange(List<HomeTagBean.DataBean> tagList, int selectPosition) {
                     tagBean.data = tagList;
                     tagStrList.addAll(setTagStrList(tagList));
                     viewPager.setCurrentItem(selectPosition);
@@ -142,6 +154,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
                     viewPager.setOffscreenPageLimit(tagList.size());
                     EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
                             Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
+                    SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY, tagList);
                 }
             });
             Bundle bundle = new Bundle();

@@ -3,9 +3,15 @@ package com.wj.base.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.util.SimpleArrayMap;
+import android.util.Base64;
 
 import com.wj.base.Initialization;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -330,6 +336,47 @@ public class SPUtils {
     }
 
     /**
+     * sp中写入对象
+     *
+     * @param key
+     * @param values
+     */
+    public void put(String key, Object values) {
+        put(key, values, false);
+    }
+
+    /**
+     * sp中写入对象
+     *
+     * @param key
+     * @param values
+     * @param isCommit
+     */
+    public void put(String key, Object values, boolean isCommit) {
+        put(key, obj2Str(values), isCommit);
+    }
+
+    /**
+     * sp中读取Object
+     *
+     * @param key
+     */
+    public Object getObject(String key) {
+        return getObject(key, "");
+    }
+
+    /**
+     * sp中读取Object
+     *
+     * @param key
+     * @param defaultValue
+     */
+    public Object getObject(String key, String defaultValue) {
+        String str = getString(key, defaultValue);
+        return str2Obj(str);
+    }
+
+    /**
      * SP 中获取所有键值对
      *
      * @return Map 对象
@@ -390,6 +437,54 @@ public class SPUtils {
             sp.edit().clear().commit();
         } else {
             sp.edit().clear().apply();
+        }
+    }
+
+    /**
+     * 对象转字符串
+     *
+     * @param obj
+     * @return
+     */
+    private String obj2Str(Object obj) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = null;
+        String str = null;
+        try {
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(obj);
+            str = new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
+        } catch (IOException e) {
+            e.printStackTrace();
+            CloseUtils.closeIO(oos);
+            CloseUtils.closeIO(baos);
+        }
+        return str;
+    }
+
+    /**
+     * 字符串转对象
+     *
+     * @param str
+     * @return
+     */
+    private Object str2Obj(String str) {
+        if (str != null) {
+            byte[] bytes = Base64.decode(str.getBytes(), Base64.DEFAULT);
+            ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+            ObjectInputStream ois = null;
+            Object obj = null;
+            try {
+                ois = new ObjectInputStream(bais);
+                obj = ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+                CloseUtils.closeIO(ois);
+                CloseUtils.closeIO(bais);
+            }
+            return obj;
+        } else {
+            return null;
         }
     }
 }
