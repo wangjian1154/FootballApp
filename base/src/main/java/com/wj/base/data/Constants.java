@@ -28,4 +28,7 @@ public class Constants {
         int CATEGORY_CHANGE = 1;//标签变化
     }
 
+    public interface SHARE_PREFENCE_KEY {
+        String SP_CATEGORY = "home_category";//首页Tab分类
+    }
 }
