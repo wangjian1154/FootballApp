@@ -8,6 +8,7 @@ import com.wj.base.base.BaseActivity;
 import com.wj.base.base.BasePresenter;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.HandleBackUtil;
+import com.wj.base.utils.StatusBarUtil;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.base.data.Constants;
@@ -124,6 +125,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.theme_yellow));
         return R.layout.activity_main;
     }
 
