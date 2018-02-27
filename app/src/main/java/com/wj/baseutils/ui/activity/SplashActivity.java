@@ -3,6 +3,8 @@ package com.wj.baseutils.ui.activity;
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.wj.base.base.SimpleActivity;
@@ -53,6 +55,8 @@ public class SplashActivity extends SimpleActivity {
 
     @Override
     protected int getLayoutId() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_splash;
     }
 

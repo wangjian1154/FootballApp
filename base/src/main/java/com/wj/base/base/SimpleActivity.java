@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.wj.base.R;
+import com.wj.base.utils.StatusBarUtil;
 import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,6 +28,7 @@ public abstract class SimpleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.theme_yellow));
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))
