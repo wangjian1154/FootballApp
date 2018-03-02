@@ -4,6 +4,7 @@ import com.wj.baseutils.bean.CircleBean;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.bean.HomeTagBean;
 import com.wj.baseutils.bean.HotDiscussionBean;
+import com.wj.baseutils.bean.SplashBean;
 import com.wj.baseutils.bean.TribeCategoryBean;
 
 import io.reactivex.Observable;
@@ -44,4 +45,7 @@ public interface ApiService {
                                          @Query("pageSize") String pageSize);
     @GET(ApiConstants.API_TRIBE_CATEGORY)
     Observable<TribeCategoryBean> getTribeCategory();
+
+    @GET(ApiConstants.API_SPLASH)
+    Observable<SplashBean> getSplashImg();
 }

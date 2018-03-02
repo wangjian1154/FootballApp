@@ -125,6 +125,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
+        StatusBarUtil.setColor(this,getResources().getColor(com.wj.base.R.color.theme_yellow));
         return R.layout.activity_main;
     }
 

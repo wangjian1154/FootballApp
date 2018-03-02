@@ -28,7 +28,6 @@ public abstract class SimpleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.theme_yellow));
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))

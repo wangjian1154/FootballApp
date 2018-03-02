@@ -29,4 +29,7 @@ public class ApiConstants {
 
     //部落分类
     public static final String API_TRIBE_CATEGORY = "/sns/categories/all?hasGroups=true";
+
+    //开屏页
+    public static final String API_SPLASH="/guideimage";
 }
