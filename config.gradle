@@ -63,6 +63,7 @@ ext {
             "circleimageview"       : "de.hdodenhof:circleimageview:2.2.0",
             "photoview"             : "com.github.chrisbanes:PhotoView:2.0.0",
             "rxpermissions2"        : "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar",
-            "material-dialogs"      : "com.afollestad.material-dialogs:commons:0.9.6.0"
+            "material-dialogs"      : "com.afollestad.material-dialogs:commons:0.9.6.0",
+            "recyclerview-animators": "jp.wasabeef:recyclerview-animators:2.3.0"
     ]
 }

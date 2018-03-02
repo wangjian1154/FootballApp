@@ -11,6 +11,10 @@ public class Constants {
         String KEY = "key";
     }
 
+    public interface Value{
+        int LIMIT=20;
+    }
+
     public interface TYPE {
         String TOP_NEWS = "tt";//头条
         String TOP_TRANSFER = "zh";//转会

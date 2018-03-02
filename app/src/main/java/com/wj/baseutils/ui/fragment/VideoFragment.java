@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
  * Created by wj on 2018/1/18.
@@ -66,6 +67,8 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
         recyclerView.setLayoutManager(layoutManager);
         adapter = new VideoListAdapter(posts);
         recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        recyclerView.getItemAnimator().setChangeDuration(500);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration
                 .Builder(getActivity())
                 .colorResId(R.color.decoration_color)

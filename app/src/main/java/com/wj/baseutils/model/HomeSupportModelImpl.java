@@ -26,7 +26,7 @@ public class HomeSupportModelImpl implements HomeSupportContract.HomeSupportMode
         switch (type) {
             case Constants.TYPE.TOP_NEWS:
                 //获取头条数据
-                homeList = apiService.getTopNewsData(timeMillis, true, true, 20);
+                homeList = apiService.getTopNewsData(timeMillis, true, true, Constants.Value.LIMIT);
                 break;
             case Constants.TYPE.TOP_TRANSFER:
                 //获取转会数据

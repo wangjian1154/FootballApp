@@ -90,8 +90,12 @@ dependencies {
     api rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["photoview"]
     api rootProject.ext.dependencies["rxpermissions2"]
+    api (rootProject.ext.dependencies["recyclerview-animators"]){
+        exclude group: 'com.android.support'
+    }
     implementation (rootProject.ext.dependencies["material-dialogs"]){
         exclude module: 'recyclerview-v7'
         exclude module: 'appcompat-v7'
     }
+
 }

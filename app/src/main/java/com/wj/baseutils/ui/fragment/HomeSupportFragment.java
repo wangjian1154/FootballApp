@@ -7,21 +7,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wj.base.base.BaseFragment;
+import com.wj.base.data.Constants;
 import com.wj.base.utils.BannerImageLoader;
 import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
-import com.wj.base.data.Constants;
+import com.wj.baseutils.adapter.TopNewsAdapter;
 import com.wj.baseutils.bean.HomeDataBean;
 import com.wj.baseutils.contract.HomeSupportContract;
 import com.wj.baseutils.model.HomeSupportModelImpl;
 import com.wj.baseutils.presenter.HomeSupportPresenterImpl;
-import com.wj.baseutils.adapter.TopNewsAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -30,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
  * Created by wj on 2018/1/14.
@@ -83,6 +85,8 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
                 .build());
         adapter = new TopNewsAdapter(posts);
         recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new SlideInLeftAnimator());
+        recyclerView.getItemAnimator().setChangeDuration(500);
         initHeadView();
 
         layBanner.setImageLoader(new BannerImageLoader());
@@ -144,7 +148,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
                     && homeDataBean.data.posts != null
                     && homeDataBean.data.posts.size() > 0) {
                 posts.addAll(homeDataBean.data.posts);
-                adapter.notifyDataSetChanged();
+                adapter.notifyItemRangeChanged(posts.size() - Constants.Value.LIMIT, posts.size());
                 //加载头条数据
                 if (posts != null && posts.size() > 0
                         && posts.get(0).getItemType() == HomeDataBean.DataBean.PostsBeanX.ITEM_BANNER
