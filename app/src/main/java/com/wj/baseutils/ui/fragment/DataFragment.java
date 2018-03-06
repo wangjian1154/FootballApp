@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.PinyinUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.LinkmanAdapter;
@@ -37,7 +38,12 @@ public class DataFragment extends SimpleFragment {
     ListIndexView listIndexView;
     private List<LinkmanBean> list;
     private LinkmanAdapter adapter;
-    private String[] names={"张sam","赵是","王3","刘","李是","千是","诸葛","吴看","吗话","朱工","清风","明月","徐飞"};
+    private String[] names = {"张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
+            "朱桢", "薛之谦", "汪涵", "谢娜", "何炅", "苏菲儿", "陈一发", "冯提莫", "胡发", "黄磊", "雷军", "任正飞"
+            , "杨过", "罗欧赔", "齐秦", "谢霆锋", "鹿晗", "迪丽热巴", "王嘉尔", "魏大勋", "黄渤", "孙红雷", "罗志祥"
+            , "王迅", "杨洋", "张艺兴", "巴宝莉", "奥尼尔", "科比", "Angele Baby", "刘亦菲", "罗永浩", "马云", "马化腾", "丁磊", "周鸿祎"
+            , "贾跃亭", "居里夫人", "张杰", "陈旭", "魏晨", "何炅", "杜海涛", "张国荣", "周杰伦", "陈奕迅", "宋冬野", "赵雷",
+            "张靓颖", "张惠妹", "梁静茹", "孙燕姿", "李宇春", "陈伟霆", "潘长江", "Ac Fun", "BBQ"};
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
@@ -50,12 +56,14 @@ public class DataFragment extends SimpleFragment {
         recyclerView.setAdapter(adapter);
         listIndexView.setTextViewDialog(tvListInCenter);
 
-
         listIndexView.setUpdateListView(new ListIndexView.UpdateListView() {
             @Override
             public void updateListView(String currentChar) {
                 int positionForSection = adapter.getPositionForSection(currentChar.charAt(0));
                 adapter.setSelection(positionForSection);
+                if (positionForSection >= 0 && positionForSection < list.size()) {
+                    recyclerView.smoothScrollToPosition(positionForSection);
+                }
             }
         });
 
