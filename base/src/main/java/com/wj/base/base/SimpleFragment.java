@@ -44,7 +44,7 @@ public abstract class SimpleFragment extends Fragment implements HandleBackUtil.
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onViewCreated();
+        onViewCreated(view);
         initViewAndEvent(savedInstanceState);
         boolean isVis = isHidden() || getUserVisibleHint();
         if (isVis && isFirstVisible) {
@@ -53,7 +53,7 @@ public abstract class SimpleFragment extends Fragment implements HandleBackUtil.
         }
     }
 
-    protected void onViewCreated() {
+    protected void onViewCreated(View view) {
 
     }
 

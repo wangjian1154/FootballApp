@@ -65,6 +65,7 @@ ext {
             "photoview"             : "com.github.chrisbanes:PhotoView:2.0.0",
             "rxpermissions2"        : "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar",
             "material-dialogs"      : "com.afollestad.material-dialogs:commons:0.9.6.0",
-            "recyclerview-animators": "jp.wasabeef:recyclerview-animators:2.3.0"
+            "recyclerview-animators": "jp.wasabeef:recyclerview-animators:2.3.0",
+            "pinyin4j"              : "com.github.open-android:pinyin4j:2.5.0"
     ]
 }

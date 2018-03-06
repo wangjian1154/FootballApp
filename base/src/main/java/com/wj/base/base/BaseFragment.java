@@ -1,5 +1,7 @@
 package com.wj.base.base;
 
+import android.view.View;
+
 /**
  * Created by wj on 2018/1/6.
  * MVP基类
@@ -11,8 +13,8 @@ public abstract class BaseFragment<T extends BasePresenter, M extends BaseModel>
     protected M mModel;
 
     @Override
-    protected void onViewCreated() {
-        super.onViewCreated();
+    protected void onViewCreated(View view) {
+        super.onViewCreated(view);
         //初始化Presenter
         mPresenter = createPresenter();
         mModel = createModel();

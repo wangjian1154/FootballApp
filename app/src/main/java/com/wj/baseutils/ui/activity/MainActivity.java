@@ -10,6 +10,8 @@ import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.HandleBackUtil;
 import com.wj.base.utils.StatusBarUtil;
 import com.wj.base.utils.ToastUtils;
+import com.wj.base.views.FixedViewPager;
+import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
 import com.wj.base.data.Constants;
 import com.wj.baseutils.adapter.BaseTabFragmentAdapter;
