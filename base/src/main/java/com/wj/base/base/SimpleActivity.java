@@ -10,6 +10,7 @@ import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -70,7 +71,7 @@ public abstract class SimpleActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(Message msg) {
         if (msg != null) {
             switch (msg.what) {
