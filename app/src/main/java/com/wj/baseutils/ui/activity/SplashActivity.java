@@ -1,7 +1,9 @@
 package com.wj.baseutils.ui.activity;
 
 import android.animation.Animator;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +15,8 @@ import android.widget.RelativeLayout;
 import com.wj.base.base.SimpleActivity;
 import com.wj.base.utils.ImageLoadUtils;
 import com.wj.base.utils.StringUtils;
+import com.wj.base.utils.TimeUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.SplashBean;
 import com.wj.baseutils.net.ApiRetrofit;
@@ -52,7 +56,7 @@ public class SplashActivity extends SimpleActivity {
                     ivSplash.setVisibility(View.VISIBLE);
                     ImageLoadUtils.display(SplashActivity.this, splashBean.data.url, ivSplash);
                     startToMainAnimal();
-                }else{
+                } else {
                     startToMainAnimal();
                 }
             }
@@ -71,6 +75,38 @@ public class SplashActivity extends SimpleActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
 
+        dynamicChangeLogo();
+    }
+
+    /**
+     * 动态改变Icon，奇数天显示正常icon。偶数天显示双11的icon
+     */
+    private void dynamicChangeLogo() {
+        ComponentName mDefault = getComponentName();
+        ComponentName mDouble11 = new ComponentName(getBaseContext(),
+                getPackageName() + ".SplashActivity");
+        PackageManager mPm = getApplicationContext().getPackageManager();
+
+        int todayDay = TimeUtils.getTodayDay();
+        if (todayDay % 2 != 0) {
+            disableComponent(mDefault, mPm);
+            enableComponent(mDouble11, mPm);
+        } else {
+            disableComponent(mDouble11, mPm);
+            enableComponent(mDefault, mPm);
+        }
+    }
+
+    private void enableComponent(ComponentName componentName, PackageManager mPm) {
+        mPm.setComponentEnabledSetting(componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    private void disableComponent(ComponentName componentName, PackageManager mPm) {
+        mPm.setComponentEnabledSetting(componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
     }
 
     private void startToMainAnimal() {

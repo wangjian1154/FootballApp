@@ -134,7 +134,7 @@ public class TimeUtils {
      *
      * @return 时间字符串
      */
-    public static String getNowString() {
+    public static String getNowDateString() {
         return millis2String(System.currentTimeMillis(), DEFAULT_FORMAT);
     }
 
@@ -145,7 +145,7 @@ public class TimeUtils {
      * @param format 时间格式
      * @return 时间字符串
      */
-    public static String getNowString(final DateFormat format) {
+    public static String getNowDateString(final DateFormat format) {
         return millis2String(System.currentTimeMillis(), format);
     }
 
@@ -191,6 +191,15 @@ public class TimeUtils {
     private static int getTimeValue(long value, long totalMillis) {
         int res = (int) (value / totalMillis);
         return res;
+    }
+
+    /**
+     * 获取今天的日子
+     * @return 10号11号 day
+     */
+    public static int getTodayDay(){
+        Date nowDate = getNowDate();
+        return nowDate.getDate();
     }
 
 }

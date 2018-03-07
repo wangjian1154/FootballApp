@@ -1,5 +1,7 @@
 package com.wj.baseutils.ui.fragment;
 
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;

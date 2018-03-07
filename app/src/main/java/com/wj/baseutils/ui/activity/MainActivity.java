@@ -47,8 +47,6 @@ public class MainActivity extends BaseActivity {
     private BaseTabFragmentAdapter mTabFragmentAdapter;
     private int[] tabViewId2Index = {R.id.rl_tab_home, R.id.rl_tab_tribe,
             R.id.rl_tab_match, R.id.rl_tab_data, R.id.rl_tab_mine};
-    private SimpleFragment mBackHandedFragment;
-    private boolean hadIntercept;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
