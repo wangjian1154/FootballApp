@@ -11,7 +11,7 @@
 
     <com.wj.base.views.ListIndexView
         android:id="@+id/liv"
-        android:layout_width="36dp"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true" />
 

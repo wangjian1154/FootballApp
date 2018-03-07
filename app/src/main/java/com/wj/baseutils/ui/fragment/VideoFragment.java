@@ -71,6 +71,7 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
         recyclerView.getItemAnimator().setChangeDuration(500);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration
                 .Builder(getActivity())
+                .size(1)
                 .colorResId(R.color.decoration_color)
                 .build());
 

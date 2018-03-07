@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.PinyinUtils;
 import com.wj.base.utils.ToastUtils;
@@ -56,11 +57,14 @@ public class DataFragment extends SimpleFragment {
         recyclerView.setAdapter(adapter);
         listIndexView.setTextViewDialog(tvListInCenter);
 
+        initEvent();
+    }
+
+    private void initEvent() {
         listIndexView.setUpdateListView(new ListIndexView.UpdateListView() {
             @Override
             public void updateListView(String currentChar) {
                 int positionForSection = adapter.getPositionForSection(currentChar.charAt(0));
-                adapter.setSelection(positionForSection);
                 if (positionForSection >= 0 && positionForSection < list.size()) {
                     recyclerView.smoothScrollToPosition(positionForSection);
                 }
@@ -78,6 +82,13 @@ public class DataFragment extends SimpleFragment {
                     int sectionForPosition = adapter.getSectionForPosition(firstVisibleItem);
                     listIndexView.updateLetterIndexView(sectionForPosition);
                 }
+            }
+        });
+
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ToastUtils.showShort(list.get(position).name);
             }
         });
     }
@@ -99,7 +110,6 @@ public class DataFragment extends SimpleFragment {
             } else {
                 user.setFirstLetter("#");
             }
-
         }
 
         Collections.sort(list, new Comparator<LinkmanBean>() {

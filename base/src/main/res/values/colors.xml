@@ -12,7 +12,7 @@
     <color name="main_bottom_line">#C0C0C0</color>
     <color name="font_gay">#A8A8A8</color>
     <color name="font_blue">#7cef01</color>
-    <color name="decoration_color">#C1C1C1</color>
+    <color name="decoration_color">#889f9f9f</color>
     <color name="theme_yellow">#FED700</color>
     <color name="pressed_gay">#C0C0C0</color>
 </resources>

@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wj.base.utils.ScreenUtils;
+
 /**
  * Created by wj on 2018/3/6.
  * ListView、RecyclerView右侧索引栏目
@@ -47,7 +49,7 @@ public class ListIndexView extends View {
     private void initPaint() {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setTextSize(24);
+        mPaint.setTextSize(ScreenUtils.dp2px(12f));
     }
 
     public void setTextViewDialog(TextView textViewDialog) {
@@ -88,7 +90,7 @@ public class ListIndexView extends View {
                     break;
 
                 default:
-                    setBackgroundColor(Color.parseColor("#cccccc"));
+                    setBackgroundColor(Color.parseColor("#40000000"));
                     if (currentPosition > -1 && currentPosition < array.length) {
                         if (textViewDialog != null) {
                             textViewDialog.setVisibility(View.VISIBLE);

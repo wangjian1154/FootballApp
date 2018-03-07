@@ -17,7 +17,6 @@ import java.util.List;
 public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder> implements SectionIndexer {
 
     private List<LinkmanBean> list;
-    private int selectionPos = -1;
 
     public LinkmanAdapter(List<LinkmanBean> data) {
         super(R.layout.item_list_linkman, data);
@@ -53,10 +52,6 @@ public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder
             return list.get(position).getFirstLetter().charAt(0);
         }
         return 0;
-    }
-
-    public void setSelection(int selectionPos) {
-        this.selectionPos = selectionPos;
     }
 
 }

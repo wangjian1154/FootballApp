@@ -79,6 +79,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         recyclerView.setLayoutManager(manager);
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration
                 .Builder(getActivity())
+                .size(1)
                 .colorResId(R.color.decoration_color)
                 .build());
         adapter = new TopNewsAdapter(posts);
