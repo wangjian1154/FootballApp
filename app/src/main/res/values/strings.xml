@@ -1,6 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">死磕足球</string>
-    <string name="string_exit">再按一次退出</string>
-    <string name="discussion_now">正在热议</string>
-    <string name="tribe_hot_value">%s热度</string>
+	<string name="app_name">死磕足球</string>
+	<string name="string_exit">再按一次退出</string>
+	<string name="discussion_now">正在热议</string>
+	<string name="tribe_hot_value">%s热度</string>
+	<string name="stringValue1">首页</string>
+	<string name="stringValue2">部落</string>
+	<string name="stringValue3">赛事</string>
+	<string name="stringValue4">数据</string>
+	<string name="stringValue5">我的</string>
 </resources>

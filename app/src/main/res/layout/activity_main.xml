@@ -2,30 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/page_bg">
 
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_weight="1"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_size_1"
-        android:background="@color/main_bottom_line" />
+        android:background="@color/main_bottom_line"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/widget_size_1"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <RelativeLayout
             android:id="@+id/rl_tab_home"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingBottom="@dimen/widget_size_3">
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_3"
-                android:src="@drawable/selector_tab_home" />
+                android:src="@drawable/selector_tab_home"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,14 +44,14 @@
                 android:layout_below="@+id/iv_tab_home"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_1"
-                android:text="首页"
+                android:textSize="@dimen/font_size_14"
                 android:textColor="@drawable/selector_tab_text"
-                android:textSize="@dimen/font_size_14" />
+                android:text="@string/stringValue1"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_tab_tribe"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_3"
-                android:src="@drawable/selector_tab_tribe" />
+                android:src="@drawable/selector_tab_tribe"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,14 +69,14 @@
                 android:layout_below="@+id/iv_tab_tribe"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_1"
-                android:text="部落"
+                android:textSize="@dimen/font_size_14"
                 android:textColor="@drawable/selector_tab_text"
-                android:textSize="@dimen/font_size_14" />
+                android:text="@string/stringValue2"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_tab_match"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingBottom="@dimen/widget_size_3">
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_3"
-                android:src="@drawable/selector_tab_match" />
+                android:src="@drawable/selector_tab_match"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,14 +95,14 @@
                 android:layout_below="@+id/iv_tab_match"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_1"
-                android:text="赛事"
+                android:textSize="@dimen/font_size_14"
                 android:textColor="@drawable/selector_tab_text"
-                android:textSize="@dimen/font_size_14" />
+                android:text="@string/stringValue3"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_tab_data"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingBottom="@dimen/widget_size_3">
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_3"
-                android:src="@drawable/selector_tab_data" />
+                android:src="@drawable/selector_tab_data"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,14 +121,14 @@
                 android:layout_below="@+id/iv_tab_date"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_1"
-                android:text="数据"
+                android:textSize="@dimen/font_size_14"
                 android:textColor="@drawable/selector_tab_text"
-                android:textSize="@dimen/font_size_14" />
+                android:text="@string/stringValue4"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_tab_mine"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingBottom="@dimen/widget_size_3">
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_3"
-                android:src="@drawable/selector_tab_mine" />
+                android:src="@drawable/selector_tab_mine"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,9 +147,9 @@
                 android:layout_below="@+id/iv_tab_mine"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/widget_size_1"
-                android:text="我的"
+                android:textSize="@dimen/font_size_14"
                 android:textColor="@drawable/selector_tab_text"
-                android:textSize="@dimen/font_size_14" />
+                android:text="@string/stringValue5"/>
         </RelativeLayout>
 
     </LinearLayout>
