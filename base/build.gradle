@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -12,17 +13,11 @@ android {
 
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -91,13 +86,12 @@ dependencies {
     api rootProject.ext.dependencies["circleimageview"]
     implementation rootProject.ext.dependencies["photoview"]
     api rootProject.ext.dependencies["rxpermissions2"]
-    api (rootProject.ext.dependencies["recyclerview-animators"]){
+    api(rootProject.ext.dependencies["recyclerview-animators"]) {
         exclude group: 'com.android.support'
     }
-    implementation (rootProject.ext.dependencies["material-dialogs"]){
+    implementation(rootProject.ext.dependencies["material-dialogs"]) {
         exclude module: 'recyclerview-v7'
         exclude module: 'appcompat-v7'
     }
     api rootProject.ext.dependencies["pinyin4j"]
-
 }

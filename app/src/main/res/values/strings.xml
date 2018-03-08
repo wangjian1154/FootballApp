@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseUtils</string>
+    <string name="app_name">死磕足球</string>
     <string name="string_exit">再按一次退出</string>
     <string name="discussion_now">正在热议</string>
     <string name="tribe_hot_value">%s热度</string>

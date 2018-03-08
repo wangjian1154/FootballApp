@@ -74,7 +74,6 @@ public class SplashActivity extends SimpleActivity {
         splashImg.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-
         dynamicChangeLogo();
     }
 

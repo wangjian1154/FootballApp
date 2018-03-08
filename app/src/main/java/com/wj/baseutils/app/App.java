@@ -3,6 +3,7 @@ package com.wj.baseutils.app;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -55,5 +56,12 @@ public class App extends Application {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }
