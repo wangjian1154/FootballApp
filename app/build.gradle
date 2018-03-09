@@ -29,18 +29,6 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled true
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), project.file('proguard-rules.pro')
-        }
-        debug {
-            debuggable true
-            minifyEnabled false
-            signingConfig signingConfigs.debug
-        }
-    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

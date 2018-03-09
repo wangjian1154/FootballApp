@@ -41,6 +41,7 @@
             </intent-filter>
         </activity-alias>
 
+        <meta-data android:name="TINKER_ID" android:value="0b50b18a7352ad05"/>
     </application>
 
 </manifest>
