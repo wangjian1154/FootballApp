@@ -74,11 +74,13 @@ public class SplashActivity extends SimpleActivity {
         splashImg.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        dynamicChangeLogo();
+//        dynamicChangeLogo();
     }
 
     /**
      * 动态改变Icon，奇数天显示正常icon。偶数天显示双11的icon
+     * 代码改变几乎没什么卵用，天猫京东估计是热修复改变的
+     *
      */
     private void dynamicChangeLogo() {
         ComponentName mDefault = getComponentName();

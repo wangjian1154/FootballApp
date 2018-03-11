@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wj.base.base.SimpleFragment;
+import com.wj.base.utils.NumAnim;
 import com.wj.base.utils.PinyinUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.ListIndexView;
@@ -37,6 +38,8 @@ public class DataFragment extends SimpleFragment {
     TextView tvListInCenter;
     @BindView(R.id.liv)
     ListIndexView listIndexView;
+    @BindView(R.id.tv_money_value)
+    TextView tvMoneyValue;
     private List<LinkmanBean> list;
     private LinkmanAdapter adapter;
     private String[] names = {"张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
@@ -125,6 +128,14 @@ public class DataFragment extends SimpleFragment {
             }
         });
 
+        NumAnim.startAnim(tvMoneyValue,9890.00f);
+
+        tvMoneyValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NumAnim.startAnim(tvMoneyValue,9890.00f);
+            }
+        });
     }
 
     @Override

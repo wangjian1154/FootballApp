@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_bg">
+    android:background="@color/page_bg"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.wj.base.views.ListIndexView
-        android:id="@+id/liv"
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true" />
-
-    <TextView
-        android:id="@+id/show_list_in_center"
-        android:layout_width="@dimen/widget_size_80"
-        android:layout_height="@dimen/widget_size_80"
-        android:layout_centerInParent="true"
-        android:background="@drawable/shape_fillet_translucent"
+        android:layout_height="@dimen/widget_size_40"
+        android:background="@color/theme_yellow"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_35"
-        android:visibility="gone" />
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_money_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.wj.base.views.ListIndexView
+            android:id="@+id/liv"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:id="@+id/show_list_in_center"
+            android:layout_width="@dimen/widget_size_80"
+            android:layout_height="@dimen/widget_size_80"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_fillet_translucent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_35"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>
