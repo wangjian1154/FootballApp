@@ -21,6 +21,7 @@ import java.util.List;
 public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder> implements SectionIndexer {
 
     private List<LinkmanBean> list;
+    private OnItemClickListener onItemClickListener;
 
     public LinkmanAdapter(@Nullable List<LinkmanBean> data) {
         super(R.layout.item_list_linkman, data);
@@ -48,6 +49,12 @@ public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder
                 tvTitle.setVisibility(View.VISIBLE);
             }
         }
+
+        helper.getView(R.id.ll_item).setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(LinkmanAdapter.this, v, helper.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -75,4 +82,8 @@ public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder
         return 0;
     }
 
+    @Override
+    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
 }

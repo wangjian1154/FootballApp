@@ -1,12 +1,12 @@
 package com.wj.baseutils.bean;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import java.io.Serializable;
 
 /**
  * Created by wj on 2018/3/6.
  */
 
-public class LinkmanBean implements MultiItemEntity {
+public class LinkmanBean implements Serializable {
 
     public static final int TYPE_TITLE = 0;
     public static final int TYPE_NORMAL = 1;
@@ -32,7 +32,6 @@ public class LinkmanBean implements MultiItemEntity {
         this.firstLetter = firstLetter;
     }
 
-    @Override
     public int getItemType() {
         return itemType;
     }

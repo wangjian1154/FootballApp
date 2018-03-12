@@ -17,6 +17,7 @@ import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.LinkmanAdapter;
 import com.wj.baseutils.bean.LinkmanBean;
+import com.wj.baseutils.ui.activity.LinkmanDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,7 +87,10 @@ public class DataFragment extends SimpleFragment {
             }
         });
 
-        adapter.setOnItemClickListener((adapter, view, position) -> ToastUtils.showShort(list.get(position).name));
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            LinkmanBean linkmanBean = list.get(position);
+            LinkmanDetailActivity.show(getContext(),linkmanBean);
+        });
     }
 
     private void initData() {
@@ -108,23 +112,20 @@ public class DataFragment extends SimpleFragment {
             }
         }
 
-        Collections.sort(list, new Comparator<LinkmanBean>() {
-            @Override
-            public int compare(LinkmanBean lhs, LinkmanBean rhs) {
+        Collections.sort(list, (lhs, rhs) -> {
 
-                if (lhs.getFirstLetter() != null) {
-                    if (lhs.getFirstLetter().contains("#")) {
-                        return 1;
-                    } else if (rhs.getFirstLetter().contains("#")) {
-                        return -1;
-                    } else {
-                        return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
-                    }
-                } else {
+            if (lhs.getFirstLetter() != null) {
+                if (lhs.getFirstLetter().contains("#")) {
+                    return 1;
+                } else if (rhs.getFirstLetter().contains("#")) {
                     return -1;
+                } else {
+                    return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
                 }
-
+            } else {
+                return -1;
             }
+
         });
 
         NumAnim.startAnim(tvMoneyValue, 9890.00f);
