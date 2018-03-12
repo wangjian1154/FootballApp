@@ -7,6 +7,7 @@ import java.util.Random;
 
 /**
  * Created by wj on 2018/3/11.
+ * 数字滚动动画
  */
 
 public class NumAnim {

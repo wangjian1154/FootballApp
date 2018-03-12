@@ -4,22 +4,59 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="80dp">
+        android:layout_height="wrap_content"
+        android:background="@color/page_bg"
+        android:clickable="false"
+        android:paddingBottom="@dimen/widget_size_10"
+        android:paddingLeft="@dimen/widget_size_15"
+        android:paddingTop="@dimen/widget_size_10">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/font_gay"
+            android:textSize="@dimen/widget_size_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/widget_size_10"
+        android:paddingLeft="@dimen/widget_size_15"
+        android:paddingRight="@dimen/widget_size_10"
+        android:paddingTop="@dimen/widget_size_10">
+
+        <ImageView
+            android:layout_width="@dimen/widget_size_49"
+            android:layout_height="@dimen/widget_size_49"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/widget_size_10"
             android:gravity="center"
-            android:textSize="@dimen/font_size_20" />
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_18" />
 
-    </RelativeLayout>
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/decoration_color"/>
+        android:background="@color/decoration_color" />
 
 </LinearLayout>

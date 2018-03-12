@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -64,13 +65,10 @@ public class DataFragment extends SimpleFragment {
     }
 
     private void initEvent() {
-        listIndexView.setUpdateListView(new ListIndexView.UpdateListView() {
-            @Override
-            public void updateListView(String currentChar) {
-                int positionForSection = adapter.getPositionForSection(currentChar.charAt(0));
-                if (positionForSection >= 0 && positionForSection < list.size()) {
-                    recyclerView.smoothScrollToPosition(positionForSection);
-                }
+        listIndexView.setUpdateListView(currentChar -> {
+            int positionForSection = adapter.getPositionForSection(currentChar.charAt(0));
+            if (positionForSection >= 0 && positionForSection < list.size()) {
+                recyclerView.smoothScrollToPosition(positionForSection);
             }
         });
 
@@ -88,12 +86,7 @@ public class DataFragment extends SimpleFragment {
             }
         });
 
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showShort(list.get(position).name);
-            }
-        });
+        adapter.setOnItemClickListener((adapter, view, position) -> ToastUtils.showShort(list.get(position).name));
     }
 
     private void initData() {
@@ -118,24 +111,25 @@ public class DataFragment extends SimpleFragment {
         Collections.sort(list, new Comparator<LinkmanBean>() {
             @Override
             public int compare(LinkmanBean lhs, LinkmanBean rhs) {
-                if (lhs.getFirstLetter().contains("#")) {
-                    return 1;
-                } else if (rhs.getFirstLetter().contains("#")) {
-                    return -1;
+
+                if (lhs.getFirstLetter() != null) {
+                    if (lhs.getFirstLetter().contains("#")) {
+                        return 1;
+                    } else if (rhs.getFirstLetter().contains("#")) {
+                        return -1;
+                    } else {
+                        return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
+                    }
                 } else {
-                    return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
+                    return -1;
                 }
+
             }
         });
 
-        NumAnim.startAnim(tvMoneyValue,9890.00f);
+        NumAnim.startAnim(tvMoneyValue, 9890.00f);
 
-        tvMoneyValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NumAnim.startAnim(tvMoneyValue,9890.00f);
-            }
-        });
+        tvMoneyValue.setOnClickListener(view -> NumAnim.startAnim(tvMoneyValue, 9890.00f));
     }
 
     @Override

@@ -1,8 +1,12 @@
 package com.wj.baseutils.adapter;
 
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wj.baseutils.R;
@@ -18,7 +22,7 @@ public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder
 
     private List<LinkmanBean> list;
 
-    public LinkmanAdapter(List<LinkmanBean> data) {
+    public LinkmanAdapter(@Nullable List<LinkmanBean> data) {
         super(R.layout.item_list_linkman, data);
         this.list = data;
     }
@@ -26,7 +30,24 @@ public class LinkmanAdapter extends BaseQuickAdapter<LinkmanBean, BaseViewHolder
     @Override
     protected void convert(BaseViewHolder helper, LinkmanBean item) {
         TextView tvName = helper.getView(R.id.tv_name);
+        LinearLayout llTitle = helper.getView(R.id.ll_title);
+        TextView tvTitle = helper.getView(R.id.tv_title);
         tvName.setText(item.name);
+
+        tvTitle.setText(item.getFirstLetter());
+        if (helper.getAdapterPosition() == 0) {
+            llTitle.setVisibility(View.VISIBLE);
+            tvTitle.setVisibility(View.VISIBLE);
+        } else {
+            String firstLetter = list.get(helper.getAdapterPosition() - 1).getFirstLetter();
+            if (item.getFirstLetter().equals(firstLetter)) {
+                llTitle.setVisibility(View.GONE);
+                tvTitle.setVisibility(View.GONE);
+            } else {
+                llTitle.setVisibility(View.VISIBLE);
+                tvTitle.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
