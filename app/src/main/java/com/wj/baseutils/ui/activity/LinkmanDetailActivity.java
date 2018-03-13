@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import com.wj.base.base.SimpleActivity;
 import com.wj.base.data.Constants;
+import com.wj.base.utils.NoFastClickUtils;
 import com.wj.base.utils.SpanUtils;
 import com.wj.base.views.TitleBar;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.LinkmanBean;
+import com.wj.baseutils.widget.dialog.LinkmanBottomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +57,14 @@ public class LinkmanDetailActivity extends SimpleActivity {
             startActivity(intent1);
         });
 
-        layTitle.setBackOnClickListenner(v -> finish());
+        layTitle.setBackButton(v -> finish());
+
+        layTitle.setRightImgButton(R.drawable.ic_more, v -> {
+            if (!NoFastClickUtils.isDoubleClick()) {
+                LinkmanBottomDialog dialog = new LinkmanBottomDialog(LinkmanDetailActivity.this);
+                dialog.show();
+            }
+        });
     }
 
     @Override

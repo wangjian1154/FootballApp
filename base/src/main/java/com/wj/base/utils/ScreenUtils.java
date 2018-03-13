@@ -1,5 +1,7 @@
 package com.wj.base.utils;
 
+import android.content.Context;
+
 import com.wj.base.Initialization;
 
 /**
@@ -7,6 +9,17 @@ import com.wj.base.Initialization;
  */
 
 public class ScreenUtils {
+
+    public static final int getHeightInPx(Context context) {
+        final int height = context.getResources().getDisplayMetrics().heightPixels;
+        return height;
+    }
+
+    public static final int getWidthInPx(Context context) {
+        final int width = context.getResources().getDisplayMetrics().widthPixels;
+        return width;
+    }
+
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)

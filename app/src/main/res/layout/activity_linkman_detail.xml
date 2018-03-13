@@ -7,7 +7,7 @@
 
     <com.wj.base.views.TitleBar
         android:id="@+id/lay_title"
-        android:background="@color/white"
+        android:background="@color/theme_yellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
