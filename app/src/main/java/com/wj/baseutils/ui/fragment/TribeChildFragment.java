@@ -65,16 +65,13 @@ public class TribeChildFragment extends BaseFragment<TribeChildPresenterImpl, Tr
     }
 
     private void initEvent() {
-        typeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                list.clear();
-                typeAdapter.setSelection(position);
-                if (categoryGroupsMap != null) {
-                    list.addAll(categoryGroupsMap.get(keyList.get(position)));
-                }
-                mAdapter.notifyDataSetChanged();
+        typeAdapter.setOnItemClickListener((adapter, view, position) -> {
+            list.clear();
+            typeAdapter.setSelection(position);
+            if (categoryGroupsMap != null) {
+                list.addAll(categoryGroupsMap.get(keyList.get(position)));
             }
+            mAdapter.notifyDataSetChanged();
         });
     }
 

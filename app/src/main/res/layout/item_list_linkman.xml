@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="@drawable/btn_selector_white_bg"
         android:paddingBottom="@dimen/widget_size_10"
         android:paddingLeft="@dimen/widget_size_15"
         android:paddingRight="@dimen/widget_size_10"

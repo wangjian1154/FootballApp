@@ -15,4 +15,5 @@
     <color name="decoration_color">#889f9f9f</color>
     <color name="theme_yellow">#FED700</color>
     <color name="pressed_gay">#C0C0C0</color>
+    <color name="color_text_bg">#05000000</color>
 </resources>

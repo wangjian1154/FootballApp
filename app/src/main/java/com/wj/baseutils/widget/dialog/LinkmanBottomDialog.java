@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.wj.base.utils.AnimationUtils;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.baseutils.R;
 
@@ -44,6 +45,7 @@ public class LinkmanBottomDialog extends Dialog {
         Window window = getWindow();
         window.setGravity(Gravity.BOTTOM);
         window.setLayout(ScreenUtils.getWidthInPx(getContext()), ScreenUtils.getHeightInPx(getContext()) * 2 / 5);
+        window.setWindowAnimations(R.style.dialog_anim_bottom_2_top);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
@@ -66,6 +68,7 @@ public class LinkmanBottomDialog extends Dialog {
 
             }
         });
+
     }
 
     class ListAdapter extends BaseQuickAdapter<MenuBean, BaseViewHolder> {
