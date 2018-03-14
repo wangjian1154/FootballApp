@@ -3,15 +3,18 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.NumAnim;
 import com.wj.base.utils.PinyinUtils;
+import com.wj.base.utils.StringUtils;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
@@ -42,26 +45,35 @@ public class DataFragment extends SimpleFragment {
     ListIndexView listIndexView;
     @BindView(R.id.tv_money_value)
     TextView tvMoneyValue;
+    @BindView(R.id.smart_layout)
+    SmartRefreshLayout smartRefreshLayout;
     private List<LinkmanBean> list;
     private LinkmanAdapter adapter;
-    private String[] names = {"张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
+    private String[] names = {"", "张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
             "朱桢", "薛之谦", "汪涵", "谢娜", "何炅", "苏菲儿", "陈一发", "冯提莫", "胡发", "黄磊", "雷军", "任正飞"
             , "杨过", "罗欧赔", "齐秦", "谢霆锋", "鹿晗", "迪丽热巴", "王嘉尔", "魏大勋", "黄渤", "孙红雷", "罗志祥"
             , "王迅", "杨洋", "张艺兴", "巴宝莉", "奥尼尔", "科比", "Angele Baby", "刘亦菲", "罗永浩", "马云", "马化腾", "丁磊", "周鸿祎"
             , "贾跃亭", "居里夫人", "张杰", "陈旭", "魏晨", "何炅", "杜海涛", "张国荣", "周杰伦", "陈奕迅", "宋冬野", "赵雷",
             "张靓颖", "张惠妹", "梁静茹", "孙燕姿", "李宇春", "陈伟霆", "潘长江", "Ac Fun", "BBQ"};
+    private TextView tvTotalNum;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
 
         initData();
 
+        smartRefreshLayout.setEnableRefresh(false);
+        smartRefreshLayout.setEnableLoadmore(false);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new LinkmanAdapter(list);
         recyclerView.setAdapter(adapter);
         listIndexView.setTextViewDialog(tvListInCenter);
 
+        View footerView = LayoutInflater.from(getContext()).inflate(R.layout.item_bottom_linkman_list, null);
+        tvTotalNum = footerView.findViewById(R.id.tv_num_linkman);
+        tvTotalNum.setText(String.format(getActivity().getResources().getString(R.string.total_linkman),names.length + ""));
+        adapter.addFooterView(footerView);
         initEvent();
     }
 
@@ -89,7 +101,7 @@ public class DataFragment extends SimpleFragment {
 
         adapter.setOnItemClickListener((adapter, view, position) -> {
             LinkmanBean linkmanBean = list.get(position);
-            LinkmanDetailActivity.show(getContext(),linkmanBean);
+            LinkmanDetailActivity.show(getContext(), linkmanBean);
         });
     }
 
@@ -103,7 +115,7 @@ public class DataFragment extends SimpleFragment {
             list.add(user);
             String convert = PinyinUtils.getInstance().getPinyin(user.name).toUpperCase();
             user.setPinyin(convert);
-            String substring = convert.substring(0, 1);
+            String substring = StringUtils.isEmpty(convert) ? "" : convert.substring(0, 1);
 
             if (substring.matches("[A-Z]")) {
                 user.setFirstLetter(substring);

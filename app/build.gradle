@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'FootballApp'
             keyPassword '123456'
-            storeFile file('F:/GitHubCode/FootballApp/FootbalApp.jks')
+            storeFile file('FootbalApp.jks')
             storePassword '123456'
         }
         debug {
@@ -438,5 +438,5 @@ dependencies {
     //optional, help to generate the final application
     annotationProcessor('com.tencent.tinker:tinker-android-anno:1.9.2')
     //tinker's main Android lib
-    compile('com.tencent.tinker:tinker-android-lib:1.9.2')
+    compile 'com.tencent.tinker:tinker-android-lib:1.9.2'
 }

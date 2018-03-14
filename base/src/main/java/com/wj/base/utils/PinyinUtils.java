@@ -165,21 +165,26 @@ public class PinyinUtils {
      * 词组解析 * * @param chs * @return
      */
     public String getPinyin(String chs) {
-        String key, value;
-        buffer = new StringBuilder();
-        for (int i = 0; i < chs.length(); i++) {
-            key = chs.substring(i, i + 1);
-            if (key.getBytes().length >= 2) {
-                value = (String) convert(key);
-                if (value == null) {
-                    value = "unknown";
+        if (!StringUtils.isEmpty(chs)){
+            String key, value;
+            buffer = new StringBuilder();
+            for (int i = 0; i < chs.length(); i++) {
+                key = chs.substring(i, i + 1);
+                if (key.getBytes().length >= 2) {
+                    value = (String) convert(key);
+                    if (value == null) {
+                        value = "unknown";
+                    }
+                } else {
+                    value = key;
                 }
-            } else {
-                value = key;
+                buffer.append(value);
             }
-            buffer.append(value);
+            return buffer.toString();
+        }else {
+            return "";
         }
-        return buffer.toString();
+
     }
 
     public String getSpelling() {

@@ -9,4 +9,5 @@
     <string name="stringValue3">赛事</string>
     <string name="stringValue4">数据</string>
     <string name="stringValue5">我的</string>
+    <string name="total_linkman">%s位联系人</string>
 </resources>
