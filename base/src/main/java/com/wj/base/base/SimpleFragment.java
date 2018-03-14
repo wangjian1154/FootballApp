@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wj.base.utils.HandleBackUtil;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;

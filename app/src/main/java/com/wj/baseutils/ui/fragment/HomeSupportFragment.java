@@ -2,9 +2,12 @@ package com.wj.baseutils.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -62,11 +65,6 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         mPresenter.loadData(true, key, "");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
     private void initView() {
         Bundle bundle = getArguments();
         key = bundle.getString(Constants.Key.KEY);
@@ -93,19 +91,9 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         layBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         layBanner.setIndicatorGravity(BannerConfig.LEFT);
 
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.loadData(true, key, "");
-            }
-        });
+        smartRefreshLayout.setOnRefreshListener(refreshlayout -> mPresenter.loadData(true, key, ""));
 
-        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                loadMore(false);
-            }
-        });
+        smartRefreshLayout.setOnLoadmoreListener(refreshlayout -> loadMore(false));
     }
 
     private void loadMore(boolean isRefresh) {

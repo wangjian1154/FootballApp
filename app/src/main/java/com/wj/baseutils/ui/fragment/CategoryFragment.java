@@ -78,23 +78,20 @@ public class CategoryFragment extends BaseFragment<CategoryPresenterImpl, Catego
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(new ItemDragHelperCallBack(
-                new ItemDragHelperCallBack.OnChannelDragListener() {
-                    @Override
-                    public void onItemMove(int starPos, int endPos) {
-                        Collections.swap(tagList, starPos, endPos);
-                        Collections.swap(HomeFragment.fragments, starPos, endPos);
-                        adapter.notifyItemMoved(starPos, endPos);
-                        if (onCategoryChangeCallback != null) {
-                            for (int i = 0; i < tagList.size(); i++) {
-                                if (tagList.get(i).name.equals(selectCategory)) {
-                                    selectPosition = i;
-                                    break;
-                                }
+                (starPos, endPos) -> {
+                    Collections.swap(tagList, starPos, endPos);
+                    Collections.swap(HomeFragment.fragments, starPos, endPos);
+                    adapter.notifyItemMoved(starPos, endPos);
+                    if (onCategoryChangeCallback != null) {
+                        for (int i = 0; i < tagList.size(); i++) {
+                            if (tagList.get(i).name.equals(selectCategory)) {
+                                selectPosition = i;
+                                break;
                             }
-
                         }
-                        SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY, tagList);
+
                     }
+                    SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_CATEGORY, tagList);
                 }));
 
         helper.attachToRecyclerView(recyclerView);

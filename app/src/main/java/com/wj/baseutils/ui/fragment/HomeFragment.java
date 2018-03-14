@@ -1,7 +1,5 @@
 package com.wj.baseutils.ui.fragment;
 
-import android.content.ComponentName;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.data.Constants;
+import com.wj.base.utils.NoFastClickUtils;
 import com.wj.base.utils.SPUtils;
 import com.wj.base.utils.ScreenUtils;
 import com.wj.base.utils.ToastUtils;
@@ -45,7 +44,7 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
     ViewPager viewPager;
 
     private List<HomeTagBean.DataBean> tagList;
-    public static List<Fragment> fragments;
+    public static List<SimpleFragment> fragments;
     private TagPagerAdapter tabAdapter;
     private HomeTagBean tagBean;
     private CategoryFragment categoryFragment;
@@ -70,14 +69,9 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
         tagList = new ArrayList<>();
         fragments = new ArrayList<>();
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                tabLayout.setTabPaddingLeftAndRight(
-                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)),
-                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)));
-            }
-        });
+        tabLayout.post(() -> tabLayout.setTabPaddingLeftAndRight(
+                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)),
+                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4))));
         tagStrList = new ArrayList<>();
         tabAdapter = new TagPagerAdapter(getChildFragmentManager(), fragments, setTagStrList(tagList));
         viewPager.setAdapter(tabAdapter);
@@ -142,19 +136,17 @@ public class HomeFragment extends BaseFragment<HomePresenterImpl, HomeModelImpl>
 
     @OnClick(R.id.ll_change_tag)
     public void changeTag() {
-        if (tagBean != null) {
+        if (tagBean != null && !NoFastClickUtils.isDoubleClick()) {
             FragmentManager fm = getChildFragmentManager();
-            categoryFragment = new CategoryFragment(new OnCategoryChangeCallback() {
-                @Override
-                public void onCategoryChange(List<HomeTagBean.DataBean> tagList, int selectPosition) {
-                    tagBean.data = tagList;
-                    tagStrList.addAll(setTagStrList(tagList));
-                    viewPager.setCurrentItem(selectPosition);
-                    tabAdapter.notifyDataSetChanged();
-                    viewPager.setOffscreenPageLimit(tagList.size());
-                    EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
-                            Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
-                }
+            categoryFragment = new CategoryFragment((tagList, selectPosition) -> {
+                tagBean.data = tagList;
+                tagStrList.addAll(setTagStrList(tagList));
+                viewPager.setCurrentItem(selectPosition);
+                tabAdapter.notifyDataSetChanged();
+                viewPager.setOffscreenPageLimit(tagList.size());
+                EventBus.getDefault().post(new Handler(Looper.getMainLooper()).obtainMessage(
+                        Constants.Key_EventBus_Msg.CATEGORY_CHANGE));
+
             });
             Bundle bundle = new Bundle();
             bundle.putSerializable(CategoryFragment.KEY, tagBean);

@@ -3,9 +3,12 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.ScreenUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.tablayout.ColorTrackTabLayout;
 import com.wj.baseutils.R;
 import com.wj.base.data.Constants;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by wj on 2018/1/11.
@@ -27,24 +31,18 @@ public class TribeFragment extends SimpleFragment {
     ColorTrackTabLayout tabLayout;
     @BindView(R.id.vp_tribe)
     ViewPager viewPager;
-
     private String titles[] = {Constants.TribeCategory.TITLE_RECOMMEND,
             Constants.TribeCategory.TITLE_NEW, Constants.TribeCategory.TITLE_TRIBE};
-    private List<Fragment> fragments;
+    private List<SimpleFragment> fragments;
     private TagPagerAdapter tagPagerAdapter;
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
         fragments = new ArrayList<>();
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                tabLayout.setTabPaddingLeftAndRight(
-                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)),
-                        ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)));
-            }
-        });
+        tabLayout.post(() -> tabLayout.setTabPaddingLeftAndRight(
+                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4)),
+                ScreenUtils.dp2px(getResources().getDimension(R.dimen.widget_size_4))));
 
         TribeRecommendFragment recommendFragment = new TribeRecommendFragment();
         TribeNewestFragment newestFragment = new TribeNewestFragment();
@@ -58,6 +56,7 @@ public class TribeFragment extends SimpleFragment {
         viewPager.setAdapter(tagPagerAdapter);
         viewPager.setOffscreenPageLimit(3);
     }
+
 
     @Override
     protected int getLayoutId() {

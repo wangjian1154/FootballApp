@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
+import com.wj.base.base.SimpleFragment;
 import com.wj.baseutils.bean.HomeTagBean;
 
 import java.util.ArrayList;
@@ -16,16 +17,16 @@ import java.util.List;
 
 public class TagPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<Fragment> fragments;
+    private List<SimpleFragment> fragments;
     private List<String> list;
 
-    public TagPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> list) {
+    public TagPagerAdapter(FragmentManager fm, List<SimpleFragment> fragments, List<String> list) {
         super(fm);
         this.fragments = fragments;
         this.list = list;
     }
 
-    public TagPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] tags) {
+    public TagPagerAdapter(FragmentManager fm, List<SimpleFragment> fragments, String[] tags) {
         super(fm);
         List<String> list = new ArrayList<>();
         for (int i = 0; i < tags.length; i++) {

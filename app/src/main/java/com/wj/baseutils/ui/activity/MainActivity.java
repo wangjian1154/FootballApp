@@ -83,30 +83,27 @@ public class MainActivity extends BaseActivity {
 
         mTabFragmentAdapter = new BaseTabFragmentAdapter(getSupportFragmentManager(), R.id.fl_content,
                 homeFragment, tribeFragment, matchFragment, dataFragment, mineFragment);
-        mTabFragmentAdapter.setonPageChagedListener(new BaseTabFragmentAdapter.OnPageChangedListener() {
-            @Override
-            public void onPageChanged(int showIndex) {
-                switch (showIndex) {
-                    case 0:
-                        onTabChecked(R.id.rl_tab_home);
-                        break;
+        mTabFragmentAdapter.setonPageChagedListener(showIndex -> {
+            switch (showIndex) {
+                case 0:
+                    onTabChecked(R.id.rl_tab_home);
+                    break;
 
-                    case 1:
-                        onTabChecked(R.id.rl_tab_tribe);
-                        break;
+                case 1:
+                    onTabChecked(R.id.rl_tab_tribe);
+                    break;
 
-                    case 2:
-                        onTabChecked(R.id.rl_tab_match);
-                        break;
+                case 2:
+                    onTabChecked(R.id.rl_tab_match);
+                    break;
 
-                    case 3:
-                        onTabChecked(R.id.rl_tab_data);
-                        break;
+                case 3:
+                    onTabChecked(R.id.rl_tab_data);
+                    break;
 
-                    case 4:
-                        onTabChecked(R.id.rl_tab_mine);
-                        break;
-                }
+                case 4:
+                    onTabChecked(R.id.rl_tab_mine);
+                    break;
             }
         });
 
