@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,8 +44,6 @@ public class DataFragment extends SimpleFragment {
     TextView tvListInCenter;
     @BindView(R.id.liv)
     ListIndexView listIndexView;
-    @BindView(R.id.tv_money_value)
-    TextView tvMoneyValue;
     @BindView(R.id.smart_layout)
     SmartRefreshLayout smartRefreshLayout;
     private List<LinkmanBean> list;
@@ -72,7 +71,7 @@ public class DataFragment extends SimpleFragment {
 
         View footerView = LayoutInflater.from(getContext()).inflate(R.layout.item_bottom_linkman_list, null);
         tvTotalNum = footerView.findViewById(R.id.tv_num_linkman);
-        tvTotalNum.setText(String.format(getActivity().getResources().getString(R.string.total_linkman),names.length + ""));
+        tvTotalNum.setText(String.format(getActivity().getResources().getString(R.string.total_linkman), names.length + ""));
         adapter.addFooterView(footerView);
         initEvent();
     }
@@ -140,9 +139,6 @@ public class DataFragment extends SimpleFragment {
 
         });
 
-        NumAnim.startAnim(tvMoneyValue, 9890.00f);
-
-        tvMoneyValue.setOnClickListener(view -> NumAnim.startAnim(tvMoneyValue, 9890.00f));
     }
 
     @Override
