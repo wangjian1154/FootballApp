@@ -82,12 +82,7 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
             }
         });
 
-        smartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                loadMore(false);
-            }
-        });
+        smartRefreshLayout.setOnLoadmoreListener(refreshlayout -> loadMore(false));
     }
 
     private void loadMore(boolean isRefresh) {
@@ -123,8 +118,9 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
         super.onEventMainThread(msg);
         switch (msg.what) {
             case Constants.Key_EventBus_Msg.CATEGORY_CHANGE:
-                if (mPresenter != null)
+                if (isVisible()){
                     mPresenter.loadData(true, key, "");
+                }
                 break;
         }
     }

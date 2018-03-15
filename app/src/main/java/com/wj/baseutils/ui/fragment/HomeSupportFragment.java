@@ -183,8 +183,9 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         super.onEventMainThread(msg);
         switch (msg.what) {
             case Constants.Key_EventBus_Msg.CATEGORY_CHANGE:
-                if (mPresenter != null)
+                if (isVisible()){
                     mPresenter.loadData(true, key, "");
+                }
                 break;
         }
     }
