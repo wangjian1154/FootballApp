@@ -5,18 +5,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wj.base.base.SimpleFragment;
-import com.wj.base.utils.NumAnim;
 import com.wj.base.utils.PinyinUtils;
 import com.wj.base.utils.StringUtils;
-import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.LinkmanAdapter;
@@ -25,7 +19,6 @@ import com.wj.baseutils.ui.activity.LinkmanDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,6 +54,12 @@ public class DataFragment extends SimpleFragment {
 
         initData();
 
+        initView();
+
+        initEvent();
+    }
+
+    private void initView() {
         smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setEnableLoadmore(false);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -73,7 +72,7 @@ public class DataFragment extends SimpleFragment {
         tvTotalNum = footerView.findViewById(R.id.tv_num_linkman);
         tvTotalNum.setText(String.format(getActivity().getResources().getString(R.string.total_linkman), names.length + ""));
         adapter.addFooterView(footerView);
-        initEvent();
+
     }
 
     private void initEvent() {
