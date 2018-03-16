@@ -3,13 +3,21 @@ package com.wj.baseutils.ui.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.wj.base.base.SimpleActivity;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.PinyinUtils;
 import com.wj.base.utils.StringUtils;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.ListIndexView;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.LinkmanAdapter;
@@ -36,6 +44,10 @@ public class DataFragment extends SimpleFragment {
     TextView tvListInCenter;
     @BindView(R.id.liv)
     ListIndexView listIndexView;
+    @BindView(R.id.search_view)
+    MaterialSearchView searchView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private List<LinkmanBean> list;
     private LinkmanAdapter adapter;
     private String[] names = {"", "张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
@@ -57,6 +69,10 @@ public class DataFragment extends SimpleFragment {
     }
 
     private void initView() {
+//
+        ((SimpleActivity) getActivity()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
+
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new LinkmanAdapter(list);
@@ -67,7 +83,6 @@ public class DataFragment extends SimpleFragment {
         tvTotalNum = footerView.findViewById(R.id.tv_num_linkman);
         tvTotalNum.setText(String.format(getActivity().getResources().getString(R.string.total_linkman), names.length + ""));
         adapter.addFooterView(footerView);
-
     }
 
     private void initEvent() {
@@ -97,6 +112,37 @@ public class DataFragment extends SimpleFragment {
             LinkmanDetailActivity.show(getContext(), linkmanBean);
         });
 
+        searchView.setVoiceSearch(false);
+        searchView.setEllipsize(true);
+        searchView.setHint(getResources().getString(R.string.linkman_search_hint));
+        searchView.setSuggestions(names);
+        searchView.setOnItemClickListener((parent, view, position, id) -> {
+            
+        });
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                return false;
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if (searchView.isSearchOpen()) {
+            searchView.closeSearch();
+            return true;
+        } else {
+            return super.onBackPressed();
+        }
     }
 
     private void initData() {
@@ -134,6 +180,14 @@ public class DataFragment extends SimpleFragment {
 
         });
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_linkman, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(menuItem);
     }
 
     @Override
