@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.PinyinUtils;
 import com.wj.base.utils.StringUtils;
@@ -37,8 +36,6 @@ public class DataFragment extends SimpleFragment {
     TextView tvListInCenter;
     @BindView(R.id.liv)
     ListIndexView listIndexView;
-    @BindView(R.id.smart_layout)
-    SmartRefreshLayout smartRefreshLayout;
     private List<LinkmanBean> list;
     private LinkmanAdapter adapter;
     private String[] names = {"", "张震岳", "吴亦凡", "潘玮柏", "张韶涵", "李晨", "范冰冰", "诸葛亮", "王祖蓝", "李明亮",
@@ -60,8 +57,6 @@ public class DataFragment extends SimpleFragment {
     }
 
     private void initView() {
-        smartRefreshLayout.setEnableRefresh(false);
-        smartRefreshLayout.setEnableLoadmore(false);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new LinkmanAdapter(list);
@@ -101,6 +96,7 @@ public class DataFragment extends SimpleFragment {
             LinkmanBean linkmanBean = list.get(position);
             LinkmanDetailActivity.show(getContext(), linkmanBean);
         });
+
     }
 
     private void initData() {
@@ -144,5 +140,4 @@ public class DataFragment extends SimpleFragment {
     protected int getLayoutId() {
         return R.layout.fragment_data;
     }
-
 }

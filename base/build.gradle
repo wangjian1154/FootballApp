@@ -94,5 +94,4 @@ dependencies {
         exclude module: 'appcompat-v7'
     }
     api rootProject.ext.dependencies["pinyin4j"]
-    api rootProject.ext.dependencies["materialsearchview"]
 }
