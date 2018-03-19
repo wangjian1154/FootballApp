@@ -15,16 +15,28 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.wj.base.Initialization;
+import com.wj.base.data.Config;
+import com.wj.base.utils.BaseUtils;
 import com.wj.baseutils.R;
+
+import java.net.HttpRetryException;
 
 /**
  * Created by wj on 2018/1/6.
  */
 
-public class App extends Application {
+public class MyApplication extends TinkerApplication {
 
     private static Context context;
+
+    public MyApplication() {
+        super(ShareConstants.TINKER_ENABLE_ALL, "com.wj.baseutils.app.SampleApplicationLike",
+                "com.tencent.tinker.loader.TinkerLoader", false);
+    }
 
     @Override
     public void onCreate() {

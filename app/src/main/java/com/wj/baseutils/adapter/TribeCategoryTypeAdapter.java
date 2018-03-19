@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wj.base.utils.StringUtils;
 import com.wj.baseutils.R;
-import com.wj.baseutils.app.App;
+import com.wj.baseutils.app.MyApplication;
 import com.wj.baseutils.bean.TribeCategoryBean;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class TribeCategoryTypeAdapter extends BaseQuickAdapter<TribeCategoryBean
 
     private int mSelectedPos = -1;//当前选中的Position
 
-    private int grayColor = App.getContext().getResources().getColor(R.color.page_bg);
+    private int grayColor = MyApplication.getContext().getResources().getColor(R.color.page_bg);
 
 
     public TribeCategoryTypeAdapter(@Nullable List<TribeCategoryBean.DataBean.CategoriesBean> data) {

@@ -3,13 +3,14 @@
     package="com.wj.baseutils">
 
     <application
-        android:name=".app.App"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--Activity-->
         <activity
             android:name=".ui.activity.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -28,7 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,13 +46,18 @@
                     android:scheme="cundong" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="TINKER_ID"
-            android:value="0b50b18a7352ad05" />
-
         <activity android:name=".ui.activity.LinkmanEditActivity" />
         <activity android:name=".ui.activity.LinkmanDetailActivity"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>
