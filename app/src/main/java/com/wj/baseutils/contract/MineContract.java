@@ -1,5 +1,7 @@
 package com.wj.baseutils.contract;
 
+import android.content.Context;
+
 import com.wj.base.base.BaseListener;
 import com.wj.base.base.BaseModel;
 import com.wj.base.base.BasePresenter;
@@ -16,10 +18,16 @@ public interface MineContract {
     }
 
     interface MineView extends BaseView {
+
         void setBackgroundBlur();
     }
 
     abstract class MinePresenter extends BasePresenter<MineModel, MineView> {
+
         public abstract void setData();
+
+        public abstract void setMineBalanceClick(Context mContext);
+
+        public abstract void setOnScoreClick(Context context);
     }
 }

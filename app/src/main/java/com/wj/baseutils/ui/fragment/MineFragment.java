@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.FastBlur;
+import com.wj.base.utils.StatusBarUtil;
 import com.wj.baseutils.R;
 import com.wj.baseutils.contract.MineContract;
 import com.wj.baseutils.model.MineModelImpl;
 import com.wj.baseutils.presenter.MinePresenterImpl;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import jp.wasabeef.blurry.Blurry;
 
 /**
@@ -57,6 +59,18 @@ public class MineFragment extends BaseFragment<MinePresenterImpl, MineModelImpl>
     @Override
     public void setBackgroundBlur() {
         Bitmap bitmap = Bitmap.createBitmap(((BitmapDrawable) iv_user.getDrawable()).getBitmap());
-        iv_bg.setImageBitmap(FastBlur.getDefaultFastBlueBitmap(bitmap));
+        Bitmap fastBlueBitmap = FastBlur.getDefaultFastBlueBitmap(bitmap);
+        iv_bg.setImageBitmap(fastBlueBitmap);
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.red));
+    }
+
+    @OnClick(R.id.rl_mine_balance)
+    public void mineBalanceClick() {
+        mPresenter.setMineBalanceClick(getContext());
+    }
+
+    @OnClick(R.id.rl_score)
+    public void scoreOnClick(){
+        mPresenter.setOnScoreClick(getContext());
     }
 }

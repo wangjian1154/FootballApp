@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/page_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,9 +27,9 @@
                 android:layout_width="@dimen/widget_size_49"
                 android:layout_height="@dimen/widget_size_49"
                 android:layout_centerInParent="true"
-                app:civ_border_width="1dp"
+                android:src="@drawable/user"
                 app:civ_border_color="@color/white"
-                android:src="@drawable/user" />
+                app:civ_border_width="1dp" />
         </RelativeLayout>
 
         <View
@@ -37,5 +37,68 @@
             android:layout_height="1px"
             android:background="@color/decoration_color" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_10"
+            android:background="@color/transparent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_mine_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_selector_white_bg"
+            android:padding="@dimen/widget_size_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的余额"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_16"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow_right"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_10"
+            android:background="@color/transparent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_selector_white_bg"
+            android:padding="@dimen/widget_size_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="去评分"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_16"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_10"
+            android:background="@color/transparent" />
     </LinearLayout>
 </ScrollView>

@@ -1,9 +1,13 @@
 package com.wj.base.utils;
 
 import android.app.ActivityManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.widget.Toast;
 
 import com.wj.base.Initialization;
 
@@ -88,5 +92,20 @@ public class BaseUtils {
         return null;
     }
 
+    /**
+     * 进入应用市场评分
+     *
+     * @param context
+     */
+    public static void toAppMarketScre(Context context) {
+        try {
+            Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, "Couldn't launch the market !", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

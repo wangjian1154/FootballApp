@@ -17,4 +17,6 @@
     <color name="pressed_gay">#C0C0C0</color>
     <color name="color_text_bg">#05000000</color>
     <color name="search_layover_bg">#50000000</color>
+    <color name="red">#F00</color>
+    <color name="balance_bg">#F16528</color>
 </resources>
