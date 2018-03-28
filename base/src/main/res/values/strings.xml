@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">base</string>
     <string name="search_hint">Search</string>
+    <string name="permission_default">是否允许以下权限</string>
+    <string name="perm_tip">
+        当前应用缺少必要权限。\n请点击"设置"-"权限"-打开所需权限。\n最后点击两次后退按钮，即可返回。
+    </string>
+    <string name="ask_again">请给予应用必要权限，让程序可正常工作。</string>
+    <string name="cancel">取消</string>
+    <string name="setting">设置</string>
 </resources>

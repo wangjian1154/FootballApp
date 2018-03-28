@@ -20,7 +20,7 @@ import butterknife.Unbinder;
  * 无MVP基类
  */
 
-public abstract class SimpleActivity extends AppCompatActivity {
+public abstract class SimpleActivity extends PermissionActivity {
 
     private Unbinder bind;
     protected boolean isCreate = false;

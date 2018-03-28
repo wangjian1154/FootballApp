@@ -31,7 +31,10 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait"
+            android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

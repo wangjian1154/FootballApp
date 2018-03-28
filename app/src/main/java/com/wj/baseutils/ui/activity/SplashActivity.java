@@ -1,10 +1,12 @@
 package com.wj.baseutils.ui.activity;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.wj.base.base.PermissionActivity;
 import com.wj.base.base.SimpleActivity;
+import com.wj.base.utils.EasyPermissionsUtils;
 import com.wj.base.utils.ImageLoadUtils;
 import com.wj.base.utils.StringUtils;
 import com.wj.base.utils.TimeUtils;
@@ -21,6 +25,8 @@ import com.wj.baseutils.R;
 import com.wj.baseutils.bean.SplashBean;
 import com.wj.baseutils.net.ApiRetrofit;
 import com.wj.baseutils.net.ApiService;
+
+import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -41,6 +47,10 @@ public class SplashActivity extends SimpleActivity {
 
     @Override
     protected void initViewAndEvent(Bundle savedInstanceState) {
+        loadData();
+    }
+
+    private void loadData() {
         ApiService apiService = ApiRetrofit.getInstance().getApiService();
         Observable<SplashBean> splashImg = apiService.getSplashImg();
         Observer<SplashBean> observer = new Observer<SplashBean>() {
@@ -80,7 +90,6 @@ public class SplashActivity extends SimpleActivity {
     /**
      * 动态改变Icon，奇数天显示正常icon。偶数天显示双11的icon
      * 代码改变几乎没什么卵用，天猫京东估计是热修复改变的
-     *
      */
     private void dynamicChangeLogo() {
         ComponentName mDefault = getComponentName();
