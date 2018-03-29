@@ -96,4 +96,6 @@ dependencies {
     api rootProject.ext.dependencies["pinyin4j"]
     api rootProject.ext.dependencies["materialsearchview"]
     api rootProject.ext.dependencies["blurry"]
+    api (rootProject.ext.dependencies["matisse"])
+    api (rootProject.ext.dependencies["picasso"])
 }

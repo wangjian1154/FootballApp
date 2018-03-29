@@ -10,9 +10,9 @@ ext {
     ]
 
     def dependVersion = [
-            support    : "26.1.0",
+            support    : "27.0.2",
             butterknife: "8.8.1",
-            glide      : "4.4.0"
+            glide      : "4.1.1"
     ]
 
     dependencies = [
@@ -68,6 +68,8 @@ ext {
             "recyclerview-animators": "jp.wasabeef:recyclerview-animators:2.3.0",
             "pinyin4j"              : "com.github.open-android:pinyin4j:2.5.0",
             "materialsearchview"    : "com.miguelcatalan:materialsearchview:1.4.0",
-            "blurry"                : "jp.wasabeef:blurry:2.1.1"
+            "blurry"                : "jp.wasabeef:blurry:2.1.1",
+            "matisse"               : "com.zhihu.android:matisse:0.4.3",
+            "picasso"               : "com.squareup.picasso:picasso:2.5.2"
     ]
 }
