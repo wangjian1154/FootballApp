@@ -91,26 +91,26 @@ public class MineFragment extends BaseFragment<MinePresenterImpl, MineModelImpl>
     @OnClick(R.id.iv_user)
     public void choiceAvaterClick() {
         ((MainActivity) getActivity()).checkPermission(() -> {
-                    Matisse.from(getActivity())
+                    Matisse.from(MineFragment.this)
                             .choose(MimeType.allOf())
                             .countable(true)
-                            .maxSelectable(9)
+                            .maxSelectable(1)
                             .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                             .thumbnailScale(0.85f)
                             .imageEngine(new PicassoEngine())
                             .forResult(REQUEST_CODE_CHOOSE);
                 }
-                , R.string.permission_default, Manifest.permission.CAMERA);
+                , R.string.permission_default, Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             mSelected = Matisse.obtainResult(data);
+            if (mSelected != null && mSelected.size() > 0) {
+                ImageLoadUtils.display(getContext(), mSelected.get(0), iv_user);
+            }
         }
-        if (mSelected != null && mSelected.size() > 0) {
-            ImageLoadUtils.display(getContext(), mSelected.get(0), iv_user);
-        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
