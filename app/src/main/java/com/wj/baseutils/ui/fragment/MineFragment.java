@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import com.wj.base.base.BaseFragment;
 import com.wj.base.utils.FastBlur;
 import com.wj.base.utils.ImageLoadUtils;
-import com.wj.base.utils.ImageUtils;
 import com.wj.base.utils.StatusBarUtil;
 import com.wj.baseutils.R;
 import com.wj.baseutils.contract.MineContract;
@@ -22,9 +21,7 @@ import com.wj.baseutils.presenter.MinePresenterImpl;
 import com.wj.baseutils.ui.activity.MainActivity;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
-import com.zhihu.matisse.filter.Filter;
 
 import java.util.List;
 

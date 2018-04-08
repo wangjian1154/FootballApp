@@ -75,12 +75,7 @@ public class VideoFragment extends BaseFragment<HomeSupportPresenterImpl, HomeSu
                 .colorResId(R.color.decoration_color)
                 .build());
 
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.loadData(true, key,"");
-            }
-        });
+        smartRefreshLayout.setOnRefreshListener(refreshlayout -> mPresenter.loadData(true, key,""));
 
         smartRefreshLayout.setOnLoadmoreListener(refreshlayout -> loadMore(false));
     }

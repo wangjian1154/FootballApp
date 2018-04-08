@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.wj.base.base.PermissionActivity;
 import com.wj.base.base.SimpleActivity;
 import com.wj.base.utils.EasyPermissionsUtils;
