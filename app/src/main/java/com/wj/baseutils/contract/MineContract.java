@@ -29,5 +29,7 @@ public interface MineContract {
         public abstract void setMineBalanceClick(Context mContext);
 
         public abstract void setOnScoreClick(Context context);
+
+        public abstract void setOnShopCarClick(Context context);
     }
 }

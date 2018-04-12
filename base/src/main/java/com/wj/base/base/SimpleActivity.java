@@ -1,8 +1,11 @@
 package com.wj.base.base;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.wj.base.R;
 import com.wj.base.utils.StatusBarUtil;
@@ -29,6 +32,8 @@ public abstract class SimpleActivity extends PermissionActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        StatusBarUtil.setColor(this, Color.TRANSPARENT);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))

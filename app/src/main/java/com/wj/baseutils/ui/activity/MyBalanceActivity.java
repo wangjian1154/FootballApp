@@ -32,7 +32,7 @@ public class MyBalanceActivity extends SimpleActivity {
 
     @Override
     protected int getLayoutId() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.white));
         return R.layout.activity_my_balance;
     }
 

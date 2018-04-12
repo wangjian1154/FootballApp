@@ -43,5 +43,10 @@ public class MinePresenterImpl extends MineContract.MinePresenter {
         BaseUtils.toAppMarketScre(context);
     }
 
+    @Override
+    public void setOnShopCarClick(Context context) {
+
+    }
+
 
 }

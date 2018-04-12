@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import jp.wasabeef.blurry.Blurry;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -70,19 +71,22 @@ public class MineFragment extends BaseFragment<MinePresenterImpl, MineModelImpl>
     @Override
     public void setBackgroundBlur() {
         Bitmap bitmap = Bitmap.createBitmap(((BitmapDrawable) iv_user.getDrawable()).getBitmap());
-        Bitmap fastBlueBitmap = FastBlur.getDefaultFastBlueBitmap(bitmap);
-        iv_bg.setImageBitmap(fastBlueBitmap);
-        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.red));
+        Blurry.with(getActivity()).from(bitmap).into(iv_bg);
     }
 
-    @OnClick(R.id.rl_mine_balance)
+    @OnClick(R.id.item_mine_balance)
     public void mineBalanceClick() {
         mPresenter.setMineBalanceClick(getContext());
     }
 
-    @OnClick(R.id.rl_score)
+    @OnClick(R.id.item_score)
     public void scoreOnClick() {
         mPresenter.setOnScoreClick(getContext());
+    }
+
+    @OnClick(R.id.item_shop_car)
+    public void shopCarClick() {
+        mPresenter.setOnShopCarClick(getContext());
     }
 
     @OnClick(R.id.iv_user)
@@ -97,7 +101,7 @@ public class MineFragment extends BaseFragment<MinePresenterImpl, MineModelImpl>
                             .imageEngine(new PicassoEngine())
                             .forResult(REQUEST_CODE_CHOOSE);
                 }
-                , R.string.permission_default, Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE);
+                , R.string.permission_default, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     @Override

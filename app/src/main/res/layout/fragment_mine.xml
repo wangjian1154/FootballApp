@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/page_bg">
+    style="@style/LayMM">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/rl_head_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_size_150">
-
-            <ImageView
-                android:id="@+id/iv_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_user"
-                android:layout_width="@dimen/widget_size_49"
-                android:layout_height="@dimen/widget_size_49"
-                android:layout_centerInParent="true"
-                android:src="@drawable/user"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="1dp" />
-        </RelativeLayout>
+        <include layout="@layout/item_headview" />
 
         <View
             android:layout_width="match_parent"
@@ -41,59 +20,33 @@
             android:layout_height="@dimen/widget_size_10"
             android:background="@color/transparent" />
 
-        <RelativeLayout
-            android:id="@+id/rl_mine_balance"
+        <com.wj.baseutils.widget.PersonItemView
+            android:id="@+id/item_mine_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_selector_white_bg"
-            android:padding="@dimen/widget_size_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="我的余额"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_16" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_right" />
-        </RelativeLayout>
+            app:title="我的余额" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_size_10"
             android:background="@color/transparent" />
 
-        <RelativeLayout
-            android:id="@+id/rl_score"
+        <com.wj.baseutils.widget.PersonItemView
+            android:id="@+id/item_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_selector_white_bg"
-            android:padding="@dimen/widget_size_10">
+            app:title="去评分" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="去评分"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_16" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_10"
+            android:background="@color/transparent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_right" />
-
-        </RelativeLayout>
+        <com.wj.baseutils.widget.PersonItemView
+            android:id="@+id/item_shop_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="购物车" />
 
         <View
             android:layout_width="match_parent"
