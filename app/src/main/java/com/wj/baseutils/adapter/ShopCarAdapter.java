@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.wj.base.utils.BaseUtils;
+import com.wj.base.utils.ImageLoadUtils;
+import com.wj.base.utils.StringUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.ShopCarBean;
 
@@ -33,6 +36,10 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
         helper.tvProductName.setText(item.productname);
         helper.tvCategory.setText(item.category);
         helper.tvPrice.setText(item.productname);
+
+        if (!StringUtils.isEmpty(item.img)) {
+            ImageLoadUtils.display(mContext, item.img, helper.ivPic);
+        }
     }
 
     class MyViewHolder extends BaseViewHolder {
@@ -50,7 +57,7 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
 
         public MyViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
         }
     }
 }
