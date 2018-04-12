@@ -8,7 +8,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.wj.base.R;
+import com.wj.base.data.Constants;
 import com.wj.base.utils.StatusBarUtil;
+import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;

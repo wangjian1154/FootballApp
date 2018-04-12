@@ -33,9 +33,9 @@
         </activity-alias>
 
         <activity
+            android:name=".ui.activity.SplashActivity"
             android:alwaysRetainTaskState="true"
-            android:screenOrientation="portrait"
-            android:name=".ui.activity.SplashActivity">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,6 +54,7 @@
         </activity>
         <activity android:name=".ui.activity.LinkmanEditActivity" />
         <activity android:name=".ui.activity.LinkmanDetailActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -64,8 +65,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-
-        <activity android:name=".ui.activity.MyBalanceActivity"></activity>
+        <activity android:name=".ui.activity.MyBalanceActivity" />
+        <activity android:name=".ui.activity.ShopCarActivity"></activity>
     </application>
 
 </manifest>

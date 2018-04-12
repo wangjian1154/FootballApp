@@ -7,6 +7,7 @@ import com.wj.base.base.BaseListener;
 import com.wj.base.utils.BaseUtils;
 import com.wj.baseutils.contract.MineContract;
 import com.wj.baseutils.ui.activity.MyBalanceActivity;
+import com.wj.baseutils.ui.activity.ShopCarActivity;
 
 /**
  * Created by wj on 2018/3/26.
@@ -33,9 +34,7 @@ public class MinePresenterImpl extends MineContract.MinePresenter {
 
     @Override
     public void setMineBalanceClick(Context mContext) {
-        Intent intent = new Intent();
-        intent.setClass(mContext, MyBalanceActivity.class);
-        mContext.startActivity(intent);
+        MyBalanceActivity.show(mContext);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class MinePresenterImpl extends MineContract.MinePresenter {
 
     @Override
     public void setOnShopCarClick(Context context) {
-
+        ShopCarActivity.show(context);
     }
 
 

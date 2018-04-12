@@ -11,4 +11,5 @@
     <string name="stringValue5">我的</string>
     <string name="total_linkman">%s位联系人</string>
     <string name="linkman_search_hint">搜索联系人</string>
+    <string name="title_my_shop_car">我的购物车</string>
 </resources>
