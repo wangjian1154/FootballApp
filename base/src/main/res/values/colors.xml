@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FED700</color>
-    <color name="colorPrimaryDark">#FED700</color>
-    <color name="colorAccent">#FED700</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
 
 
     <color name="white">#FFFFFF</color>
@@ -19,4 +19,5 @@
     <color name="search_layover_bg">#50000000</color>
     <color name="red">#F00</color>
     <color name="balance_bg">#F16528</color>
+    <color name="price_color">#F16528</color>
 </resources>

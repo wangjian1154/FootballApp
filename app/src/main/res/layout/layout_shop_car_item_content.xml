@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/decoration_color"
+        android:paddingLeft="@dimen/widget_size_15"
+        android:paddingRight="@dimen/widget_size_15" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/widget_size_5"
+        android:paddingTop="@dimen/widget_size_5">
+
+        <LinearLayout
+            android:id="@+id/ll_check"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/widget_size_120"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/widget_size_15"
+            android:paddingRight="@dimen/widget_size_15">
+
+            <ImageView
+                android:id="@+id/iv_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_shop_car" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="@dimen/widget_size_100"
+            android:layout_height="@dimen/widget_size_120"
+            android:layout_marginRight="@dimen/widget_size_3"
+            android:layout_toRightOf="@+id/ll_check"
+            android:src="@drawable/ic_default" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:maxLines="2"
+            android:text="太平鸟男装2018春款灰色男士商务休闲牛津纺别致刺绣男士衬衫" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_product_name"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:maxLines="2"
+            android:text="灰色;XL" />
+
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_pic"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:singleLine="true"
+            android:text="¥279"
+            android:textColor="@color/price_color" />
+
+    </RelativeLayout>
+</LinearLayout>

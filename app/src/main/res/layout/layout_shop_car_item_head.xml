@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_shop_car_head"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/item_space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_5"
+        android:background="@color/page_bg"
+        android:paddingLeft="@dimen/widget_size_15"
+        android:paddingRight="@dimen/widget_size_15" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_40"
+        android:background="@color/white"
+        android:paddingRight="@dimen/widget_size_15">
+
+        <Button
+            android:id="@+id/btn_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/selector_shop_car"
+            android:drawablePadding="@dimen/widget_size_15"
+            android:paddingLeft="@dimen/widget_size_15"
+            android:text="商店名称"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_14" />
+
+    </RelativeLayout>
+
+</LinearLayout>
