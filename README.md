@@ -9,7 +9,7 @@
        <img src="https://github.com/wangjian1154/FootballApp/raw/master/screenshots/%E9%83%A8%E8%90%BD%E5%88%86%E7%B1%BB.jpg?raw=true" alt="部落" width="32%">
 </div>
 <div style="align: center">
-        <img src="https://github.com/wangjian1154/FootballApp/blob/master/screenshots/%E8%B4%AD%E7%89%A9%E8%BD%A6.gif?raw=true" alt="购物车",width="32%">
+        <img src="https://github.com/wangjian1154/FootballApp/blob/master/screenshots/%E8%B4%AD%E7%89%A9%E8%BD%A6.gif?raw=true" alt="购物车" width="32%">
 </div>
 #### Libraries Used in This App
 
