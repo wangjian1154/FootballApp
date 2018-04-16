@@ -81,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@+id/iv_pic"
+            android:gravity="center"
             android:background="@drawable/shape_shop_car_add_sub">
 
             <TextView
