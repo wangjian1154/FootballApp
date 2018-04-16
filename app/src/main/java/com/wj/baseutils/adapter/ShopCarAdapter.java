@@ -9,10 +9,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.wj.base.base.SimpleActivity;
 import com.wj.base.utils.ImageLoadUtils;
+import com.wj.base.utils.NoFastClickUtils;
 import com.wj.base.utils.StringUtils;
 import com.wj.baseutils.R;
 import com.wj.baseutils.bean.ShopCarBean;
+import com.wj.baseutils.ui.activity.ShopCarActivity;
 
 import java.util.Date;
 import java.util.List;
@@ -28,8 +31,11 @@ import butterknife.ButterKnife;
 
 public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductItem, ShopCarAdapter.ViewHolder> {
 
-    public ShopCarAdapter(@Nullable List<ShopCarBean.ShopCarProductItem> data) {
+    private ShopCarActivity activity;
+
+    public ShopCarAdapter(ShopCarActivity activity, @Nullable List<ShopCarBean.ShopCarProductItem> data) {
         super(R.layout.item_list_shop_car, data);
+        this.activity = activity;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
         ImageLoadUtils.display(mContext, item.img, helper.ivPic);
         helper.ivCheck.setSelected(item.select);
         helper.btnShopName.setSelected(item.shopSelect);
-
+        helper.tvQuantity.setText(item.quantity + "");
 
         if (helper.getAdapterPosition() == 0) {
             helper.llShopCarHead.setVisibility(View.VISIBLE);
@@ -81,6 +87,7 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
                     }
                 }
             }
+            activity.showTotalPrice();
             notifyDataSetChanged();
         });
 
@@ -89,13 +96,33 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
                 item.shopSelect = !item.shopSelect;
                 for (int i = 0; i < mData.size(); i++) {
                     if (mData.get(i).shopname.equals(item.shopname)) {
-                        mData.get(i).select=item.shopSelect;
+                        mData.get(i).select = item.shopSelect;
                     }
                 }
+                activity.showTotalPrice();
                 notifyDataSetChanged();
             }
         });
+
+        helper.tvAdd.setOnClickListener(v -> {
+            item.quantity = item.quantity + 1;
+            helper.tvQuantity.setText(item.quantity + "");
+            if (item.select) {
+                activity.showTotalPrice();
+            }
+        });
+
+        helper.tvSub.setOnClickListener(v -> {
+            if (item.quantity > 1) {
+                item.quantity = item.quantity - 1;
+                helper.tvQuantity.setText(item.quantity + "");
+            }
+            if (item.select) {
+                activity.showTotalPrice();
+            }
+        });
     }
+
 
     static class ViewHolder extends BaseViewHolder {
         @BindView(R.id.btn_shop_name)
@@ -118,6 +145,12 @@ public class ShopCarAdapter extends BaseQuickAdapter<ShopCarBean.ShopCarProductI
         View line;
         @BindView(R.id.item_space)
         View itemSpace;
+        @BindView(R.id.tv_add)
+        TextView tvAdd;
+        @BindView(R.id.tv_sub)
+        TextView tvSub;
+        @BindView(R.id.tv_quantity)
+        TextView tvQuantity;
 
         ViewHolder(View view) {
             super(view);

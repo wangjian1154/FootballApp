@@ -47,9 +47,9 @@ public abstract class SimpleActivity extends PermissionActivity {
         initViewAndEvent(savedInstanceState);
     }
 
-    protected void onViewCreated() {
+    protected void onViewCreated() {}
 
-    }
+    protected abstract int getLayoutId();
 
     protected abstract void initViewAndEvent(Bundle savedInstanceState);
 
@@ -76,7 +76,6 @@ public abstract class SimpleActivity extends PermissionActivity {
         isDestroy = true;
     }
 
-    protected abstract int getLayoutId();
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(Message msg) {

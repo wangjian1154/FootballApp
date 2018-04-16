@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widget_size_49"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentTop="true"
+        android:background="@color/decoration_color" />
+
+    <Button
+        android:id="@+id/btn_selector_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_15"
+        android:background="@null"
+        android:drawableLeft="@drawable/selector_shop_car"
+        android:drawablePadding="@dimen/widget_size_5"
+        android:text="全选"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_16" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="合计：" />
+
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_1"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:text="0.00"
+            android:textColor="@color/price_color" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/balance_bg"
+            android:paddingLeft="@dimen/widget_size_10"
+            android:paddingRight="@dimen/widget_size_10"
+            android:text="结算"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

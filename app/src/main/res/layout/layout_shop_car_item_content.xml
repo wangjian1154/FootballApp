@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingRight="@dimen/widget_size_15"
     android:orientation="vertical">
 
     <View
@@ -73,6 +74,53 @@
             android:singleLine="true"
             android:text="¥279"
             android:textColor="@color/price_color" />
+
+
+        <LinearLayout
+            android:layout_width="@dimen/widget_size_90"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/iv_pic"
+            android:background="@drawable/shape_shop_car_add_sub">
+
+            <TextView
+                android:id="@+id/tv_sub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-"
+                android:textSize="@dimen/font_size_20" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/decoration_color" />
+
+            <TextView
+                android:id="@+id/tv_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="@dimen/font_size_16" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/decoration_color" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="+"
+                android:textSize="@dimen/font_size_20" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 </LinearLayout>

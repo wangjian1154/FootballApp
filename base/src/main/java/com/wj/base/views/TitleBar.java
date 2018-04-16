@@ -167,7 +167,7 @@ public class TitleBar extends FrameLayout {
             mRightText.setVisibility(View.GONE);
     }
 
-    public void setmRightText(String text, OnClickListener listener) {
+    public void setRightText(String text, OnClickListener listener) {
         if (text != null)
             mRightText.setText(text);
         if (listener != null)
