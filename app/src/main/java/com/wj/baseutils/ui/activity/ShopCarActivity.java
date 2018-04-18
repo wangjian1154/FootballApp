@@ -1,8 +1,17 @@
 package com.wj.baseutils.ui.activity;
 
+import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +20,7 @@ import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wj.base.base.BaseActivity;
+import com.wj.base.utils.BaseUtils;
 import com.wj.base.views.TitleBar;
 import com.wj.baseutils.R;
 import com.wj.baseutils.adapter.ShopCarAdapter;
@@ -19,6 +29,9 @@ import com.wj.baseutils.contract.ShopCarContract;
 import com.wj.baseutils.model.ShopCarModelImpl;
 import com.wj.baseutils.presenter.ShopCarPresenterImpl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +87,10 @@ public class ShopCarActivity extends BaseActivity<ShopCarPresenterImpl, ShopCarM
         recyclerView.setAdapter(adapter);
 
         initEvent();
+
+
     }
+
 
     private void initEvent() {
         layTitle.setBackButton(v -> finish());

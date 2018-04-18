@@ -11,8 +11,8 @@ public class Constants {
         String KEY = "key";
     }
 
-    public interface Value{
-        int LIMIT=20;
+    public interface Value {
+        int LIMIT = 20;
     }
 
     public interface TYPE {
@@ -34,5 +34,6 @@ public class Constants {
 
     public interface SHARE_PREFENCE_KEY {
         String SP_CATEGORY = "home_category";//首页Tab分类
+        String SP_IS_FIRST_OPEN = "is_first";//是否第一次打开App
     }
 }
