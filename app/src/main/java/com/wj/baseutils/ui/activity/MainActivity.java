@@ -1,13 +1,19 @@
 package com.wj.baseutils.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.wj.base.base.BaseActivity;
 import com.wj.base.base.BasePresenter;
 import com.wj.base.base.SimpleFragment;
+import com.wj.base.utils.BaseUtils;
 import com.wj.base.utils.HandleBackUtil;
+import com.wj.base.utils.SPUtils;
 import com.wj.base.utils.StatusBarUtil;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.FixedViewPager;
@@ -53,6 +59,32 @@ public class MainActivity extends BaseActivity {
 
         initFragments(savedInstanceState);
         onTabChecked(tabViewId2Index[mTabFragmentAdapter.getCurrentTabIndex()]);
+
+        showNotification();
+
+        SPUtils.getInstance().put(Constants.SHARE_PREFENCE_KEY.SP_IS_FIRST_OPEN, false);
+    }
+
+    private void showNotification() {
+        boolean isFirst = SPUtils.getInstance().getBoolean(Constants.SHARE_PREFENCE_KEY.SP_IS_FIRST_OPEN, true);
+        if (isFirst && !BaseUtils.isNotificationEnable(this)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("提示");
+            builder.setMessage("您没有打开通知权限，可能无法收到通知，立即打开？");
+            builder.setNegativeButton("取消", null);
+            builder.setPositiveButton("立即打开", (dialog, which) -> {
+                try {
+                    BaseUtils.openNotificationSetting(this);
+                } catch (Exception e) {
+                    ToastUtils.showDebugShort(e.getMessage());
+                    if (dialog != null)
+                        dialog.dismiss();
+                }
+
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     private void initFragments(Bundle savedInstanceState) {

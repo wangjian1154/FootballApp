@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.provider.Settings;
+import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import com.wj.base.Initialization;
@@ -108,4 +110,24 @@ public class BaseUtils {
         }
     }
 
+    /**
+     * 判断通知权限是否打开
+     */
+    public static boolean isNotificationEnable(Context context) {
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        return notificationManagerCompat.areNotificationsEnabled();
+    }
+
+    /**
+     * 进入通知打开页面
+     *
+     * @param context
+     */
+    public static void openNotificationSetting(Context context) {
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+        intent.setData(uri);
+        context.startActivity(intent);
+    }
 }
