@@ -26,6 +26,7 @@ import com.wj.baseutils.ui.activity.LinkmanDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -69,7 +70,7 @@ public class DataFragment extends SimpleFragment {
     }
 
     private void initView() {
-//
+
         ((SimpleActivity) getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
@@ -164,20 +165,23 @@ public class DataFragment extends SimpleFragment {
             }
         }
 
-        Collections.sort(list, (lhs, rhs) -> {
+        Collections.sort(list, new Comparator<LinkmanBean>() {
+            @Override
+            public int compare(LinkmanBean lhs, LinkmanBean rhs) {
 
-            if (lhs.getFirstLetter() != null) {
-                if (lhs.getFirstLetter().contains("#")) {
-                    return 1;
-                } else if (rhs.getFirstLetter().contains("#")) {
-                    return -1;
+                if (lhs.getFirstLetter() != null) {
+                    if (lhs.getFirstLetter().contains("#")) {
+                        return 1;
+                    } else if (rhs.getFirstLetter().contains("#")) {
+                        return -1;
+                    } else {
+                        return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
+                    }
                 } else {
-                    return lhs.getFirstLetter().compareTo(rhs.getFirstLetter());
+                    return -1;
                 }
-            } else {
-                return -1;
-            }
 
+            }
         });
 
     }

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.wj.base.R;
 import com.wj.base.data.Constants;
+import com.wj.base.utils.RxBus;
 import com.wj.base.utils.StatusBarUtil;
 import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.LoadingProgress;
@@ -35,7 +36,7 @@ public abstract class SimpleActivity extends PermissionActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        StatusBarUtil.setColor(this, Color.TRANSPARENT);
+//        StatusBarUtil.setTranslucent(this);
         setContentView(getLayoutId());
         bind = ButterKnife.bind(this);
         if (!EventBus.getDefault().isRegistered(this))
@@ -64,6 +65,7 @@ public abstract class SimpleActivity extends PermissionActivity {
         } else {
             LoadingProgress.getInstance(this).dismiss();
         }
+
     }
 
     @Override
