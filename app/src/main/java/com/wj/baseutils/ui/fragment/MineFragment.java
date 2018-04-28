@@ -89,6 +89,11 @@ public class MineFragment extends BaseFragment<MinePresenterImpl, MineModelImpl>
         mPresenter.setOnShopCarClick(getContext());
     }
 
+    @OnClick(R.id.item_gallery)
+    public void galleryClick(){
+        mPresenter.setGalleryClick(getContext());
+    }
+
     @OnClick(R.id.iv_user)
     public void choiceAvaterClick() {
         ((MainActivity) getActivity()).checkPermission(() -> {

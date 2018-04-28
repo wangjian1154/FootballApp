@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.wj.base.base.BaseListener;
 import com.wj.base.utils.BaseUtils;
 import com.wj.baseutils.contract.MineContract;
+import com.wj.baseutils.ui.activity.GalleryActivity;
 import com.wj.baseutils.ui.activity.MyBalanceActivity;
 import com.wj.baseutils.ui.activity.ShopCarActivity;
 
@@ -45,6 +46,11 @@ public class MinePresenterImpl extends MineContract.MinePresenter {
     @Override
     public void setOnShopCarClick(Context context) {
         ShopCarActivity.show(context);
+    }
+
+    @Override
+    public void setGalleryClick(Context context) {
+        GalleryActivity.show(context);
     }
 
 

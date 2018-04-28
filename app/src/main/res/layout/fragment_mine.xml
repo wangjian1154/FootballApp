@@ -53,5 +53,16 @@
             android:layout_height="@dimen/widget_size_10"
             android:background="@color/transparent" />
 
+        <com.wj.baseutils.widget.PersonItemView
+            android:id="@+id/item_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="画廊" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_10"
+            android:background="@color/transparent" />
+
     </LinearLayout>
 </ScrollView>
