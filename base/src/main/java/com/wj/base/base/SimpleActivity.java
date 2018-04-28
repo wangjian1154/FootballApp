@@ -1,17 +1,8 @@
 package com.wj.base.base;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.wj.base.R;
-import com.wj.base.data.Constants;
-import com.wj.base.utils.RxBus;
-import com.wj.base.utils.StatusBarUtil;
-import com.wj.base.utils.ToastUtils;
 import com.wj.base.views.LoadingProgress;
 
 import org.greenrobot.eventbus.EventBus;

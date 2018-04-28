@@ -66,6 +66,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
     }
 
     private void initView() {
+        setProgressIndicator(true);
         Bundle bundle = getArguments();
         key = bundle.getString(Constants.Key.KEY);
 
@@ -148,6 +149,7 @@ public class HomeSupportFragment extends BaseFragment<HomeSupportPresenterImpl, 
         }
         smartRefreshLayout.finishLoadmore();
         smartRefreshLayout.finishRefresh();
+        setProgressIndicator(false);
     }
 
     private void loadBanner() {

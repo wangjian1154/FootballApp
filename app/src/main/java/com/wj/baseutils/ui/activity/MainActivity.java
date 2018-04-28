@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.wj.base.base.BaseActivity;
 import com.wj.base.base.BasePresenter;
+import com.wj.base.base.SimpleActivity;
 import com.wj.base.base.SimpleFragment;
 import com.wj.base.utils.BaseUtils;
 import com.wj.base.utils.HandleBackUtil;
@@ -31,7 +32,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jzvd.JZVideoPlayer;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends SimpleActivity {
 
     @BindView(R.id.rl_tab_home)
     RelativeLayout rlTabHome;
@@ -158,10 +159,6 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
 
     private void onTabChecked(int id) {
         rlTabHome.setSelected(false);
