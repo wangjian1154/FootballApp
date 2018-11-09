@@ -11,6 +11,7 @@
 <div style="align: center">
         <img src="https://github.com/wangjian1154/FootballApp/blob/master/screenshots/%E8%B4%AD%E7%89%A9%E8%BD%A6.gif?raw=true" alt="购物车" width="32%">
 </div>
+
 #### Libraries Used in This App
 
 * 使用[RxJava](https://github.com/ReactiveX/RxJava)搭配[Retrofit](https://github.com/square/retrofit)实现网络请求
